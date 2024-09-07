@@ -26,3 +26,13 @@ Y para iniciarlo localmente ejecutar el siguente comando:
 ```
 npm start
 ```
+
+Recomendación instalar prettier y eslint
+
+```
+npx expo lint
+```
+
+```
+npx expo install -- --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+```
