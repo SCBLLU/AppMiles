@@ -23,7 +23,9 @@ const Planes = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.bienvenida}>Suscripciones</Text>
-      <Text style={styles.infoplanes}>Selecciona un plan para continuar</Text>
+      <Text style={styles.informacionplanes}>
+        Selecciona un plan para continuar
+      </Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 16,
   },
-  infoplanes: {
+  informacionplanes: {
     color: "#666",
     fontSize: 16,
     textAlign: "center",
