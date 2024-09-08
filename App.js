@@ -1,14 +1,24 @@
-import React from "react";
-import { View, ScrollView, StatusBar } from "react-native";
+import { View, StatusBar, StyleSheet } from "react-native";
 import Main from "./components/Main";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <View>
-      <ScrollView>
+
+    <SafeAreaProvider>
+      <View style={styles.contenedor}>
+        <StatusBar style="auto" />
+
         <Main />
-      </ScrollView>
-      <StatusBar style="auto" />
-    </View>
+      </View>
+    </SafeAreaProvider>
+
   );
 }
+const styles = StyleSheet.create({
+  contenedor: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+  },
+
+});

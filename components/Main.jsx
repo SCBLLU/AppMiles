@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { StyleSheet, View, ScrollView, StatusBar } from "react-native";
+import { View, ScrollView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Logo from "./Logo";
 import Preguntas from "./Preguntas";
 import Planes from "./Planes";
 
-export default function App() {
+export function Main() {
   const [preguntaActiva, setPreguntaActiva] = useState(null);
+  const insets = useSafeAreaInsets();
 
   const manejarPresionPregunta = (index) => {
     setPreguntaActiva((prev) => (prev === index ? null : index));
   };
 
   return (
-    <View style={styles.contenedor}>
-      <ScrollView contentContainerStyle={styles.contenidoScrollView}>
+    <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      <ScrollView contentContainerStyle>
         <Logo />
         <Preguntas
           preguntaActiva={preguntaActiva}
@@ -21,18 +23,6 @@ export default function App() {
         />
         <Planes />
       </ScrollView>
-      <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  contenedor: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-    paddingTop: StatusBar.currentHeight,
-  },
-  contenidoScrollView: {
-    alignItems: "center",
-  },
-});

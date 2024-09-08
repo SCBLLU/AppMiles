@@ -1,8 +1,27 @@
-import React, { useState } from "react";
-import { View, Modal, StyleSheet, Text, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
 
 const Proximamente = () => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    // Cambia el estilo de la barra de estado al abrir o cerrar el modal
+    StatusBar.setBarStyle(
+      modalVisible ? "light-content" : "dark-content",
+      true
+    );
+    StatusBar.setBackgroundColor(
+      modalVisible ? "rgba(0, 0, 0, 0.5)" : "#ffffff",
+      true
+    );
+  }, [modalVisible]);
 
   const showModal = () => {
     setModalVisible(true);
@@ -46,8 +65,8 @@ const Proximamente = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginTop: 20,
-    marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f5f5f5",

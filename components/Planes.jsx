@@ -38,7 +38,7 @@ const Planes = () => {
     <View style={styles.container}>
       <Text style={styles.bienvenida}>Suscripciones</Text>
       <Text style={styles.informacionplanes}>
-        Selecciona un plan para comenzar tus entrenamientos
+        Selecciona unp de nuestros planes para comenzar tus entrenamientos
       </Text>
       <ScrollView
         ref={scrollViewRef}
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     marginBottom: 16,
-    width: width * 0.8,
+    width: width * 0.9,
   },
   plansContainer: {
     alignItems: "center",

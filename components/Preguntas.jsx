@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     marginBottom: 16,
+    width: width * 0.9,
   },
   tarjetaPregunta: {
     width: width * 0.9,
