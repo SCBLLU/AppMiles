@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Text, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
 
 const Planes = () => {
+  const scrollViewRef = useRef(null);
+
   const planes = [
     {
       title: "Plan Básico",
@@ -24,6 +26,14 @@ const Planes = () => {
     },
   ];
 
+  // Centrar el Plan Estándar al cargar
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      const offsetX = (width * 0.8 + 34) * 1 - width / 2 + (width * 0.8) / 2;
+      scrollViewRef.current.scrollTo({ x: offsetX, animated: true });
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.bienvenida}>Suscripciones</Text>
@@ -31,21 +41,18 @@ const Planes = () => {
         Selecciona un plan para comenzar tus entrenamientos
       </Text>
       <ScrollView
+        ref={scrollViewRef}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.plansContainer}
         snapToAlignment="center"
-        snapToInterval={width * 0.8 + 24} // Ajuste de alineación al centro
+        snapToInterval={width * 0.8 + 24}
         decelerationRate="fast"
-        pagingEnabled
       >
         {planes.map((plan, index) => (
           <View
             key={index}
-            style={[
-              styles.plan,
-              index === 1 && styles.estandar, // Resalta el plan estándar
-            ]}
+            style={[styles.plan, index === 1 && styles.estandar]}
           >
             <Text style={styles.planTitle}>{plan.title}</Text>
             <Text style={styles.planPrice}>{plan.price}</Text>
@@ -71,10 +78,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   informacionplanes: {
-    color: "#34495e",
+    color: "#666",
     fontSize: 16,
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 16,
+    width: width * 0.8,
   },
   plansContainer: {
     alignItems: "center",
@@ -98,24 +106,24 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
   },
   estandar: {
-    borderColor: "#2980b9", // Resalta el plan Estándar con un borde azul
-    transform: [{ scale: 1.05 }], // Aumenta el tamaño del plan estándar
+    borderColor: "#999",
+    transform: [{ scale: 1.05 }],
   },
   planTitle: {
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "#2980b9",
+    color: "#191919",
   },
   planPrice: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#27ae60",
+    color: "#1ed760",
     marginBottom: 6,
   },
   planDescription: {
     fontSize: 14,
-    color: "#7f8c8d",
+    color: "#191919",
     textAlign: "center",
   },
 });
