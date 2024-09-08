@@ -30,9 +30,9 @@ const Proximamente = () => {
               Funciones próximamente disponibles:
             </Text>
 
-            <Text style={styles.modalText}>Login de usuarios</Text>
-            <Text style={styles.modalText}>Videos en la plataforma</Text>
-            <Text style={styles.modalText}>Imágenes</Text>
+            <Text style={styles.modalText}>Planes de suscripción anuales</Text>
+            <Text style={styles.modalText}>Soporte de chat en vivo</Text>
+            <Text style={styles.modalText}>Entrenamientos personalizados</Text>
 
             <TouchableOpacity style={styles.closeButton} onPress={hideModal}>
               <Text style={styles.closeButtonText}>Cerrar</Text>
