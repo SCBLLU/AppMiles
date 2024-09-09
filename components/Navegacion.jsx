@@ -1,42 +1,25 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { View, Text, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 
 const Navegacion = () => {
-  const router = useRouter();
-
   return (
     <View style={styles.NavegacionContainer}>
-      <TouchableOpacity
-        style={styles.NavegacionItem}
-        onPress={() => router.push("/")}
-      >
+      <Link href="/" style={styles.NavegacionItem}>
         <Text style={styles.NavegacionText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.NavegacionItem}
-        onPress={() => router.push("/dashboard")}
-      >
+      </Link>
+      <Link href="/dashboard" style={styles.NavegacionItem}>
         <Text style={styles.NavegacionText}>Menu</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.NavegacionItem}
-        onPress={() => router.push("/subscriptions")}
-      >
+      </Link>
+      <Link href="/subscriptions" style={styles.NavegacionItem}>
         <Text style={styles.NavegacionText}>Planes</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.NavegacionItem}
-        onPress={() => router.push("/about")}
-      >
+      </Link>
+      <Link href="/about" style={styles.NavegacionItem}>
         <Text style={styles.NavegacionText}>Nosotros</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.NavegacionItem}
-        onPress={() => router.push("/collaborate")}
-      >
+      </Link>
+      <Link href="/collaborate" style={styles.NavegacionItem}>
         <Text style={styles.NavegacionText}>Colaborar</Text>
-      </TouchableOpacity>
+      </Link>
     </View>
   );
 };
