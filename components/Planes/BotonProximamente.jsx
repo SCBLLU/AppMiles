@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   buttonText: {
-    color: "#fff",
+    color: "#212121",
     fontSize: 16,
     fontWeight: "bold",
   },
