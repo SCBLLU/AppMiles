@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Text, Dimensions } from "react-native";
+import { Link } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -37,6 +38,9 @@ const Planes = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.bienvenida}>Suscripciones</Text>
+
+
+
       <Text style={styles.informacionplanes}>
         Selecciona unp de nuestros planes para comenzar tus entrenamientos
       </Text>

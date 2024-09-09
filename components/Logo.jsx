@@ -24,13 +24,13 @@ export const Logo = (props) => (
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     flexDirection: "row",
     alignItems: "center",
   },
   svgContainer: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
   },

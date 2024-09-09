@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import Proximamente from "./Proximamente";
+import Proximamente from "./BotonProximamente";
 
 const { width } = Dimensions.get("window");
 

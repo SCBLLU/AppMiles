@@ -1,8 +1,15 @@
-import { Main } from "../components/Main";
+import { ScrollView } from "react-native";
+import Screen from "../components/Screen";
+import Login from "../components/Login/Ingreso";
 
-export default function Index() {
+export default function Main() {
+
+
     return (
-        <Main />
+        <Screen>
+            <ScrollView contentContainerStyle>
+                <Login />
+            </ScrollView>
+        </Screen>
     );
 }
-
