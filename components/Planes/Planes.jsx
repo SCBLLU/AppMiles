@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Text, Dimensions } from "react-native";
-import { Link } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
