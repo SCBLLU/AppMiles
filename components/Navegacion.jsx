@@ -1,24 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Link } from "expo-router";
+import { LogIn, Menu, Tag, Info, Users } from "lucide-react-native";
 
 const Navegacion = () => {
   return (
     <View style={styles.NavegacionContainer}>
       <Link href="/" style={styles.NavegacionItem}>
-        <Text style={styles.NavegacionText}>Login</Text>
+        <LogIn size={24} color="black" style={styles.icon} />
       </Link>
       <Link href="/dashboard" style={styles.NavegacionItem}>
-        <Text style={styles.NavegacionText}>Menu</Text>
+        <Menu size={24} color="black" style={styles.icon} />
       </Link>
       <Link href="/subscriptions" style={styles.NavegacionItem}>
-        <Text style={styles.NavegacionText}>Planes</Text>
+        <Tag size={24} color="black" style={styles.icon} />
       </Link>
       <Link href="/about" style={styles.NavegacionItem}>
-        <Text style={styles.NavegacionText}>Nosotros</Text>
+        <Info size={24} color="black" style={styles.icon} />
       </Link>
       <Link href="/collaborate" style={styles.NavegacionItem}>
-        <Text style={styles.NavegacionText}>Colaborar</Text>
+        <Users size={24} color="black" style={styles.icon} />
       </Link>
     </View>
   );
@@ -33,10 +34,15 @@ const styles = StyleSheet.create({
   },
   NavegacionItem: {
     padding: 10,
+    alignItems: "center",
   },
   NavegacionText: {
     fontSize: 16,
     fontWeight: "bold",
+    marginTop: 5,
+  },
+  icon: {
+    marginBottom: 5,
   },
 });
 

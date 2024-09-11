@@ -1,5 +1,11 @@
 import React from "react";
-import { Text, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const Dashboard = () => {
   const exercises = [
@@ -18,23 +24,48 @@ const Dashboard = () => {
       title: "Entrenamiento de Fuerza",
       description: "Incrementa tu fuerza con estos ejercicios.",
     },
+    {
+      id: "4",
+      title: "Ejercicios de Estiramiento",
+      description: "Mejora tu flexibilidad con esta rutina.",
+    },
+    {
+      id: "5",
+      title: "Rutina de Abdominales",
+      description: "Fortalece tu abdomen con estos ejercicios.",
+    },
+    {
+      id: "6",
+      title: "Ejercicios para Espalda",
+      description: "Fortalece tu espalda con esta rutina.",
+    },
   ];
 
+  const renderExercise = ({ item }) => (
+    <TouchableOpacity style={styles.card}>
+      <Text style={styles.cardTitle}>{item.title}</Text>
+      <Text style={styles.cardDescription}>{item.description}</Text>
+    </TouchableOpacity>
+  );
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Ejercicios Disponibles</Text>
-      {exercises.map((exercise) => (
-        <TouchableOpacity key={exercise.id} style={styles.card}>
-          <Text style={styles.cardTitle}>{exercise.title}</Text>
-          <Text style={styles.cardDescription}>{exercise.description}</Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+      <FlatList
+        data={exercises}
+        renderItem={renderExercise}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        contentContainerStyle={styles.gridContainer}
+        scrollEnabled={false} // Desactivar el scroll
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 15,
   },
   title: {
@@ -43,7 +74,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
   },
+  gridContainer: {
+    justifyContent: "space-between",
+  },
   card: {
+    flex: 1,
     backgroundColor: "#f5f5f5",
     borderRadius: 10,
     padding: 15,

@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, TextInput, ActivityIndicator } from "react-native";
+import { Button } from "react-native-elements";
 import { useRouter } from "expo-router";
 
 const Login = () => {
@@ -30,7 +24,7 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Inicio de sesión</Text>
       <TextInput
         style={styles.input}
         placeholder="Usuario"
@@ -47,13 +41,17 @@ const Login = () => {
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
-        <Button title="Ingresar" onPress={handleLogin} />
+        <Button
+          title="Iniciar cesion"
+          onPress={handleLogin}
+          buttonStyle={styles.button}
+        />
       )}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     justifyContent: "center",
@@ -75,6 +73,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "#fff",
   },
-});
+  button: {
+    backgroundColor: "#0000ff",
+    borderRadius: 20,
+    paddingVertical: 15,
+  },
+};
 
 export default Login;

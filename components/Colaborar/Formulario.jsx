@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Informacion() {
+export default function Formulario() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Nosotros</Text>
       <Text style={styles.description}>
-        Esta es una aplicación simple que utiliza la API de Spotify para mostrar las canciones y artistas más populares de un usuario. Fue creada por Miles.
+        Esta es una aplicación simple que utiliza la API de Spotify para mostrar
+        las canciones y artistas más populares de un usuario. Fue creada por
+        Miles.
       </Text>
     </View>
   );
