@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-export const Logo = (props) => (
+export const Icono_Login = (props) => (
   <View style={styles.container}>
     <View style={styles.svgContainer}>
       <Svg
@@ -17,7 +17,6 @@ export const Logo = (props) => (
         />
       </Svg>
     </View>
-    {/*     <Text style={styles.text}>Miles</Text> */}
   </View>
 );
 
@@ -25,12 +24,11 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
     paddingHorizontal: 5,
-    flexDirection: "row",
     alignItems: "center",
   },
   svgContainer: {
-    width: 40,
-    height: 40,
+    width: 100,
+    height: 100,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -46,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Logo;
+export default Icono_Login;
