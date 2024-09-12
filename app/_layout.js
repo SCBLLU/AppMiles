@@ -1,16 +1,54 @@
 import { Stack } from "expo-router";
-import { View, } from "react-native";
-import Navegacion from "../components/Navegacion";
+import Logo from "../components/Logo";
+import Exit from "../components/Menu/Exit";
 
 export default function Layout() {
     return (
-        <View style={{ flex: 1 }}>
-            <Stack screenOptions={{
-                headerTitle: "",
+        <Stack>
 
-            }} />
-            <Navegacion />
-        </View>
+            <Stack.Screen
+                name="index"
+                options={{
+                    headerShown: false,
+                }}
+            />
+
+            <Stack.Screen
+                name="dashboard"
+                options={{
+                    headerTitle: "Menu",
+                    headerLeft: () => <Logo />,
+                    headerRight: () => <Exit />,
+                }}
+            />
+
+            <Stack.Screen
+                name="subscriptions"
+                options={{
+                    headerTitle: "Planes",
+                    headerLeft: () => <Logo />,
+                    headerRight: () => <Exit />,
+                }}
+            />
+
+            <Stack.Screen
+                name="collaborate"
+                options={{
+                    headerTitle: "Colaborar",
+                    headerLeft: () => <Logo />,
+                    headerRight: () => <Exit />,
+                }}
+            />
+
+            <Stack.Screen
+                name="settings"
+                options={{
+                    headerTitle: "Ajustes",
+                    headerLeft: () => <Logo />,
+                    headerRight: () => <Exit />,
+                }}
+            />
+
+        </Stack>
     );
 }
-

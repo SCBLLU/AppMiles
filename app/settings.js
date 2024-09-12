@@ -1,13 +1,13 @@
 import { ScrollView } from "react-native";
 import Screen from "../components/Screen";
-import Menu from "../components/Menu/Cursos";
+import Ajustes from "../components/Configuraciones/Ajustes";
 import Navegacion from "../components/Navegacion";
 
-export default function Dashboard() {
+export default function Settings() {
     return (
         <Screen>
-            <ScrollView contentContainerStyle>
-                <Menu />
+            <ScrollView>
+                <Ajustes />
             </ScrollView>
             <Navegacion />
         </Screen>

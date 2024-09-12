@@ -5,7 +5,6 @@ import Icono_Login from "../components/Login/Icono";
 
 export default function Main() {
 
-
     return (
         <Screen>
             <ScrollView contentContainerStyle>

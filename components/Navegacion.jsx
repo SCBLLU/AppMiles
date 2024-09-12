@@ -1,25 +1,22 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
-import { LogIn, Menu, Tag, Info, Users } from "lucide-react-native";
+import { House, Gem, UsersRound, Settings } from "lucide-react-native";
 
 const Navegacion = () => {
   return (
     <View style={styles.NavegacionContainer}>
-      <Link href="/" style={styles.NavegacionItem}>
-        <LogIn size={24} color="black" style={styles.icon} />
-      </Link>
       <Link href="/dashboard" style={styles.NavegacionItem}>
-        <Menu size={24} color="black" style={styles.icon} />
+        <House size={24} color="black" style={styles.icon} />
       </Link>
       <Link href="/subscriptions" style={styles.NavegacionItem}>
-        <Tag size={24} color="black" style={styles.icon} />
-      </Link>
-      <Link href="/about" style={styles.NavegacionItem}>
-        <Info size={24} color="black" style={styles.icon} />
+        <Gem size={24} color="black" style={styles.icon} />
       </Link>
       <Link href="/collaborate" style={styles.NavegacionItem}>
-        <Users size={24} color="black" style={styles.icon} />
+        <UsersRound size={24} color="black" style={styles.icon} />
+      </Link>
+      <Link href="/settings" style={styles.NavegacionItem}>
+        <Settings size={24} color="black" style={styles.icon} />
       </Link>
     </View>
   );

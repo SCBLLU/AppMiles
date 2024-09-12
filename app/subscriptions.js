@@ -3,8 +3,7 @@ import { ScrollView } from "react-native";
 import Preguntas from "../components/Planes/Preguntas";
 import Planes from "../components/Planes/Planes";
 import Screen from "../components/Screen";
-import { Stack } from "expo-router";
-import Logo from "../components/Logo";
+import Navegacion from "../components/Navegacion";
 
 export default function Subscription() {
     const [preguntaActiva, setPreguntaActiva] = useState(null);
@@ -15,12 +14,6 @@ export default function Subscription() {
 
     return (
         <Screen>
-            <Stack.Screen
-                options={{
-                    headerTitle: "Planes",
-                    headerLeft: () => <Logo />,
-                }}
-            />
             <ScrollView contentContainerStyle>
                 <Preguntas
                     preguntaActiva={preguntaActiva}
@@ -28,6 +21,7 @@ export default function Subscription() {
                 />
                 <Planes />
             </ScrollView>
+            <Navegacion />
         </Screen>
     );
 }
