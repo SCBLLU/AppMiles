@@ -17,10 +17,7 @@ const Proximamente = () => {
       modalVisible ? "light-content" : "dark-content",
       true
     );
-    StatusBar.setBackgroundColor(
-      modalVisible ? "rgba(0, 0, 0, 0.5)" : "#ffffff",
-      true
-    );
+    
   }, [modalVisible]);
 
   const showModal = () => {

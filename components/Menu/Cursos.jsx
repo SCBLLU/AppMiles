@@ -24,21 +24,6 @@ const Dashboard = () => {
       title: "Entrenamiento de Fuerza",
       description: "Incrementa tu fuerza con estos ejercicios.",
     },
-    {
-      id: "4",
-      title: "Ejercicios de Estiramiento",
-      description: "Mejora tu flexibilidad con esta rutina.",
-    },
-    {
-      id: "5",
-      title: "Rutina de Abdominales",
-      description: "Fortalece tu abdomen con estos ejercicios.",
-    },
-    {
-      id: "6",
-      title: "Ejercicios para Espalda",
-      description: "Fortalece tu espalda con esta rutina.",
-    },
   ];
 
   const renderExercise = ({ item }) => (
@@ -57,7 +42,7 @@ const Dashboard = () => {
         keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={styles.gridContainer}
-        scrollEnabled={false} // Desactivar el scroll
+        scrollEnabled={false}
       />
     </View>
   );
@@ -66,37 +51,38 @@ const Dashboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 15,
+    padding: 10,
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    margin: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 15,
     textAlign: "center",
+    color: "#333",
   },
   gridContainer: {
-    justifyContent: "space-between",
+    paddingHorizontal: 2,
   },
   card: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
-    borderRadius: 10,
+    backgroundColor: "#fff",
+    borderRadius: 15,
     padding: 15,
-    marginBottom: 15,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 3,
+    margin: 10,
+    elevation: 5,
   },
   cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#333",
   },
   cardDescription: {
-    marginTop: 10,
+    marginTop: 5,
     fontSize: 14,
-    color: "#555",
+    color: "#666",
   },
 });
 

@@ -1,7 +1,6 @@
 import { ScrollView } from "react-native";
 import Screen from "../components/Screen";
 import Ajustes from "../components/Configuraciones/Ajustes";
-import Navegacion from "../components/Navegacion";
 
 export default function Settings() {
     return (
@@ -9,7 +8,6 @@ export default function Settings() {
             <ScrollView>
                 <Ajustes />
             </ScrollView>
-            <Navegacion />
         </Screen>
     );
 }

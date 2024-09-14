@@ -22,7 +22,8 @@ export const Icono_Login = (props) => (
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 90,
+    paddingTop: 80,
+    paddingBottom: 20,
     paddingHorizontal: 5,
     alignItems: "center",
   },
