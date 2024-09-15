@@ -1,12 +1,12 @@
 import { ScrollView } from "react-native";
 import Screen from "../components/Screen";
-import Formulario from "../components/Colaborar/Formulario";
+import Bienvenida from "../components/Colaborar/Bienvenida";
 
 export default function Collaborate() {
     return (
         <Screen>
             <ScrollView>
-                <Formulario />
+                <Bienvenida />
             </ScrollView>
         </Screen>
     );

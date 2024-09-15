@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
     borderRadius: 20,
-    margin: 10,
+    margin: 15,
   },
   title: {
     fontSize: 24,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   stepsCount: {
     fontSize: 48,
     fontWeight: "bold",
-    color: "#1ED760",
+    color: "#000000",
   },
   goalText: {
     fontSize: 16,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: "100%",
-    backgroundColor: "#1ED760",
+    backgroundColor: "#000000",
   },
   percentage: {
     fontSize: 18,

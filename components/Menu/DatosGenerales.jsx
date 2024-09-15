@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Footprints, Clock, Flame } from "lucide-react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faWalking, faFire } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 const DatosGenerales = ({ steps, minutes, calories }) => {
   // Formatea los números con separadores de miles
@@ -9,19 +11,34 @@ const DatosGenerales = ({ steps, minutes, calories }) => {
   return (
     <View style={styles.container}>
       <View style={styles.statCard}>
-        <Footprints size={40} color="#4CAF50" style={styles.icon} />
+        <FontAwesomeIcon
+          icon={faWalking}
+          size={40}
+          color="#4CAF50"
+          style={styles.icon}
+        />
         <Text style={styles.statValue}>{formatNumber(steps)}</Text>
         <Text style={styles.statLabel}>Pasos</Text>
       </View>
 
       <View style={styles.statCard}>
-        <Clock size={40} color="#2196F3" style={styles.icon} />
+        <FontAwesomeIcon
+          icon={faClock}
+          size={40}
+          color="#2196F3"
+          style={styles.icon}
+        />
         <Text style={styles.statValue}>{formatNumber(minutes)}</Text>
         <Text style={styles.statLabel}>Minutos</Text>
       </View>
 
       <View style={styles.statCard}>
-        <Flame size={40} color="#FF5722" style={styles.icon} />
+        <FontAwesomeIcon
+          icon={faFire}
+          size={40}
+          color="#FF5722"
+          style={styles.icon}
+        />
         <Text style={styles.statValue}>{formatNumber(calories)}</Text>
         <Text style={styles.statLabel}>Calorías</Text>
       </View>
@@ -38,8 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     padding: 5,
     backgroundColor: "#fff",
-
-    margin: 10,
+    margin: 15,
   },
   statCard: {
     flex: 1,
@@ -53,7 +69,7 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333",
+    color: "#000000",
   },
   statLabel: {
     fontSize: 12,

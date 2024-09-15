@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView } from "react-native";
 import Screen from "../components/Screen";
-import Menu from "../components/Menu/Cursos";
+import Menu from "../components/Menu/Caracteristicas";
 import DatosGenerales from "../components/Menu/DatosGenerales";
 import DatosPasos from "../components/Menu/DatosPasos";
 import ActividadesFisicas from "../components/Menu/ActividadesFisicas";

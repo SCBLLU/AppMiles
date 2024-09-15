@@ -1,22 +1,28 @@
 import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { Link } from "expo-router";
-import { House, Gem, UsersRound, Settings } from "lucide-react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+  faHome,
+  faGem,
+  faUsers,
+  faCog,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Navegacion = () => {
   return (
     <View style={styles.NavegacionContainer}>
       <Link href="/dashboard" style={styles.NavegacionItem}>
-        <House color="black" style={styles.icon} />
+        <FontAwesomeIcon icon={faHome} size={25} style={styles.icon} />
       </Link>
       <Link href="/subscriptions" style={styles.NavegacionItem}>
-        <Gem color="black" style={styles.icon} />
+        <FontAwesomeIcon icon={faGem} size={25} style={styles.icon} />
       </Link>
       <Link href="/collaborate" style={styles.NavegacionItem}>
-        <UsersRound color="black" style={styles.icon} />
+        <FontAwesomeIcon icon={faUsers} size={25} style={styles.icon} />
       </Link>
       <Link href="/settings" style={styles.NavegacionItem}>
-        <Settings color="black" style={styles.icon} />
+        <FontAwesomeIcon icon={faCog} size={25} style={styles.icon} />
       </Link>
     </View>
   );
@@ -24,10 +30,10 @@ const Navegacion = () => {
 
 const styles = StyleSheet.create({
   NavegacionContainer: {
+    backgroundColor: "#ffffff",
     flexDirection: "row",
     justifyContent: "space-around",
-    backgroundColor: "#fff",
-    paddingVertical: 10,
+    paddingVertical: 5,
     ...Platform.select({
       ios: {
         shadowRadius: 2,
@@ -45,8 +51,9 @@ const styles = StyleSheet.create({
     }),
   },
   icon: {
-    width: 30, 
+    width: 30,
     height: 30,
+    color: "#000000",
     ...Platform.select({
       ios: {
         transform: [{ scale: 1.06 }], // Escala más grande en iOS
