@@ -1,9 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
+import Screen from "../Screen";
+import { useDarkMode } from "../DarkModeProvider";
 
 const DatosPasos = ({ currentSteps, goalSteps }) => {
+  const { isDarkMode } = useDarkMode();
+
   // Calcula el porcentaje y limita a 100%
-  const percentage = Math.min((currentSteps / goalSteps) * 100, 500);
+  const percentage = Math.min((currentSteps / goalSteps) * 100, 100); // Corregido el límite a 100%
   // Calcula el ancho de la barra de progreso
   const progressWidth = (percentage / 100) * Dimensions.get("window").width;
 
@@ -11,19 +15,51 @@ const DatosPasos = ({ currentSteps, goalSteps }) => {
   const formatNumber = (number) => number.toLocaleString();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Pasos del Día</Text>
-      <Text style={styles.stepsCount}>{formatNumber(currentSteps)}</Text>
-      <Text style={styles.goalText}>
-        Objetivo: {formatNumber(goalSteps)} pasos
-      </Text>
+    <Screen>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: isDarkMode ? "#333" : "#F3F4F6" },
+        ]}
+      >
+        <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#333" }]}>
+          Pasos del Día
+        </Text>
+        <Text
+          style={[styles.stepsCount, { color: isDarkMode ? "#fff" : "#000" }]}
+        >
+          {formatNumber(currentSteps)}
+        </Text>
+        <Text
+          style={[styles.goalText, { color: isDarkMode ? "#aaa" : "#666" }]}
+        >
+          Objetivo: {formatNumber(goalSteps)} pasos
+        </Text>
 
-      <View style={styles.progressContainer}>
-        <View style={[styles.progressBar, { width: progressWidth }]} />
+        <View
+          style={[
+            styles.progressContainer,
+            { backgroundColor: isDarkMode ? "#555" : "#ddd" },
+          ]}
+        >
+          <View
+            style={[
+              styles.progressBar,
+              {
+                width: progressWidth,
+                backgroundColor: isDarkMode ? "#4CAF50" : "#000",
+              },
+            ]}
+          />
+        </View>
+
+        <Text
+          style={[styles.percentage, { color: isDarkMode ? "#ddd" : "#333" }]}
+        >
+          {percentage.toFixed(0)}%
+        </Text>
       </View>
-
-      <Text style={styles.percentage}>{percentage.toFixed(0)}%</Text>
-    </View>
+    </Screen>
   );
 };
 
@@ -33,7 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#fff",
     borderRadius: 20,
     margin: 15,
   },
@@ -41,34 +76,28 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "#333",
   },
   stepsCount: {
     fontSize: 48,
     fontWeight: "bold",
-    color: "#000000",
   },
   goalText: {
     fontSize: 16,
-    color: "#666",
     marginVertical: 10,
   },
   progressContainer: {
     width: "100%",
     height: 20,
-    backgroundColor: "#ddd",
     borderRadius: 10,
     overflow: "hidden",
     marginVertical: 20,
   },
   progressBar: {
     height: "100%",
-    backgroundColor: "#000000",
   },
   percentage: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333",
   },
 });
 

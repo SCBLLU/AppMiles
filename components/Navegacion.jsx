@@ -8,21 +8,45 @@ import {
   faUsers,
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDarkMode } from "../components/DarkModeProvider"; // Importa el modo oscuro
 
 const Navegacion = () => {
+  const { isDarkMode } = useDarkMode(); // Obtiene el estado del modo oscuro
+
   return (
-    <View style={styles.NavegacionContainer}>
+    <View
+      style={[
+        styles.NavegacionContainer,
+        { backgroundColor: isDarkMode ? "#333" : "#ffffff" },
+      ]}
+    >
       <Link href="/dashboard" style={styles.NavegacionItem}>
-        <FontAwesomeIcon icon={faHome} size={25} style={styles.icon} />
+        <FontAwesomeIcon
+          icon={faHome}
+          size={25}
+          style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
+        />
       </Link>
       <Link href="/subscriptions" style={styles.NavegacionItem}>
-        <FontAwesomeIcon icon={faGem} size={25} style={styles.icon} />
+        <FontAwesomeIcon
+          icon={faGem}
+          size={25}
+          style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
+        />
       </Link>
       <Link href="/collaborate" style={styles.NavegacionItem}>
-        <FontAwesomeIcon icon={faUsers} size={25} style={styles.icon} />
+        <FontAwesomeIcon
+          icon={faUsers}
+          size={25}
+          style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
+        />
       </Link>
       <Link href="/settings" style={styles.NavegacionItem}>
-        <FontAwesomeIcon icon={faCog} size={25} style={styles.icon} />
+        <FontAwesomeIcon
+          icon={faCog}
+          size={25}
+          style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
+        />
       </Link>
     </View>
   );
@@ -30,7 +54,6 @@ const Navegacion = () => {
 
 const styles = StyleSheet.create({
   NavegacionContainer: {
-    backgroundColor: "#ffffff",
     flexDirection: "row",
     justifyContent: "space-around",
     paddingVertical: 5,
@@ -53,7 +76,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 30,
     height: 30,
-    color: "#000000",
     ...Platform.select({
       ios: {
         transform: [{ scale: 1.06 }], // Escala más grande en iOS

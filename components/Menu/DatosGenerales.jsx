@@ -3,44 +3,75 @@ import { View, Text, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faWalking, faFire } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-
+import { useDarkMode } from "../DarkModeProvider";
 const DatosGenerales = ({ steps, minutes, calories }) => {
+  const { isDarkMode } = useDarkMode();
+
   // Formatea los números con separadores de miles
   const formatNumber = (number) => number.toLocaleString();
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDarkMode ? "#333" : "#F3F4F6" },
+      ]}
+    >
       <View style={styles.statCard}>
         <FontAwesomeIcon
           icon={faWalking}
           size={40}
-          color="#4CAF50"
+          color={isDarkMode ? "#4CAF50" : "#4CAF50"}
           style={styles.icon}
         />
-        <Text style={styles.statValue}>{formatNumber(steps)}</Text>
-        <Text style={styles.statLabel}>Pasos</Text>
+        <Text
+          style={[styles.statValue, { color: isDarkMode ? "#fff" : "#000" }]}
+        >
+          {formatNumber(steps)}
+        </Text>
+        <Text
+          style={[styles.statLabel, { color: isDarkMode ? "#aaa" : "#666" }]}
+        >
+          Pasos
+        </Text>
       </View>
 
       <View style={styles.statCard}>
         <FontAwesomeIcon
           icon={faClock}
           size={40}
-          color="#2196F3"
+          color={isDarkMode ? "#2196F3" : "#2196F3"}
           style={styles.icon}
         />
-        <Text style={styles.statValue}>{formatNumber(minutes)}</Text>
-        <Text style={styles.statLabel}>Minutos</Text>
+        <Text
+          style={[styles.statValue, { color: isDarkMode ? "#fff" : "#000" }]}
+        >
+          {formatNumber(minutes)}
+        </Text>
+        <Text
+          style={[styles.statLabel, { color: isDarkMode ? "#aaa" : "#666" }]}
+        >
+          Minutos
+        </Text>
       </View>
 
       <View style={styles.statCard}>
         <FontAwesomeIcon
           icon={faFire}
           size={40}
-          color="#FF5722"
+          color={isDarkMode ? "#FF5722" : "#FF5722"}
           style={styles.icon}
         />
-        <Text style={styles.statValue}>{formatNumber(calories)}</Text>
-        <Text style={styles.statLabel}>Calorías</Text>
+        <Text
+          style={[styles.statValue, { color: isDarkMode ? "#fff" : "#000" }]}
+        >
+          {formatNumber(calories)}
+        </Text>
+        <Text
+          style={[styles.statLabel, { color: isDarkMode ? "#aaa" : "#666" }]}
+        >
+          Calorías
+        </Text>
       </View>
     </View>
   );
@@ -54,7 +85,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 5,
-    backgroundColor: "#fff",
     margin: 15,
   },
   statCard: {
@@ -69,11 +99,9 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#000000",
   },
   statLabel: {
     fontSize: 12,
-    color: "#666",
   },
 });
 

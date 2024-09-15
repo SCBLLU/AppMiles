@@ -7,11 +7,13 @@ import {
   Dimensions,
 } from "react-native";
 import Proximamente from "./BotonProximamente";
+import { useDarkMode } from "../DarkModeProvider"; // Importar el hook
 
 const { width } = Dimensions.get("window");
 
 const Preguntas = ({ preguntaActiva, manejarPresionPregunta }) => {
   const [preguntaAbierta, setPreguntaAbierta] = useState(null);
+  const { isDarkMode } = useDarkMode(); // Obtener el estado del modo oscuro
 
   const preguntas = [
     {
@@ -32,15 +34,36 @@ const Preguntas = ({ preguntaActiva, manejarPresionPregunta }) => {
   ];
 
   return (
-    <View style={styles.contenedor}>
-      <Text style={styles.titulo}>Preguntas Frecuentes</Text>
-      <Text style={styles.informacion}>
+    <View
+      style={[
+        styles.contenedor,
+        { backgroundColor: isDarkMode ? "#121212" : "#fff" },
+      ]}
+    >
+      <Text style={[styles.titulo, { color: isDarkMode ? "#fff" : "#000" }]}>
+        Preguntas Frecuentes
+      </Text>
+      <Text
+        style={[styles.informacion, { color: isDarkMode ? "#ccc" : "#666" }]}
+      >
         Respuestas a las preguntas más comunes sobre nuestras suscripciones.
       </Text>
       {preguntas.map((pregunta, index) => (
         <TouchableOpacity
           key={index}
-          style={[styles.tarjetaPregunta, preguntaActiva === index]}
+          style={[
+            styles.tarjetaPregunta,
+            {
+              backgroundColor: isDarkMode ? "#1e1e1e" : "#fff",
+              borderColor:
+                preguntaActiva === index
+                  ? isDarkMode
+                    ? "#ccc"
+                    : "#000"
+                  : "transparent",
+            },
+            preguntaActiva === index && styles.tarjetaActiva,
+          ]}
           onPress={() => {
             if (preguntaAbierta === index) {
               setPreguntaAbierta(null);
@@ -50,9 +73,21 @@ const Preguntas = ({ preguntaActiva, manejarPresionPregunta }) => {
             }
           }}
         >
-          <Text style={styles.tituloPregunta}>{pregunta.titulo}</Text>
+          <Text
+            style={[
+              styles.tituloPregunta,
+              { color: isDarkMode ? "#fff" : "#000" },
+            ]}
+          >
+            {pregunta.titulo}
+          </Text>
           {preguntaAbierta === index && (
-            <Text style={styles.descripcionPregunta}>
+            <Text
+              style={[
+                styles.descripcionPregunta,
+                { color: isDarkMode ? "#ccc" : "#555" },
+              ]}
+            >
               {pregunta.descripcion}
             </Text>
           )}
@@ -77,7 +112,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   informacion: {
-    color: "#666",
     fontSize: 16,
     textAlign: "center",
     marginBottom: 16,
@@ -86,7 +120,6 @@ const styles = StyleSheet.create({
   tarjetaPregunta: {
     width: width * 0.9,
     padding: 20,
-    backgroundColor: "#fff",
     borderRadius: 12,
     marginVertical: 10,
     elevation: 4,
@@ -95,6 +128,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
   },
+
   tituloPregunta: {
     fontSize: 18,
     fontWeight: "bold",
@@ -102,7 +136,6 @@ const styles = StyleSheet.create({
   },
   descripcionPregunta: {
     fontSize: 16,
-    color: "#555",
   },
 });
 

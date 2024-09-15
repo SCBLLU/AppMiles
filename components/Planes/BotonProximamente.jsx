@@ -7,17 +7,18 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
+import { useDarkMode } from "../DarkModeProvider"; // Importar el hook
 
 const Proximamente = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const { isDarkMode } = useDarkMode(); // Obtener el estado del modo oscuro
 
   useEffect(() => {
-    // Cambia el estilo de la barra de estado al abrir o cerrar el modal
+    // Cambiar el estilo de la barra de estado al abrir o cerrar el modal
     StatusBar.setBarStyle(
       modalVisible ? "light-content" : "dark-content",
       true
     );
-    
   }, [modalVisible]);
 
   const showModal = () => {
@@ -29,9 +30,27 @@ const Proximamente = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={showModal}>
-        <Text style={styles.buttonText}>Próximas actualizaciones</Text>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDarkMode ? "#121212" : "#f5f5f5" },
+      ]}
+    >
+      <TouchableOpacity
+        style={[
+          styles.button,
+          { backgroundColor: isDarkMode ? "#1ed760" : "#1ed760" },
+        ]}
+        onPress={showModal}
+      >
+        <Text
+          style={[
+            styles.buttonText,
+            { color: isDarkMode ? "#212121" : "#212121" },
+          ]}
+        >
+          Próximas actualizaciones
+        </Text>
       </TouchableOpacity>
 
       <Modal
@@ -40,17 +59,63 @@ const Proximamente = () => {
         transparent={true}
         onRequestClose={hideModal}
       >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>
+        <View
+          style={[
+            styles.modalOverlay,
+            {
+              backgroundColor: isDarkMode
+                ? "rgba(0, 0, 0, 0.8)"
+                : "rgba(0, 0, 0, 0.5)",
+            },
+          ]}
+        >
+          <View
+            style={[
+              styles.modalContent,
+              { backgroundColor: isDarkMode ? "#1e1e1e" : "#fff" },
+            ]}
+          >
+            <Text
+              style={[
+                styles.modalTitle,
+                { color: isDarkMode ? "#fff" : "#000" },
+              ]}
+            >
               Funciones próximamente disponibles:
             </Text>
 
-            <Text style={styles.modalText}>Planes de suscripción anuales</Text>
-            <Text style={styles.modalText}>Soporte de chat en vivo</Text>
-            <Text style={styles.modalText}>Entrenamientos personalizados</Text>
+            <Text
+              style={[
+                styles.modalText,
+                { color: isDarkMode ? "#ccc" : "#000" },
+              ]}
+            >
+              Planes de suscripción anuales
+            </Text>
+            <Text
+              style={[
+                styles.modalText,
+                { color: isDarkMode ? "#ccc" : "#000" },
+              ]}
+            >
+              Soporte de chat en vivo
+            </Text>
+            <Text
+              style={[
+                styles.modalText,
+                { color: isDarkMode ? "#ccc" : "#000" },
+              ]}
+            >
+              Entrenamientos personalizados
+            </Text>
 
-            <TouchableOpacity style={styles.closeButton} onPress={hideModal}>
+            <TouchableOpacity
+              style={[
+                styles.closeButton,
+                { backgroundColor: isDarkMode ? "#FF5733" : "#FF5733" },
+              ]}
+              onPress={hideModal}
+            >
               <Text style={styles.closeButtonText}>Cerrar</Text>
             </TouchableOpacity>
           </View>
@@ -66,10 +131,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f5f5f5",
   },
   button: {
-    backgroundColor: "#1ed760",
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -80,7 +143,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   buttonText: {
-    color: "#212121",
     fontSize: 16,
     fontWeight: "bold",
   },
@@ -88,12 +150,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
     width: 300,
     padding: 20,
-    backgroundColor: "#fff",
     borderRadius: 10,
     alignItems: "center",
     elevation: 5,
@@ -115,7 +175,6 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     marginTop: 20,
-    backgroundColor: "#FF5733",
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,

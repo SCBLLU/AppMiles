@@ -1,12 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Users, Book, Activity } from "lucide-react-native"; // Usando lucide-react-native para los íconos
+import { useDarkMode } from "../DarkModeProvider";
 
 const Características = () => {
+  const { isDarkMode } = useDarkMode();
+
   return (
-    <View style={styles.section}>
+    <View style={[styles.section, { backgroundColor: isDarkMode ? "#333" : "#F3F4F6" }]}>
       <View style={styles.container}>
-        <Text style={styles.heading}>Características Principales</Text>
+        <Text style={[styles.heading, { color: isDarkMode ? "#fff" : "#000" }]}>
+          Características Principales
+        </Text>
         <View style={styles.grid}>
           <FeatureCard
             Icon={Users}
@@ -33,16 +38,29 @@ const Características = () => {
 };
 
 const FeatureCard = ({ Icon, title, description, buttonText }) => {
+  const { isDarkMode } = useDarkMode();
+
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { backgroundColor: isDarkMode ? "#444" : "#fff" }]}>
       <View style={styles.cardHeader}>
-        <Icon width={32} height={32} color="black" style={styles.icon} />
-        <Text style={styles.cardTitle}>{title}</Text>
-        <Text style={styles.cardDescription}>{description}</Text>
+        <Icon
+          width={32}
+          height={32}
+          color={isDarkMode ? "#fff" : "#000"}
+          style={styles.icon}
+        />
+        <Text style={[styles.cardTitle, { color: isDarkMode ? "#fff" : "#000" }]}>
+          {title}
+        </Text>
+        <Text style={[styles.cardDescription, { color: isDarkMode ? "#ccc" : "#6B7280" }]}>
+          {description}
+        </Text>
       </View>
       <View style={styles.cardContent}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>{buttonText}</Text>
+        <TouchableOpacity style={[styles.button, { borderColor: isDarkMode ? "#fff" : "#000" }]}>
+          <Text style={[styles.buttonText, { color: isDarkMode ? "#fff" : "#000" }]}>
+            {buttonText}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -51,18 +69,18 @@ const FeatureCard = ({ Icon, title, description, buttonText }) => {
 
 const styles = StyleSheet.create({
   section: {
-    width: "100%",
-    paddingVertical: 48, // Similar to py-12 in Tailwind
-    backgroundColor: "#F3F4F6", // bg-gray-100
+    paddingVertical: 48,
+    margin: 15,
+    borderRadius: 20,
   },
   container: {
-    paddingHorizontal: 15, // px-4
+    paddingHorizontal: 15,
   },
   heading: {
-    fontSize: 36, // sm:text-5xl
+    fontSize: 36,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 24, // mb-12
+    marginBottom: 24,
   },
   grid: {
     flexDirection: "row",
@@ -70,8 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   card: {
-    width: "100%", // Full width in mobile
-    backgroundColor: "white",
+    width: "100%",
     borderRadius: 8,
     padding: 16,
     marginBottom: 16,
@@ -79,7 +96,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 5 },
-    elevation: 5, // For Android shadow
+    elevation: 5,
   },
   cardHeader: {
     alignItems: "center",
@@ -96,20 +113,17 @@ const styles = StyleSheet.create({
   cardDescription: {
     fontSize: 14,
     textAlign: "center",
-    color: "#6B7280", // Similar to gray-500
   },
   cardContent: {
     marginTop: 16,
   },
   button: {
     borderWidth: 1,
-    borderColor: "black",
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: "center",
   },
   buttonText: {
-    color: "black",
     fontWeight: "bold",
   },
 });

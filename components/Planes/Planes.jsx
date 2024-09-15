@@ -1,10 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Text, Dimensions } from "react-native";
+import { useDarkMode } from "../DarkModeProvider";
 
 const { width } = Dimensions.get("window");
 
 const Planes = () => {
   const scrollViewRef = useRef(null);
+  const { isDarkMode } = useDarkMode(); // Obtener el estado del modo oscuro
 
   const planes = [
     {
@@ -35,13 +37,12 @@ const Planes = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.bienvenida}>Suscripciones</Text>
-
-
-
-      <Text style={styles.informacionplanes}>
-        Selecciona unp de nuestros planes para comenzar tus entrenamientos
+    <View style={[styles.container, { backgroundColor: isDarkMode ? "#121212" : "#fff" }]}>
+      <Text style={[styles.bienvenida, { color: isDarkMode ? "#fff" : "#2c3e50" }]}>
+        Suscripciones
+      </Text>
+      <Text style={[styles.informacionplanes, { color: isDarkMode ? "#ccc" : "#666" }]}>
+        Selecciona uno de nuestros planes para comenzar tus entrenamientos
       </Text>
       <ScrollView
         ref={scrollViewRef}
@@ -55,11 +56,21 @@ const Planes = () => {
         {planes.map((plan, index) => (
           <View
             key={index}
-            style={[styles.plan, index === 1 && styles.estandar]}
+            style={[
+              styles.plan,
+              index === 1 && styles.estandar,
+              { backgroundColor: isDarkMode ? "#1e1e1e" : "#fff", borderColor: isDarkMode ? "#333" : "transparent" }
+            ]}
           >
-            <Text style={styles.planTitle}>{plan.title}</Text>
-            <Text style={styles.planPrice}>{plan.price}</Text>
-            <Text style={styles.planDescription}>{plan.description}</Text>
+            <Text style={[styles.planTitle, { color: isDarkMode ? "#fff" : "#191919" }]}>
+              {plan.title}
+            </Text>
+            <Text style={[styles.planPrice, { color: isDarkMode ? "#4caf50" : "#1ed760" }]}>
+              {plan.price}
+            </Text>
+            <Text style={[styles.planDescription, { color: isDarkMode ? "#ddd" : "#191919" }]}>
+              {plan.description}
+            </Text>
           </View>
         ))}
       </ScrollView>
@@ -74,14 +85,12 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   bienvenida: {
-    color: "#2c3e50",
     fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 16,
   },
   informacionplanes: {
-    color: "#666",
     fontSize: 16,
     textAlign: "center",
     marginBottom: 16,
@@ -94,7 +103,6 @@ const styles = StyleSheet.create({
   plan: {
     width: width * 0.8,
     height: 180,
-    backgroundColor: "#fff",
     marginHorizontal: 12,
     borderRadius: 16,
     justifyContent: "center",
@@ -106,7 +114,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     padding: 20,
     borderWidth: 2,
-    borderColor: "transparent",
   },
   estandar: {
     borderColor: "#999",
@@ -116,17 +123,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "#191919",
   },
   planPrice: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#1ed760",
     marginBottom: 6,
   },
   planDescription: {
     fontSize: 14,
-    color: "#191919",
     textAlign: "center",
   },
 });
