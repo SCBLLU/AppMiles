@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,8 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useDarkMode } from "./Utils/DarkModeProvider";
 import { useNotifications } from "./Utils/NotificationsProvider";
+import { UserContext } from "./Utils/UserContext"; // Asegúrate de importar correctamente el contexto
+import { useNavigation } from "@react-navigation/native";
 
 const InfoItem = ({ icon, text, isDarkMode }) => (
   <View style={styles.infoItem}>
@@ -29,11 +31,13 @@ const InfoItem = ({ icon, text, isDarkMode }) => (
   </View>
 );
 
-const Profile = () => {
+const User = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+  const { username } = useContext(UserContext); // Obtén el nombre de usuario
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { notifications, toggleNotifications } = useNotifications();
+  navigation = useNavigation();
 
   const profileImage = require("../assets/profile.jpg");
 
@@ -96,7 +100,7 @@ const Profile = () => {
                   { color: isDarkMode ? "#FFFFFF" : "#000000" },
                 ]}
               >
-                Rafael Ernesto
+                {username ? `${username}` : "Usuario no encontrado"}
               </Text>
               <Text
                 style={[
@@ -104,24 +108,24 @@ const Profile = () => {
                   { color: isDarkMode ? "#A0A0A0" : "#505050" },
                 ]}
               >
-                rafael.canales@gmail.com
+                {username ? `${username}123@gmail.com` : ""}
               </Text>
             </View>
 
             <View style={styles.infoContainer}>
               <InfoItem
                 icon="calendar-outline"
-                text="Se unió en Enero 2023"
+                text="Se unió en Septiembre 2024"
                 isDarkMode={isDarkMode}
               />
               <InfoItem
                 icon="location-outline"
-                text="Ciudad, País"
+                text="Santa Tecla, El Salvador"
                 isDarkMode={isDarkMode}
               />
               <InfoItem
                 icon="link-outline"
-                text="usuario.com"
+                text={`miles.app/${username}`}
                 isDarkMode={isDarkMode}
               />
             </View>
@@ -152,6 +156,31 @@ const Profile = () => {
                 ]}
               >
                 Configuración
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.buttonOut,
+                { backgroundColor: isDarkMode ? "#2C2C2C" : "#E0E0E0" },
+              ]}
+              onPress={() => {
+                setIsOpen(false);
+                navigation.navigate("index"); // Navegar a la pantalla de inicio
+              }}
+            >
+              <Ionicons
+                name="exit-outline"
+                size={24}
+                color={isDarkMode ? "#FFFFFF" : "#000000"}
+              />
+              <Text
+                style={[
+                  styles.settingsButtonText,
+                  { color: isDarkMode ? "#FFFFFF" : "#000000" },
+                ]}
+              >
+                Salir de la App
               </Text>
             </TouchableOpacity>
           </ScrollView>
@@ -353,6 +382,14 @@ const styles = StyleSheet.create({
   settingsText: {
     fontSize: 18,
   },
+  buttonOut: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 10,
+  },
 });
 
-export default Profile;
+export default User;

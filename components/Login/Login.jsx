@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
 import { useRouter } from "expo-router";
 import { Eye, EyeOff } from "lucide-react-native";
 import { useDarkMode } from "../Utils/DarkModeProvider";
+import { UserContext } from "../Utils/UserContext"; // Importa el UserContext
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -21,6 +22,9 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { isDarkMode } = useDarkMode(); // Usar modo oscuro
+
+  // Accede al setter de nombre de usuario desde el contexto
+  const { setUsername: setGlobalUsername } = useContext(UserContext);
 
   const handleLogin = () => {
     if (!username || !password) {
@@ -31,7 +35,8 @@ const Login = () => {
     setLoading(true);
     global.setTimeout(() => {
       setLoading(false);
-      router.push("/dashboard");
+      setGlobalUsername(username); // Guarda el nombre de usuario en el contexto
+      router.push("/dashboard"); // Redirige a dashboard
     }, 1000);
   };
 
