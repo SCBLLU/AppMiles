@@ -6,104 +6,49 @@ import {
   StyleSheet,
   Modal,
   ScrollView,
-  Image, // Importar Image
+  Image,
+  Platform,
+  SafeAreaView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDarkMode } from "./DarkModeProvider";
 import { useNotifications } from "./NotificationsProvider";
 
-// Definición de InfoItem
 const InfoItem = ({ icon, text, isDarkMode }) => (
   <View style={styles.infoItem}>
-    <Ionicons name={icon} size={24} color={isDarkMode ? "white" : "black"} />
-    <Text style={[styles.infoText, { color: isDarkMode ? "#ddd" : "#333" }]}>
+    <Ionicons
+      name={icon}
+      size={24}
+      color={isDarkMode ? "#A0A0A0" : "#505050"}
+    />
+    <Text
+      style={[styles.infoText, { color: isDarkMode ? "#E0E0E0" : "#303030" }]}
+    >
       {text}
     </Text>
   </View>
 );
 
-// Definición de SettingsModal
-const SettingsModal = ({
-  isVisible,
-  onClose,
-  isDarkMode,
-  toggleDarkMode,
-  notifications,
-  toggleNotifications,
-}) => (
-  <Modal animationType="slide" transparent={true} visible={isVisible}>
-    <View
-      style={[
-        styles.settingsModal,
-        { backgroundColor: isDarkMode ? "#333" : "#fff" },
-      ]}
-    >
-      <TouchableOpacity style={styles.settingsItem} onPress={toggleDarkMode}>
-        <Text
-          style={[styles.settingsText, { color: isDarkMode ? "#fff" : "#000" }]}
-        >
-          Modo Oscuro
-        </Text>
-        <Ionicons
-          name={isDarkMode ? "moon" : "sunny"}
-          size={24}
-          color={isDarkMode ? "white" : "black"}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.settingsItem}
-        onPress={toggleNotifications}
-      >
-        <Text
-          style={[styles.settingsText, { color: isDarkMode ? "#fff" : "#000" }]}
-        >
-          Notificaciones
-        </Text>
-        <Ionicons
-          name={notifications ? "notifications" : "notifications-off"}
-          size={24}
-          color={isDarkMode ? "white" : "black"}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.settingsItem} onPress={onClose}>
-        <Text
-          style={[styles.settingsText, { color: isDarkMode ? "#fff" : "#000" }]}
-        >
-          Cerrar
-        </Text>
-      </TouchableOpacity>
-    </View>
-  </Modal>
-);
-
-const TwitterProfileRN = () => {
+const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { notifications, toggleNotifications } = useNotifications();
 
-  // Importar imagen local
   const profileImage = require("../assets/profile.jpg");
 
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
-        { backgroundColor: isDarkMode ? "#000" : "#fff" },
+        { backgroundColor: isDarkMode ? "#121212" : "#fff" },
       ]}
     >
       <TouchableOpacity
         onPress={() => setIsOpen(true)}
         style={styles.profileButton}
       >
-        <View style={styles.profileImage}>
-          <Image
-            source={profileImage} // Usar imagen local
-            style={styles.profileImageStyle} // Aplicar estilos
-          />
-        </View>
+        <Image source={profileImage} style={styles.profileImageStyle} />
       </TouchableOpacity>
 
       <Modal
@@ -112,71 +57,98 @@ const TwitterProfileRN = () => {
         visible={isOpen}
         onRequestClose={() => setIsOpen(false)}
       >
-        <ScrollView
+        <SafeAreaView
           style={[
             styles.modalContent,
-            { backgroundColor: isDarkMode ? "#000" : "#fff" },
+            { backgroundColor: isDarkMode ? "#121212" : "#fff" },
           ]}
         >
-          <View style={styles.header}>
-            <Text
-              style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}
-            >
-              Perfil de Usuario
-            </Text>
-            <TouchableOpacity onPress={() => setIsOpen(false)}>
-              <Ionicons
-                name="close"
-                size={24}
-                color={isDarkMode ? "white" : "black"}
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.header}>
+              <Text
+                style={[
+                  styles.title,
+                  { color: isDarkMode ? "#FFFFFF" : "#000000" },
+                ]}
+              >
+                Perfil de Usuario
+              </Text>
+              <TouchableOpacity
+                onPress={() => setIsOpen(false)}
+                style={styles.closeButton}
+              >
+                <Ionicons
+                  name="close"
+                  size={28}
+                  color={isDarkMode ? "#FFFFFF" : "#000000"}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.avatarContainer}>
+              <Image source={profileImage} style={styles.avatarLargeStyle} />
+            </View>
+
+            <View style={styles.userInfoContainer}>
+              <Text
+                style={[
+                  styles.name,
+                  { color: isDarkMode ? "#FFFFFF" : "#000000" },
+                ]}
+              >
+                Rafael Ernesto
+              </Text>
+              <Text
+                style={[
+                  styles.email,
+                  { color: isDarkMode ? "#A0A0A0" : "#505050" },
+                ]}
+              >
+                rafael.canales@gmail.com
+              </Text>
+            </View>
+
+            <View style={styles.infoContainer}>
+              <InfoItem
+                icon="calendar-outline"
+                text="Se unió en Enero 2023"
+                isDarkMode={isDarkMode}
               />
+              <InfoItem
+                icon="location-outline"
+                text="Ciudad, País"
+                isDarkMode={isDarkMode}
+              />
+              <InfoItem
+                icon="link-outline"
+                text="usuario.com"
+                isDarkMode={isDarkMode}
+              />
+            </View>
+
+            <TouchableOpacity
+              style={[
+                styles.settingsButton,
+                { backgroundColor: isDarkMode ? "#2C2C2C" : "#E0E0E0" },
+              ]}
+              onPress={() => setIsSettingsVisible(true)}
+            >
+              <Ionicons
+                name="settings-outline"
+                size={24}
+                color={isDarkMode ? "#FFFFFF" : "#000000"}
+              />
+              <Text
+                style={[
+                  styles.settingsButtonText,
+                  { color: isDarkMode ? "#FFFFFF" : "#000000" },
+                ]}
+              >
+                Configuración
+              </Text>
             </TouchableOpacity>
-          </View>
-
-          <View style={styles.avatarLarge}>
-            <Image
-              source={profileImage} // Usar imagen local
-              style={styles.avatarLargeStyle} // Aplicar estilos
-            />
-          </View>
-
-          <Text style={[styles.name, { color: isDarkMode ? "#fff" : "#000" }]}>
-            Nombre Usuario
-          </Text>
-          <Text style={styles.username}>@usuario</Text>
-
-          <Text style={[styles.bio, { color: isDarkMode ? "#ddd" : "#333" }]}>
-            Biografía del usuario. Aquí iría una breve descripción sobre el
-            usuario y sus intereses.
-          </Text>
-
-          <InfoItem
-            icon="location-outline"
-            text="Ciudad, País"
-            isDarkMode={isDarkMode}
-          />
-          <InfoItem
-            icon="link-outline"
-            text="usuario.com"
-            isDarkMode={isDarkMode}
-          />
-          <InfoItem
-            icon="calendar-outline"
-            text="Se unió en Enero 2023"
-            isDarkMode={isDarkMode}
-          />
-
-          <TouchableOpacity
-            style={styles.settingsButton}
-            onPress={() => setIsSettingsVisible(true)}
-          >
-            <Ionicons
-              name="settings-outline"
-              size={24}
-              color={isDarkMode ? "white" : "black"}
-            />
-          </TouchableOpacity>
-        </ScrollView>
+          </ScrollView>
+        </SafeAreaView>
       </Modal>
 
       <SettingsModal
@@ -187,27 +159,92 @@ const TwitterProfileRN = () => {
         notifications={notifications}
         toggleNotifications={toggleNotifications}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
+const SettingsModal = ({
+  isVisible,
+  onClose,
+  isDarkMode,
+  toggleDarkMode,
+  notifications,
+  toggleNotifications,
+}) => (
+  <Modal animationType="slide" transparent={true} visible={isVisible}>
+    <SafeAreaView
+      style={[
+        styles.settingsModal,
+        { backgroundColor: isDarkMode ? "#121212" : "#F5F5F5" },
+      ]}
+    >
+      <View style={styles.settingsHeader}>
+        <Text
+          style={[
+            styles.settingsTitle,
+            { color: isDarkMode ? "#FFFFFF" : "#000000" },
+          ]}
+        >
+          Configuración
+        </Text>
+        <TouchableOpacity onPress={onClose}>
+          <Ionicons
+            name="close"
+            size={28}
+            color={isDarkMode ? "#FFFFFF" : "#000000"}
+          />
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity style={styles.settingsItem} onPress={toggleDarkMode}>
+        <Text
+          style={[
+            styles.settingsText,
+            { color: isDarkMode ? "#FFFFFF" : "#000000" },
+          ]}
+        >
+          Modo Oscuro
+        </Text>
+        <Ionicons
+          name={isDarkMode ? "moon" : "sunny"}
+          size={24}
+          color={isDarkMode ? "#FFFFFF" : "#000000"}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.settingsItem}
+        onPress={toggleNotifications}
+      >
+        <Text
+          style={[
+            styles.settingsText,
+            { color: isDarkMode ? "#FFFFFF" : "#000000" },
+          ]}
+        >
+          Notificaciones
+        </Text>
+        <Ionicons
+          name={notifications ? "notifications" : "notifications-off"}
+          size={24}
+          color={isDarkMode ? "#FFFFFF" : "#000000"}
+        />
+      </TouchableOpacity>
+    </SafeAreaView>
+  </Modal>
+);
+
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "center",
   },
   profileButton: {
     width: 50,
     height: 50,
-    borderRadius: 24,
-  },
-  profileImage: {
-    width: 48,
-    height: 48,
-    borderRadius: 24, // Esto hace que la imagen sea circular
-    overflow: "hidden", // Para asegurar que la imagen no se desborde del borde redondeado
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent", // Fondo transparente para el contenedor
+    borderRadius: 25,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "#4A90E2",
   },
   profileImageStyle: {
     width: "100%",
@@ -215,7 +252,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
-    padding: 20,
+    padding: Platform.OS === "ios" ? 10 : 20,
   },
   header: {
     flexDirection: "row",
@@ -224,64 +261,85 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  avatarLarge: {
-    width: 96,
-    height: 96,
-    borderRadius: 48, // Esto hace que la imagen sea circular
-    marginBottom: 20,
-  },
-  avatarLargeStyle: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 48, // Esto hace que la imagen sea circular
-  },
-  name: {
     fontSize: 24,
     fontWeight: "bold",
   },
-  username: {
-    fontSize: 16,
-    color: "#777",
+  closeButton: {
+    padding: 8,
   },
-  bio: {
-    fontSize: 14,
-    marginVertical: 10,
+  avatarContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  avatarLargeStyle: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    borderWidth: 3,
+    borderColor: "#4A90E2",
+  },
+  userInfoContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  name: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  email: {
+    fontSize: 16,
+  },
+  infoContainer: {
+    marginBottom: 20,
   },
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 5,
+    marginBottom: 15,
   },
   infoText: {
-    marginLeft: 10,
+    marginLeft: 15,
+    fontSize: 16,
   },
   settingsButton: {
-    backgroundColor: "transparent", // Asegúrate de que el fondo no sea visible
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  settingsButtonText: {
+    marginLeft: 10,
+    fontSize: 16,
+    fontWeight: "600",
   },
   settingsModal: {
-    margin: 20,
-    borderRadius: 20,
-    padding: 35,
+    flex: 1,
+    padding: 20,
+  },
+  settingsHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    marginBottom: 20,
+  },
+  settingsTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
   settingsItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100%",
-    marginBottom: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#E0E0E0",
   },
   settingsText: {
-    fontSize: 16,
+    fontSize: 18,
   },
 });
 
-export default TwitterProfileRN;
+export default Profile;

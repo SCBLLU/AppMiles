@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,8 @@ import {
   Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { Eye, EyeOff, Subtitles } from "lucide-react-native";
+import { Eye, EyeOff } from "lucide-react-native";
+import { useDarkMode } from "../DarkModeProvider";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -19,6 +20,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { isDarkMode } = useDarkMode(); // Usar modo oscuro
 
   const handleLogin = () => {
     if (!username || !password) {
@@ -30,36 +32,55 @@ const Login = () => {
     global.setTimeout(() => {
       setLoading(false);
       router.push("/dashboard");
-    }, 2000);
+    }, 1000);
   };
-
-  // Usuario y contraseña de demostración
-  /*   useEffect(() => {
-    setUsername("usuario_demo");
-    setPassword("123456");
-  }, []); */
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Inicio de sesión</Text>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: isDarkMode ? "#121212" : "#fff" },
+        ]}
+      >
+        <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}>
+          Inicio de sesión
+        </Text>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Usuario</Text>
+          <Text style={[styles.label, { color: isDarkMode ? "#fff" : "#000" }]}>
+            Usuario
+          </Text>
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              {
+                borderColor: isDarkMode ? "#fff" : "#333",
+                color: isDarkMode ? "#fff" : "#000",
+              },
+            ]}
             placeholder="Email o nombre de usuario"
+            placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
             value={username}
             onChangeText={setUsername}
           />
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Contraseña</Text>
+          <Text style={[styles.label, { color: isDarkMode ? "#fff" : "#000" }]}>
+            Contraseña
+          </Text>
           <View style={styles.passwordContainer}>
             <TextInput
-              style={styles.passwordInput}
+              style={[
+                styles.passwordInput,
+                {
+                  borderColor: isDarkMode ? "#fff" : "#333",
+                  color: isDarkMode ? "#fff" : "#000",
+                },
+              ]}
               placeholder="Contraseña"
+              placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
               secureTextEntry={!showPassword}
               value={password}
               onChangeText={setPassword}
@@ -69,9 +90,9 @@ const Login = () => {
               style={styles.icon}
             >
               {showPassword ? (
-                <EyeOff size={24} color="gray" />
+                <EyeOff size={24} color={isDarkMode ? "#fff" : "gray"} />
               ) : (
-                <Eye size={24} color="gray" />
+                <Eye size={24} color={isDarkMode ? "#fff" : "gray"} />
               )}
             </TouchableOpacity>
           </View>
@@ -88,7 +109,11 @@ const Login = () => {
             <Text style={styles.buttonText}>Iniciar sesión</Text>
           </TouchableOpacity>
         )}
-        <Text style={styles.Subtitles}>¿Olvidaste tu contraseña?</Text>
+        <Text
+          style={[styles.Subtitles, { color: isDarkMode ? "#fff" : "#000" }]}
+        >
+          ¿Olvidaste tu contraseña?
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -98,17 +123,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: 30,},
+    paddingHorizontal: 30,
+  },
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "black",
     marginBottom: 20,
     textAlign: "center",
   },
   Subtitles: {
     fontSize: 18,
-    color: "black",
     marginTop: 25,
     textAlign: "center",
   },
@@ -122,7 +146,6 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    borderColor: "#333",
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
@@ -130,7 +153,6 @@ const styles = StyleSheet.create({
   passwordContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderColor: "#333",
     borderWidth: 1,
     borderRadius: 5,
     height: 50,
