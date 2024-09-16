@@ -28,20 +28,35 @@ const Planes = () => {
     },
   ];
 
-  // Centrar el Plan Estándar al cargar
   useEffect(() => {
-    if (scrollViewRef.current) {
-      const offsetX = (width * 0.8 + 34) * 1 - width / 2 + (width * 0.8) / 2;
-      scrollViewRef.current.scrollTo({ x: offsetX, animated: true });
-    }
+    const timer = global.setTimeout(() => {
+      if (scrollViewRef.current) {
+        const offsetX = (width * 0.8 + 36) * 1 - width / 2 + (width * 0.8) / 2;
+        scrollViewRef.current.scrollTo({ x: offsetX, animated: true });
+      }
+    }, 100); // Ajusta el tiempo si es necesario
+
+    return () => global.clearTimeout(timer);
   }, []);
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? "#121212" : "#fff" }]}>
-      <Text style={[styles.bienvenida, { color: isDarkMode ? "#fff" : "#2c3e50" }]}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDarkMode ? "#121212" : "#fff" },
+      ]}
+    >
+      <Text
+        style={[styles.bienvenida, { color: isDarkMode ? "#fff" : "#2c3e50" }]}
+      >
         Suscripciones
       </Text>
-      <Text style={[styles.informacionplanes, { color: isDarkMode ? "#ccc" : "#666" }]}>
+      <Text
+        style={[
+          styles.informacionplanes,
+          { color: isDarkMode ? "#ccc" : "#666" },
+        ]}
+      >
         Selecciona uno de nuestros planes para comenzar tus entrenamientos
       </Text>
       <ScrollView
@@ -59,16 +74,34 @@ const Planes = () => {
             style={[
               styles.plan,
               index === 1 && styles.estandar,
-              { backgroundColor: isDarkMode ? "#1e1e1e" : "#fff", borderColor: isDarkMode ? "#333" : "transparent" }
+              {
+                backgroundColor: isDarkMode ? "#1e1e1e" : "#fff",
+                borderColor: isDarkMode ? "#333" : "transparent",
+              },
             ]}
           >
-            <Text style={[styles.planTitle, { color: isDarkMode ? "#fff" : "#191919" }]}>
+            <Text
+              style={[
+                styles.planTitle,
+                { color: isDarkMode ? "#fff" : "#191919" },
+              ]}
+            >
               {plan.title}
             </Text>
-            <Text style={[styles.planPrice, { color: isDarkMode ? "#4caf50" : "#1ed760" }]}>
+            <Text
+              style={[
+                styles.planPrice,
+                { color: isDarkMode ? "#4caf50" : "#1ed760" },
+              ]}
+            >
               {plan.price}
             </Text>
-            <Text style={[styles.planDescription, { color: isDarkMode ? "#ddd" : "#191919" }]}>
+            <Text
+              style={[
+                styles.planDescription,
+                { color: isDarkMode ? "#ddd" : "#191919" },
+              ]}
+            >
               {plan.description}
             </Text>
           </View>
@@ -85,7 +118,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   bienvenida: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 16,
@@ -102,7 +135,7 @@ const styles = StyleSheet.create({
   },
   plan: {
     width: width * 0.8,
-    height: 180,
+    height: 200,
     marginHorizontal: 12,
     borderRadius: 16,
     justifyContent: "center",
