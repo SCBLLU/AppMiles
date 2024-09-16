@@ -52,7 +52,7 @@ const Profile = () => {
       </TouchableOpacity>
 
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={false}
         visible={isOpen}
         onRequestClose={() => setIsOpen(false)}
@@ -131,7 +131,14 @@ const Profile = () => {
                 styles.settingsButton,
                 { backgroundColor: isDarkMode ? "#2C2C2C" : "#E0E0E0" },
               ]}
-              onPress={() => setIsSettingsVisible(true)}
+              onPress={() => {
+                if (Platform.OS === "ios") {
+                  setIsOpen(false); // Cerrar el modal del perfil primero en iOS
+                  global.setTimeout(() => setIsSettingsVisible(true), 50); // Esperar y abrir configuración en iOS
+                } else {
+                  setIsSettingsVisible(true); // Directamente abrir configuración en Android
+                }
+              }}
             >
               <Ionicons
                 name="settings-outline"
@@ -171,7 +178,7 @@ const SettingsModal = ({
   notifications,
   toggleNotifications,
 }) => (
-  <Modal animationType="slide" transparent={true} visible={isVisible}>
+  <Modal animationType="none" transparent={true} visible={isVisible}>
     <View
       style={[
         styles.settingsModal,
