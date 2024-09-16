@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native";
-import Screen from "../components/Screen";
+import Screen from "../components/Utils/Screen";
 import Login from "../components/Login/Ingreso";
 import Icono_Login from "../components/Login/Icono";
 

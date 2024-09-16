@@ -16,7 +16,7 @@ import {
   faSwimmer,
   faPersonHiking,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDarkMode } from "../DarkModeProvider";
+import { useDarkMode } from "../Utils/DarkModeProvider";
 
 const initialActivities = [
   {

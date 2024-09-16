@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Users, Book, Activity } from "lucide-react-native"; // Usando lucide-react-native para los íconos
-import { useDarkMode } from "../DarkModeProvider";
+import { useDarkMode } from "../Utils/DarkModeProvider";
 
 const Características = () => {
   const { isDarkMode } = useDarkMode();

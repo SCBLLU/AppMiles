@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Text, Dimensions } from "react-native";
-import { useDarkMode } from "../DarkModeProvider";
+import { useDarkMode } from "../Utils/DarkModeProvider";
 
 const { width } = Dimensions.get("window");
 

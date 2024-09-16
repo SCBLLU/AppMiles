@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native";
-import Screen from "../components/Screen";
+import Screen from "../components/Utils/Screen";
 
 export default function Settings() {
     return (

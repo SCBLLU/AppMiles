@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import Svg, { Path } from "react-native-svg";
-import { useDarkMode } from "../DarkModeProvider";
+import { useDarkMode } from "../Utils/DarkModeProvider";
 
 export const Icono_Login = (props) => {
   const { isDarkMode } = useDarkMode(); // Obtener el estado de modo oscuro

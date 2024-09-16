@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { useDarkMode } from "../DarkModeProvider"; // Importar el hook
+import { useDarkMode } from "../Utils/DarkModeProvider";
 
 const Proximamente = () => {
   const [modalVisible, setModalVisible] = useState(false);

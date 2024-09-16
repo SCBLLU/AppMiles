@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from "react-native";
 import Proximamente from "./BotonProximamente";
-import { useDarkMode } from "../DarkModeProvider"; // Importar el hook
+import { useDarkMode } from "../Utils/DarkModeProvider";
 
 const { width } = Dimensions.get("window");
 

@@ -11,8 +11,8 @@ import {
   StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useDarkMode } from "./DarkModeProvider";
-import { useNotifications } from "./NotificationsProvider";
+import { useDarkMode } from "./Utils/DarkModeProvider";
+import { useNotifications } from "./Utils/NotificationsProvider";
 
 const InfoItem = ({ icon, text, isDarkMode }) => (
   <View style={styles.infoItem}>

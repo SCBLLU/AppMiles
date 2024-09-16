@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Platform, StatusBar } from "react-native";
-import { useDarkMode } from "./DarkModeProvider";
-import Profile from "./Perfil";
+import { useDarkMode } from "./Utils/DarkModeProvider";
+import Profile from "./User";
 const Header = () => {
   const { isDarkMode } = useDarkMode();
 

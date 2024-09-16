@@ -8,7 +8,7 @@ import {
   faUsers,
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDarkMode } from "../components/DarkModeProvider"; // Importa el modo oscuro
+import { useDarkMode } from "../components/Utils/DarkModeProvider"; // Importa el modo oscuro
 
 const Navegacion = () => {
   const { isDarkMode } = useDarkMode(); // Obtiene el estado del modo oscuro

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
-import Screen from "../Screen";
-import { useDarkMode } from "../DarkModeProvider";
+import Screen from "../Utils/Screen";
+import { useDarkMode } from "../Utils/DarkModeProvider";
 
 const DatosPasos = ({ currentSteps, goalSteps }) => {
   const { isDarkMode } = useDarkMode();

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faWalking, faFire } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { useDarkMode } from "../DarkModeProvider";
+import { useDarkMode } from "../Utils/DarkModeProvider";
 const DatosGenerales = ({ steps, minutes, calories }) => {
   const { isDarkMode } = useDarkMode();
 

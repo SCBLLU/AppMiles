@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import Preguntas from "../components/Planes/Preguntas";
 import Planes from "../components/Planes/Planes";
-import Screen from "../components/Screen";
+import Screen from "../components/Utils/Screen";
 
 export default function Subscription() {
     const [preguntaActiva, setPreguntaActiva] = useState(null);

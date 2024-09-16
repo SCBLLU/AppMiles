@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, usePathname } from "expo-router";
-import { DarkModeProvider } from "../components/DarkModeProvider";
-import { NotificationsProvider } from "../components/NotificationsProvider";
+import { DarkModeProvider } from "../components/Utils/DarkModeProvider";
+import { NotificationsProvider } from "../components/Utils/NotificationsProvider";
 
 import Navegacion from "../components/Navegacion";
 import Header from "../components/Header";
