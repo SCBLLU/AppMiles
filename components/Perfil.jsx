@@ -8,7 +8,7 @@ import {
   ScrollView,
   Image,
   Platform,
-  SafeAreaView,
+  StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDarkMode } from "./DarkModeProvider";
@@ -38,7 +38,7 @@ const Profile = () => {
   const profileImage = require("../assets/profile.jpg");
 
   return (
-    <SafeAreaView
+    <View
       style={[
         styles.container,
         { backgroundColor: isDarkMode ? "#121212" : "#fff" },
@@ -57,7 +57,7 @@ const Profile = () => {
         visible={isOpen}
         onRequestClose={() => setIsOpen(false)}
       >
-        <SafeAreaView
+        <View
           style={[
             styles.modalContent,
             { backgroundColor: isDarkMode ? "#121212" : "#fff" },
@@ -148,7 +148,7 @@ const Profile = () => {
               </Text>
             </TouchableOpacity>
           </ScrollView>
-        </SafeAreaView>
+        </View>
       </Modal>
 
       <SettingsModal
@@ -159,7 +159,7 @@ const Profile = () => {
         notifications={notifications}
         toggleNotifications={toggleNotifications}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -172,7 +172,7 @@ const SettingsModal = ({
   toggleNotifications,
 }) => (
   <Modal animationType="slide" transparent={true} visible={isVisible}>
-    <SafeAreaView
+    <View
       style={[
         styles.settingsModal,
         { backgroundColor: isDarkMode ? "#121212" : "#F5F5F5" },
@@ -228,7 +228,7 @@ const SettingsModal = ({
           color={isDarkMode ? "#FFFFFF" : "#000000"}
         />
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   </Modal>
 );
 
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     overflow: "hidden",
     borderWidth: 2,
-    borderColor: "#4A90E2",
+    borderColor: "#0d0d0d",
   },
   profileImageStyle: {
     width: "100%",
@@ -252,7 +252,10 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
-    padding: Platform.OS === "ios" ? 10 : 20,
+    padding: 20,
+    paddingTop: Platform.select({
+      ios: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 60, // Ajusta el padding para iOS
+    }),
   },
   header: {
     flexDirection: "row",
@@ -276,7 +279,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 60,
     borderWidth: 3,
-    borderColor: "#4A90E2",
+    borderColor: "#0d0d0d",
   },
   userInfoContainer: {
     alignItems: "center",
@@ -318,6 +321,9 @@ const styles = StyleSheet.create({
   settingsModal: {
     flex: 1,
     padding: 20,
+    paddingTop: Platform.select({
+      ios: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 60, // Ajusta el padding para iOS
+    }),
   },
   settingsHeader: {
     flexDirection: "row",

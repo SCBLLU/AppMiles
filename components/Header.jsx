@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     paddingTop: Platform.select({
-      ios: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 40, // Ajusta el padding para iOS
+      ios: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 50, // Ajusta el padding para iOS
     }),
   },
 });
