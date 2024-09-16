@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Text, Dimensions } from "react-native";
 import { useDarkMode } from "../Utils/DarkModeProvider";
+import { FontAwesome } from "@expo/vector-icons"; // Importa los iconos si los necesitas
 
 const { width } = Dimensions.get("window");
 
@@ -10,21 +11,43 @@ const Planes = () => {
 
   const planes = [
     {
-      title: "Plan Básico",
-      price: "$9.99/mes",
-      description: "Acceso a entrenamientos básicos y seguimiento de progreso.",
+      nombre: "Básico",
+      precio: "9.99€",
+      facturacion: "mes",
+      descripcion: "Perfecto para empezar",
+      caracteristicas: [
+        "Registro de entrenamientos básicos",
+        "Registro de alimentación básico",
+        "Asesoría básica",
+        "Acceso a funciones básicas",
+      ],
+      popular: false,
     },
     {
-      title: "Plan Estándar",
-      price: "$14.99/mes",
-      description:
-        "Acceso a entrenamientos avanzados y recomendaciones personalizadas.",
+      nombre: "Pro",
+      precio: "19.99€",
+      facturacion: "mes",
+      descripcion: "Ideal para usuarios avanzados",
+      caracteristicas: [
+        "Registro de ejercicios avanzado",
+        "Registro de alimentación avanzado",
+        "Asesoría personalizada",
+        "Acceso a todas las funciones",
+      ],
+      popular: true,
     },
     {
-      title: "Plan Premium",
-      price: "$19.99/mes",
-      description:
-        "Acceso completo a entrenamientos personalizados y soporte prioritario.",
+      nombre: "Premium",
+      precio: "49.99€",
+      facturacion: "mes",
+      descripcion: "Para usuarios profesionales",
+      caracteristicas: [
+        "Registro de ejercicios avanzado",
+        "Registro de alimentación avanzado",
+        "Asesoría personalizada 24/7",
+        "Funciones personalizadas",
+      ],
+      popular: false,
     },
   ];
 
@@ -49,7 +72,7 @@ const Planes = () => {
       <Text
         style={[styles.bienvenida, { color: isDarkMode ? "#fff" : "#2c3e50" }]}
       >
-        Suscripciones
+        Planes de Suscripción
       </Text>
       <Text
         style={[
@@ -57,7 +80,7 @@ const Planes = () => {
           { color: isDarkMode ? "#ccc" : "#666" },
         ]}
       >
-        Selecciona uno de nuestros planes para comenzar tus entrenamientos
+        Elige el plan que mejor se adapte a tus necesidades
       </Text>
       <ScrollView
         ref={scrollViewRef}
@@ -68,25 +91,30 @@ const Planes = () => {
         snapToInterval={width * 0.8 + 24}
         decelerationRate="fast"
       >
-        {planes.map((plan, index) => (
+        {planes.map((plan) => (
           <View
-            key={index}
+            key={plan.nombre}
             style={[
               styles.plan,
-              index === 1 && styles.estandar,
+              plan.popular && styles.popular,
               {
                 backgroundColor: isDarkMode ? "#1e1e1e" : "#fff",
                 borderColor: isDarkMode ? "#333" : "transparent",
               },
             ]}
           >
+            {plan.popular && (
+              <View style={styles.popularBadge}>
+                <Text style={styles.popularText}>Popular</Text>
+              </View>
+            )}
             <Text
               style={[
                 styles.planTitle,
                 { color: isDarkMode ? "#fff" : "#191919" },
               ]}
             >
-              {plan.title}
+              {plan.nombre}
             </Text>
             <Text
               style={[
@@ -94,7 +122,8 @@ const Planes = () => {
                 { color: isDarkMode ? "#4caf50" : "#1ed760" },
               ]}
             >
-              {plan.price}
+              {plan.precio}{" "}
+              <Text style={styles.facturacion}>/{plan.facturacion}</Text>
             </Text>
             <Text
               style={[
@@ -102,8 +131,40 @@ const Planes = () => {
                 { color: isDarkMode ? "#ddd" : "#191919" },
               ]}
             >
-              {plan.description}
+              {plan.descripcion}
             </Text>
+            <View style={styles.featuresContainer}>
+              {plan.caracteristicas.map((caracteristica) => (
+                <View key={caracteristica} style={styles.feature}>
+                  <FontAwesome
+                    name="check"
+                    size={24}
+                    color={isDarkMode ? "#4caf50" : "#1ed760"}
+                  />
+                  <Text
+                    style={[
+                      styles.featureText,
+                      { color: isDarkMode ? "#ddd" : "#191919" },
+                    ]}
+                  >
+                    {caracteristica}
+                  </Text>
+                </View>
+              ))}
+            </View>
+            <View style={styles.footer}>
+              <Text
+                style={[
+                  styles.subscribeButton,
+                  {
+                    borderColor: isDarkMode ? "#4caf50" : "#1ed760",
+                    color: isDarkMode ? "#4caf50" : "#1ed760",
+                  },
+                ]}
+              >
+                Suscribirse
+              </Text>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -135,7 +196,7 @@ const styles = StyleSheet.create({
   },
   plan: {
     width: width * 0.8,
-    height: 200,
+    height: 400,
     marginHorizontal: 12,
     borderRadius: 16,
     justifyContent: "center",
@@ -148,9 +209,23 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 2,
   },
-  estandar: {
-    borderColor: "#999",
-    transform: [{ scale: 1.05 }],
+  popular: {
+    borderColor: "#4caf50",
+    borderWidth: 2,
+  },
+  popularBadge: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    backgroundColor: "#4caf50",
+    padding: 5,
+    borderRadius: 10,
+  },
+  popularText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 12,
+    textTransform: "uppercase",
   },
   planTitle: {
     fontSize: 22,
@@ -158,13 +233,46 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   planPrice: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "600",
     marginBottom: 6,
+  },
+  facturacion: {
+    fontSize: 16,
+    fontWeight: "400",
+    color: "#666",
   },
   planDescription: {
     fontSize: 14,
     textAlign: "center",
+    marginBottom: 10,
+  },
+  featuresContainer: {
+    marginTop: 10,
+    marginBottom: 20,
+    width: "100%",
+    paddingHorizontal: 10,
+  },
+  feature: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  featureText: {
+    marginLeft: 10,
+    fontSize: 14,
+  },
+  footer: {
+    marginTop: 30,
+    width: "100%",
+  },
+  subscribeButton: {
+    borderWidth: 2,
+    borderRadius: 8,
+    paddingVertical: 10,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });
 
