@@ -21,18 +21,18 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
   return (
     <Dialog.Container visible={visible}>
       <Dialog.Title
-        style={[styles.title, { color: isDarkMode ? "#e0e0e0" : "#333" }]}
+        style={[styles.title, { color: isDarkMode ? "#282c34" : "#333" }]}
       >
         Completar Compra
       </Dialog.Title>
       <Dialog.Description
-        style={[styles.description, { color: isDarkMode ? "#b0b0b0" : "#666" }]}
+        style={[styles.description, { color: isDarkMode ? "#282c34" : "#666" }]}
       >
         {`Plan seleccionado: ${selectedPlan.name} - ${selectedPlan.price}/${selectedPlan.billing}`}
       </Dialog.Description>
       <View style={styles.form}>
         <Text
-          style={[styles.label, { color: isDarkMode ? "#e0e0e0" : "#333" }]}
+          style={[styles.label, { color: isDarkMode ? "#282c34" : "#333" }]}
         >
           Método de Pago
         </Text>
@@ -43,13 +43,13 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
           <View style={styles.radioItem}>
             <RadioButton
               value="card"
-              color={isDarkMode ? "#4caf50" : "#1ed760"}
+              color={isDarkMode ? "#282c34" : "#282c34"}
             />
             <FontAwesomeIcon icon={faCreditCard} style={styles.icon} />
             <Text
               style={[
                 styles.radioLabel,
-                { color: isDarkMode ? "#e0e0e0" : "#333" },
+                { color: isDarkMode ? "#282c34" : "#333" },
               ]}
             >
               Tarjeta de Crédito
@@ -58,13 +58,13 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
           <View style={styles.radioItem}>
             <RadioButton
               value="paypal"
-              color={isDarkMode ? "#4caf50" : "#1ed760"}
+              color={isDarkMode ? "#282c34" : "#282c34"}
             />
             <FontAwesomeIcon icon={faPaypal} style={styles.icon} />
             <Text
               style={[
                 styles.radioLabel,
-                { color: isDarkMode ? "#e0e0e0" : "#333" },
+                { color: isDarkMode ? "#282c34" : "#333" },
               ]}
             >
               PayPal
@@ -78,12 +78,12 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
               style={[
                 styles.input,
                 {
-                  backgroundColor: isDarkMode ? "#1f1f1f" : "#fff",
+                  backgroundColor: isDarkMode ? "#282c34" : "#fff",
                   color: isDarkMode ? "#e0e0e0" : "#333",
                 },
               ]}
               placeholder="Número de Tarjeta"
-              placeholderTextColor={isDarkMode ? "#757575" : "#ccc"}
+              placeholderTextColor={isDarkMode ? "#E7E6E6" : "#ccc"}
               keyboardType="numeric"
             />
             <View style={styles.inputRow}>
@@ -92,12 +92,12 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
                   styles.input,
                   styles.inputHalf,
                   {
-                    backgroundColor: isDarkMode ? "#1f1f1f" : "#fff",
+                    backgroundColor: isDarkMode ? "#282c34" : "#fff",
                     color: isDarkMode ? "#e0e0e0" : "#333",
                   },
                 ]}
                 placeholder="MM/YY"
-                placeholderTextColor={isDarkMode ? "#757575" : "#ccc"}
+                placeholderTextColor={isDarkMode ? "#E7E6E6" : "#ccc"}
                 keyboardType="numeric"
               />
               <TextInput
@@ -105,12 +105,12 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
                   styles.input,
                   styles.inputHalf,
                   {
-                    backgroundColor: isDarkMode ? "#1f1f1f" : "#fff",
+                    backgroundColor: isDarkMode ? "#282c34" : "#fff",
                     color: isDarkMode ? "#e0e0e0" : "#333",
                   },
                 ]}
                 placeholder="CVC"
-                placeholderTextColor={isDarkMode ? "#757575" : "#ccc"}
+                placeholderTextColor={isDarkMode ? "#E7E6E6" : "#ccc"}
                 keyboardType="numeric"
               />
             </View>
@@ -121,7 +121,7 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
           <Text
             style={[
               styles.paypalInfo,
-              { color: isDarkMode ? "#e0e0e0" : "#333" },
+              { color: isDarkMode ? "#282c34" : "#333" },
             ]}
           >
             Serás redirigido a PayPal para completar tu pago.
@@ -132,8 +132,8 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
           style={[
             styles.payButton,
             {
-              borderColor: isDarkMode ? "#4caf50" : "#1ed760",
-              color: isDarkMode ? "#4caf50" : "#1ed760",
+              borderColor: isDarkMode ? "#282c34" : "#282c34",
+              color: isDarkMode ? "#282c34" : "#282c34",
             },
           ]}
           onPress={handlePayment}
