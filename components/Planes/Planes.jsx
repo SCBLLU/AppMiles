@@ -1,21 +1,91 @@
 import React, { useRef, useEffect } from "react";
-import { View, ScrollView, StyleSheet, Text, Dimensions } from "react-native";
-import { useDarkMode } from "../Utils/DarkModeProvider";
-import { FontAwesome } from "@expo/vector-icons"; // Importa los iconos si los necesitas
+import { View, Text, ScrollView, StyleSheet, Dimensions } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useDarkMode } from "../Utils/DarkModeProvider"; 
 
 const { width } = Dimensions.get("window");
 
-const Planes = () => {
-  const scrollViewRef = useRef(null);
-  const { isDarkMode } = useDarkMode(); // Obtener el estado del modo oscuro
+const PlanCard = ({ plan, onSelect, isDarkMode }) => (
+  <View
+    style={[
+      styles.card,
+      {
+        backgroundColor: isDarkMode ? "#1e1e1e" : "#fff",
+        borderColor: isDarkMode ? "#333" : "transparent",
+      },
+    ]}
+  >
+    {plan.popular && (
+      <View style={styles.popularBadge}>
+        <Text style={styles.popularText}>Popular</Text>
+      </View>
+    )}
+    <Text
+      style={[styles.cardTitle, { color: isDarkMode ? "#fff" : "#191919" }]}
+    >
+      {plan.name}
+    </Text>
+    <Text
+      style={[
+        styles.cardDescription,
+        { color: isDarkMode ? "#4caf50" : "#1ed760" },
+      ]}
+    >
+      {plan.price}/{plan.billing}
+    </Text>
+    <Text
+      style={[
+        styles.planDescription,
+        { color: isDarkMode ? "#ddd" : "#191919" },
+      ]}
+    >
+      {plan.description}
+    </Text>
+    <View style={styles.featuresContainer}>
+      {plan.features.map((feature, index) => (
+        <View key={index} style={styles.feature}>
+          <FontAwesomeIcon
+            icon={faCheck}
+            color={isDarkMode ? "#4caf50" : "#1ed760"}
+          />
+          <Text
+            style={[
+              styles.featureText,
+              { color: isDarkMode ? "#ddd" : "#191919" },
+            ]}
+          >
+            {feature}
+          </Text>
+        </View>
+      ))}
+    </View>
+    <Text
+      style={[
+        styles.subscribeButton,
+        {
+          borderColor: isDarkMode ? "#4caf50" : "#1ed760",
+          color: isDarkMode ? "#4caf50" : "#1ed760",
+        },
+      ]}
+      onPress={() => onSelect(plan)}
+    >
+      Suscribirse
+    </Text>
+  </View>
+);
+
+export default function SubscriptionPlans({ onPlanSelect }) {
+  const { isDarkMode } = useDarkMode();
+  const scrollViewRef = useRef(null); 
 
   const planes = [
     {
-      nombre: "Básico",
-      precio: "9.99€",
-      facturacion: "mes",
-      descripcion: "Perfecto para empezar",
-      caracteristicas: [
+      name: "Básico",
+      price: "9.99€",
+      billing: "mes",
+      description: "Perfecto para empezar",
+      features: [
         "Registro de entrenamientos básicos",
         "Registro de alimentación básico",
         "Asesoría básica",
@@ -24,11 +94,11 @@ const Planes = () => {
       popular: false,
     },
     {
-      nombre: "Pro",
-      precio: "19.99€",
-      facturacion: "mes",
-      descripcion: "Ideal para usuarios avanzados",
-      caracteristicas: [
+      name: "Pro",
+      price: "19.99€",
+      billing: "mes",
+      description: "Ideal para usuarios avanzados",
+      features: [
         "Registro de ejercicios avanzado",
         "Registro de alimentación avanzado",
         "Asesoría personalizada",
@@ -37,11 +107,11 @@ const Planes = () => {
       popular: true,
     },
     {
-      nombre: "Premium",
-      precio: "49.99€",
-      facturacion: "mes",
-      descripcion: "Para usuarios profesionales",
-      caracteristicas: [
+      name: "Premium",
+      price: "49.99€",
+      billing: "mes",
+      description: "Para usuarios profesionales",
+      features: [
         "Registro de ejercicios avanzado",
         "Registro de alimentación avanzado",
         "Asesoría personalizada 24/7",
@@ -54,226 +124,98 @@ const Planes = () => {
   useEffect(() => {
     const timer = global.setTimeout(() => {
       if (scrollViewRef.current) {
-        const offsetX = (width * 0.8 + 36) * 1 - width / 2 + (width * 0.8) / 2;
+        const offsetX = (width * 0.8 + 46) * 1 - width / 2 + (width * 0.8) / 2;
         scrollViewRef.current.scrollTo({ x: offsetX, animated: true });
       }
     }, 100); // Ajusta el tiempo si es necesario
 
-    return () => global.clearTimeout(timer);
+    return () => global.clearTimeout(timer); // Limpiar el temporizador al desmontar
   }, []);
 
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDarkMode ? "#121212" : "#fff" },
-      ]}
+    <ScrollView
+      ref={scrollViewRef} // Asignar la referencia al ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.plansContainer}
+      snapToAlignment="center"
+      snapToInterval={width * 0.8 + 32}
+      decelerationRate="fast"
     >
-      <Text
-        style={[styles.bienvenida, { color: isDarkMode ? "#fff" : "#2c3e50" }]}
-      >
-        Planes de Suscripción
-      </Text>
-      <Text
-        style={[
-          styles.informacionplanes,
-          { color: isDarkMode ? "#ccc" : "#666" },
-        ]}
-      >
-        Elige el plan que mejor se adapte a tus necesidades
-      </Text>
-      <ScrollView
-        ref={scrollViewRef}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.plansContainer}
-        snapToAlignment="center"
-        snapToInterval={width * 0.8 + 24}
-        decelerationRate="fast"
-      >
-        {planes.map((plan) => (
-          <View
-            key={plan.nombre}
-            style={[
-              styles.plan,
-              plan.popular && styles.popular,
-              {
-                backgroundColor: isDarkMode ? "#1e1e1e" : "#fff",
-                borderColor: isDarkMode ? "#333" : "transparent",
-              },
-            ]}
-          >
-            {plan.popular && (
-              <View style={styles.popularBadge}>
-                <Text style={styles.popularText}>Popular</Text>
-              </View>
-            )}
-            <Text
-              style={[
-                styles.planTitle,
-                { color: isDarkMode ? "#fff" : "#191919" },
-              ]}
-            >
-              {plan.nombre}
-            </Text>
-            <Text
-              style={[
-                styles.planPrice,
-                { color: isDarkMode ? "#4caf50" : "#1ed760" },
-              ]}
-            >
-              {plan.precio}{" "}
-              <Text style={styles.facturacion}>/{plan.facturacion}</Text>
-            </Text>
-            <Text
-              style={[
-                styles.planDescription,
-                { color: isDarkMode ? "#ddd" : "#191919" },
-              ]}
-            >
-              {plan.descripcion}
-            </Text>
-            <View style={styles.featuresContainer}>
-              {plan.caracteristicas.map((caracteristica) => (
-                <View key={caracteristica} style={styles.feature}>
-                  <FontAwesome
-                    name="check"
-                    size={24}
-                    color={isDarkMode ? "#4caf50" : "#1ed760"}
-                  />
-                  <Text
-                    style={[
-                      styles.featureText,
-                      { color: isDarkMode ? "#ddd" : "#191919" },
-                    ]}
-                  >
-                    {caracteristica}
-                  </Text>
-                </View>
-              ))}
-            </View>
-            <View style={styles.footer}>
-              <Text
-                style={[
-                  styles.subscribeButton,
-                  {
-                    borderColor: isDarkMode ? "#4caf50" : "#1ed760",
-                    color: isDarkMode ? "#4caf50" : "#1ed760",
-                  },
-                ]}
-              >
-                Suscribirse
-              </Text>
-            </View>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+      {planes.map((plan) => (
+        <PlanCard
+          key={plan.name}
+          plan={plan}
+          onSelect={onPlanSelect}
+          isDarkMode={isDarkMode}
+        />
+      ))}
+    </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    paddingVertical: 20,
-  },
-  bienvenida: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 16,
-  },
-  informacionplanes: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 16,
-    width: width * 0.9,
-  },
   plansContainer: {
-    alignItems: "center",
+    paddingHorizontal: 12,
     paddingVertical: 16,
   },
-  plan: {
+  card: {
     width: width * 0.8,
-    height: 400,
+    borderRadius: 12,
+    padding: 16,
     marginHorizontal: 12,
-    borderRadius: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    elevation: 5,
+    borderWidth: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    padding: 20,
-    borderWidth: 2,
-  },
-  popular: {
-    borderColor: "#4caf50",
-    borderWidth: 2,
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
   },
   popularBadge: {
     position: "absolute",
-    top: 10,
-    right: 10,
-    backgroundColor: "#4caf50",
-    padding: 5,
-    borderRadius: 10,
+    top: 12,
+    right: 12,
+    backgroundColor: "#1ed760",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 20,
   },
   popularText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 12,
-    textTransform: "uppercase",
   },
-  planTitle: {
-    fontSize: 22,
+  cardTitle: {
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 8,
   },
-  planPrice: {
-    fontSize: 24,
-    fontWeight: "600",
-    marginBottom: 6,
-  },
-  facturacion: {
+  cardDescription: {
     fontSize: 16,
-    fontWeight: "400",
-    color: "#666",
+    fontWeight: "bold",
+    marginBottom: 8,
   },
   planDescription: {
     fontSize: 14,
-    textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 16,
   },
   featuresContainer: {
-    marginTop: 10,
-    marginBottom: 20,
-    width: "100%",
-    paddingHorizontal: 10,
+    marginBottom: 16,
   },
   feature: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 5,
+    marginBottom: 8,
   },
   featureText: {
-    marginLeft: 10,
+    marginLeft: 8,
     fontSize: 14,
-  },
-  footer: {
-    marginTop: 30,
-    width: "100%",
   },
   subscribeButton: {
     borderWidth: 2,
     borderRadius: 8,
-    paddingVertical: 10,
     textAlign: "center",
+    paddingVertical: 12,
     fontWeight: "bold",
-    fontSize: 16,
   },
 });
-
-export default Planes;
