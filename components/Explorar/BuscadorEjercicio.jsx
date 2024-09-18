@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import ResultadosBusqueda from "./ResultadosBusqueda";
 import BusquedasRecientes from "./BusquedasRecientes";
-import TodasCategorias from "./TodasCategorias";
 
-// Mock data for exercises
+// Base de datos de ejercicios
 const exerciseDatabase = [
   "Sentadillas - Fuerza de piernas",
   "Plancha - Core",
@@ -17,6 +24,33 @@ const exerciseDatabase = [
   "Natación - Cardio de bajo impacto",
   "Estiramientos - Flexibilidad general",
   "HIIT - Entrenamiento de alta intensidad",
+  "Caminata - Cardio de bajo impacto",
+  "Flexiones - Fuerza de brazos",
+  "Abdominales - Core",
+  "Ciclismo - Cardio de bajo impacto",
+  "Boxeo - Cardio y fuerza",
+  "Entrenamiento de resistencia - Fuerza general",
+  "Ejercicios de equilibrio - Estabilidad",
+  "Ejercicios de movilidad - Movilidad general",
+  "Ejercicios de coordinación - Coordinación",
+  "Ejercicios de agilidad - Agilidad",
+  "Ejercicios de fuerza explosiva - Fuerza explosiva",
+  "Ejercicios de velocidad - Velocidad",
+  "Ejercicios de flexibilidad - Flexibilidad",
+  "Ejercicios de resistencia - Resistencia",
+  "Ejercicios de fuerza - Fuerza",
+  "Ejercicios de cardio - Cardio",
+  "Ejercicios de calentamiento - Calentamiento",
+  "Ejercicios de enfriamiento - Enfriamiento",
+  "Ejercicios de estiramiento - Estiramiento",
+  "Ejercicios de relajación - Relajación",
+  "Ejercicios de respiración - Respiración",
+  "Ejercicios de meditación - Meditación",
+  "Ejercicios de yoga - Yoga",
+  "Ejercicios de pilates - Pilates",
+  "Ejercicios de baile - Baile",
+  "Ejercicios de gimnasia - Gimnasia",
+  "Ejercicios de calistenia - Calistenia",
 ];
 
 export default function BuscadorEjercicio() {
@@ -25,6 +59,7 @@ export default function BuscadorEjercicio() {
   const [searchResults, setSearchResults] = useState([]);
   const [recentSearches, setRecentSearches] = useState([]);
   const [showRecentSearches, setShowRecentSearches] = useState(true);
+  const [noResults, setNoResults] = useState(false);
 
   useEffect(() => {
     if (searchTerm.trim()) {
@@ -33,9 +68,11 @@ export default function BuscadorEjercicio() {
       );
       setSearchResults(results);
       setShowRecentSearches(false);
+      setNoResults(results.length === 0); // Muestra 'No hay resultados' solo si no hay resultados
     } else {
       setSearchResults([]);
       setShowRecentSearches(true);
+      setNoResults(false); // Oculta el mensaje cuando se limpia la búsqueda
     }
   }, [searchTerm]);
 
@@ -50,6 +87,10 @@ export default function BuscadorEjercicio() {
     setRecentSearches((prev) => prev.filter((search) => search !== item));
   };
 
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
+
   return (
     <View
       style={[
@@ -60,14 +101,18 @@ export default function BuscadorEjercicio() {
       <View
         style={[
           styles.searchContainer,
-          { backgroundColor: isDarkMode ? "#333" : "#676767" },
+          { backgroundColor: isDarkMode ? "#333" : "#fff" },
         ]}
       >
+        <FontAwesomeIcon
+          icon={faSearch}
+          size={20}
+          color={isDarkMode ? "#bbb" : "#888"}
+        />
         <TextInput
           style={[
             styles.input,
             {
-              backgroundColor: isDarkMode ? "#444" : "#fff",
               color: isDarkMode ? "#fff" : "#000",
             },
           ]}
@@ -77,6 +122,15 @@ export default function BuscadorEjercicio() {
           onChangeText={setSearchTerm}
           onSubmitEditing={handleSearch}
         />
+        {searchTerm !== "" && (
+          <TouchableOpacity onPress={clearSearch} style={styles.clearButton}>
+            <FontAwesomeIcon
+              icon={faTimes}
+              size={16}
+              color={isDarkMode ? "#bbb" : "#888"}
+            />
+          </TouchableOpacity>
+        )}
       </View>
 
       {searchResults.length > 0 && (
@@ -94,7 +148,13 @@ export default function BuscadorEjercicio() {
           onRemoveSearch={handleRemoveSearch}
         />
       )}
-      {showRecentSearches && searchResults.length === 0 && <TodasCategorias />}
+      {noResults && (
+        <Text
+          style={[styles.noResults, { color: isDarkMode ? "#bbb" : "#666" }]}
+        >
+          No hay resultados. Intenta con otra búsqueda.
+        </Text>
+      )}
     </View>
   );
 }
@@ -102,21 +162,32 @@ export default function BuscadorEjercicio() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
-    padding: 10,
+    padding: 16,
   },
   searchContainer: {
-    borderRadius: 30,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 25,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     marginBottom: 20,
-    width: "90%",
-    alignSelf: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   input: {
+    flex: 1,
     fontSize: 16,
-    borderRadius: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 5,
+    marginLeft: 8,
+  },
+  clearButton: {
+    padding: 4,
+  },
+  noResults: {
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 16,
   },
 });
