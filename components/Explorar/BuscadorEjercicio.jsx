@@ -46,6 +46,10 @@ export default function BuscadorEjercicio() {
     setSearchTerm("");
   };
 
+  const handleRemoveSearch = (item) => {
+    setRecentSearches((prev) => prev.filter((search) => search !== item));
+  };
+
   return (
     <View
       style={[
@@ -56,7 +60,7 @@ export default function BuscadorEjercicio() {
       <View
         style={[
           styles.searchContainer,
-          { backgroundColor: isDarkMode ? "#333" : "#676767" }, // Cambiamos el color de fondo dependiendo del modo
+          { backgroundColor: isDarkMode ? "#333" : "#676767" },
         ]}
       >
         <TextInput
@@ -76,12 +80,18 @@ export default function BuscadorEjercicio() {
       </View>
 
       {searchResults.length > 0 && (
-        <ResultadosBusqueda results={searchResults} />
+        <ResultadosBusqueda
+          results={searchResults}
+          onSelectResult={(selectedResult) =>
+            setRecentSearches((prev) => [selectedResult, ...prev.slice(0, 4)])
+          }
+        />
       )}
       {showRecentSearches && recentSearches.length > 0 && (
         <BusquedasRecientes
           searches={recentSearches}
           onSelectSearch={setSearchTerm}
+          onRemoveSearch={handleRemoveSearch}
         />
       )}
       {showRecentSearches && searchResults.length === 0 && <TodasCategorias />}

@@ -9,9 +9,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faClock, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
+import { useRouter } from "expo-router";
 
 const BusquedasRecientes = ({ searches, onSelectSearch, onRemoveSearch }) => {
   const { isDarkMode } = useDarkMode();
+  const router = useRouter();
 
   const renderItem = ({ item }) => (
     <View
@@ -21,12 +23,15 @@ const BusquedasRecientes = ({ searches, onSelectSearch, onRemoveSearch }) => {
       ]}
     >
       <TouchableOpacity
-        onPress={() => onSelectSearch(item)}
+        onPress={() => {
+          onSelectSearch(item);
+          router.push(`/exercise/${encodeURIComponent(item)}`);
+        }}
         style={styles.searchButton}
       >
         <FontAwesomeIcon
           icon={faClock}
-          color={isDarkMode ? "#1ac356" : "#000"} // Cambiamos el color del icono
+          color={isDarkMode ? "#1ac356" : "#000"}
           style={styles.icon}
         />
         <Text style={{ color: isDarkMode ? "#ccc" : "#333" }}>{item}</Text>

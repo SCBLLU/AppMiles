@@ -10,11 +10,12 @@ import {
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
 
-const ResultadosBusqueda = ({ results }) => {
+const ResultadosBusqueda = ({ results, onSelectResult }) => {
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
 
   const handleResultPress = (exercise) => {
+    onSelectResult(exercise);
     router.push(`/exercise/${encodeURIComponent(exercise)}`);
   };
 
@@ -49,7 +50,7 @@ const ResultadosBusqueda = ({ results }) => {
             </Text>
           </TouchableOpacity>
         )}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item}
         scrollEnabled={false}
       />
     </View>
@@ -59,17 +60,20 @@ const ResultadosBusqueda = ({ results }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    borderRadius: 20,
+    marginTop: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: "bold",
     marginBottom: 10,
   },
   resultCard: {
     flexDirection: "row",
     alignItems: "center",
     padding: 15,
-    borderRadius: 10,
-    marginVertical: 5,
+    borderRadius: 15,
+    marginBottom: 10,
   },
   exerciseImage: {
     width: 50,
