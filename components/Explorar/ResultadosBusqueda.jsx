@@ -28,6 +28,7 @@ const ResultadosBusqueda = ({ results }) => {
           </View>
         )}
         keyExtractor={(item, index) => index.toString()}
+        scrollEnabled={false} //Hace que no se pueda hacer scroll en la lista
       />
     </View>
   );
