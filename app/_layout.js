@@ -30,6 +30,12 @@ export default function Layout() {
                             }}
                         />
                         <Stack.Screen
+                            name="explore"
+                            options={{
+                                headerShown: false,
+                            }}
+                        />
+                        <Stack.Screen
                             name="subscriptions"
                             options={{
                                 headerShown: false,
@@ -41,12 +47,7 @@ export default function Layout() {
                                 headerShown: false,
                             }}
                         />
-                        <Stack.Screen
-                            name="settings"
-                            options={{
-                                headerShown: false,
-                            }}
-                        />
+
                     </Stack>
 
                     {pathname !== "/" && <Navegacion />}

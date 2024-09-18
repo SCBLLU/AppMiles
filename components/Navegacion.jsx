@@ -6,7 +6,7 @@ import {
   faHome,
   faGem,
   faUsers,
-  faCog,
+  faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../components/Utils/DarkModeProvider"; // Importa el modo oscuro
 
@@ -27,6 +27,13 @@ const Navegacion = () => {
           style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
         />
       </Link>
+      <Link href="/explore" style={styles.NavegacionItem}>
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          size={25}
+          style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
+        />
+      </Link>
       <Link href="/subscriptions" style={styles.NavegacionItem}>
         <FontAwesomeIcon
           icon={faGem}
@@ -37,13 +44,6 @@ const Navegacion = () => {
       <Link href="/collaborate" style={styles.NavegacionItem}>
         <FontAwesomeIcon
           icon={faUsers}
-          size={25}
-          style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
-        />
-      </Link>
-      <Link href="/settings" style={styles.NavegacionItem}>
-        <FontAwesomeIcon
-          icon={faCog}
           size={25}
           style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
         />
