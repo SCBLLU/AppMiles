@@ -19,11 +19,12 @@ const exerciseDatabase = [
   "HIIT - Entrenamiento de alta intensidad",
 ];
 
-const BuscadorEjercicio = () => {
+export default function BuscadorEjercicio() {
   const { isDarkMode } = useDarkMode();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [recentSearches, setRecentSearches] = useState([]);
+  const [showRecentSearches, setShowRecentSearches] = useState(true);
 
   useEffect(() => {
     if (searchTerm.trim()) {
@@ -31,14 +32,19 @@ const BuscadorEjercicio = () => {
         exercise.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setSearchResults(results);
-
-      if (!recentSearches.includes(searchTerm)) {
-        setRecentSearches((prev) => [searchTerm, ...prev.slice(0, 4)]);
-      }
+      setShowRecentSearches(false);
     } else {
       setSearchResults([]);
+      setShowRecentSearches(true);
     }
   }, [searchTerm]);
+
+  const handleSearch = () => {
+    if (searchTerm.trim() && !recentSearches.includes(searchTerm.trim())) {
+      setRecentSearches((prev) => [searchTerm.trim(), ...prev.slice(0, 4)]);
+    }
+    setSearchTerm("");
+  };
 
   const removeRecentSearch = (search) => {
     setRecentSearches((prev) => prev.filter((s) => s !== search));
@@ -73,21 +79,24 @@ const BuscadorEjercicio = () => {
           placeholderTextColor={isDarkMode ? "#bbb" : "#888"}
           value={searchTerm}
           onChangeText={setSearchTerm}
+          onSubmitEditing={handleSearch}
         />
       </View>
 
       {searchResults.length > 0 && (
         <ResultadosBusqueda results={searchResults} />
       )}
-      <BusquedasRecientes
-        searches={recentSearches}
-        onSelectSearch={handleSelectSearch}
-        onRemoveSearch={removeRecentSearch}
-      />
-      <TodasCategorias />
+      {showRecentSearches && recentSearches.length > 0 && (
+        <BusquedasRecientes
+          searches={recentSearches}
+          onSelectSearch={handleSelectSearch}
+          onRemoveSearch={removeRecentSearch}
+        />
+      )}
+      {showRecentSearches && searchResults.length === 0 && <TodasCategorias />}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -107,5 +116,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 });
-
-export default BuscadorEjercicio;
