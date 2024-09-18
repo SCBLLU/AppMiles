@@ -46,14 +46,6 @@ export default function BuscadorEjercicio() {
     setSearchTerm("");
   };
 
-  const removeRecentSearch = (search) => {
-    setRecentSearches((prev) => prev.filter((s) => s !== search));
-  };
-
-  const handleSelectSearch = (search) => {
-    setSearchTerm(search);
-  };
-
   return (
     <View
       style={[
@@ -64,7 +56,7 @@ export default function BuscadorEjercicio() {
       <View
         style={[
           styles.searchContainer,
-          { backgroundColor: isDarkMode ? "#333" : "#e0e0e0" },
+          { backgroundColor: isDarkMode ? "#333" : "#676767" }, // Cambiamos el color de fondo dependiendo del modo
         ]}
       >
         <TextInput
@@ -89,8 +81,7 @@ export default function BuscadorEjercicio() {
       {showRecentSearches && recentSearches.length > 0 && (
         <BusquedasRecientes
           searches={recentSearches}
-          onSelectSearch={handleSelectSearch}
-          onRemoveSearch={removeRecentSearch}
+          onSelectSearch={setSearchTerm}
         />
       )}
       {showRecentSearches && searchResults.length === 0 && <TodasCategorias />}
@@ -101,18 +92,21 @@ export default function BuscadorEjercicio() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    margin: 10,
+    padding: 10,
   },
   searchContainer: {
     borderRadius: 30,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
     paddingVertical: 10,
     marginBottom: 20,
+    width: "90%",
+    alignSelf: "center",
   },
   input: {
-    flex: 1,
     fontSize: 16,
     borderRadius: 30,
     paddingHorizontal: 20,
+    paddingVertical: 5,
   },
 });
