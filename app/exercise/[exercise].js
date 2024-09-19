@@ -1,9 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import data from "../../data/data.json"; // Ajusta la ruta según tu estructura de archivos
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 export default function ExerciseDetails() {
-  const { exercise } = useLocalSearchParams();
+  const { exerciseId } = useLocalSearchParams();
+
+  // Buscar el ejercicio en los datos importados
+  const exercise = data.exercises.find(ex => ex.id === exerciseId);
 
   if (!exercise) {
     return (
@@ -13,12 +18,30 @@ export default function ExerciseDetails() {
     );
   }
 
+  // Obtener la categoría del ejercicio
+  const category = data.categories.find(cat => cat.id === exercise.category);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{exercise}</Text>
+      <Text style={styles.title}>{exercise.name}</Text>
+      {/*       {exercise.image && (
+        <Image
+          source={require(`../../assets/${exercise.image}`)} // Ajusta la ruta según la ubicación real de tus imágenes
+          style={styles.image}
+          resizeMode="cover"
+        />
+      )} */}
       <Text style={styles.description}>
-        Aquí puedes mostrar información detallada sobre {exercise}, como beneficios, instrucciones, etc.
+        Duración: {exercise.duration} minutos{"\n"}
+        Calorías quemadas: {exercise.calories}{"\n"}
+        Categoría: {category ? category.name : "Desconocida"}
       </Text>
+      {category && (
+        <View style={[styles.categoryContainer, { backgroundColor: category.color }]}>
+
+          <Text style={styles.categoryText}>{category.name}</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -36,5 +59,23 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
+    marginBottom: 20,
+  },
+  image: {
+    width: Dimensions.get('window').width - 40,
+    height: 200,
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
+  categoryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 8,
+  },
+  categoryText: {
+    fontSize: 16,
+    color: "#fff",
+    marginLeft: 10,
   },
 });

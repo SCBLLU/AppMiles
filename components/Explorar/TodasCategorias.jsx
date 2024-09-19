@@ -20,22 +20,32 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
+import data from "../../data/data.json"; // Asegúrate de que esta ruta sea correcta
 
-const categories = [
-  { id: "1", name: "Cardio", icon: faHeartbeat, color: "#FF6B6B" },
-  { id: "2", name: "Fuerza", icon: faDumbbell, color: "#4ECDC4" },
-  { id: "3", name: "Flexibilidad", icon: faLeaf, color: "#45B649" },
-  { id: "4", name: "Correr", icon: faRunning, color: "#FF8C00" },
-  { id: "5", name: "Ciclismo", icon: faBiking, color: "#6A5ACD" },
-  { id: "6", name: "Natación", icon: faSwimmer, color: "#1E90FF" },
-  { id: "7", name: "Meditación", icon: faPersonPraying, color: "#9B59B6" },
-  { id: "8", name: "Nutrición", icon: faAppleAlt, color: "#2ECC71" },
-  { id: "9", name: "Sueño", icon: faBed, color: "#34495E" },
-];
+const iconMap = {
+  faHeartbeat: faHeartbeat,
+  faDumbbell: faDumbbell,
+  faLeaf: faLeaf,
+  faRunning: faRunning,
+  faBiking: faBiking,
+  faSwimmer: faSwimmer,
+  faPersonPraying: faPersonPraying,
+  faAppleAlt: faAppleAlt,
+  faBed: faBed,
+};
 
 const TodasCategorias = () => {
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
+
+  // Manejar si los datos no están disponibles
+  if (!data || !data.categories) {
+    return (
+      <View>
+        <Text>Cargando categorías...</Text>
+      </View>
+    );
+  }
 
   const handleResultPress = (category) => {
     router.push(`/categories/${encodeURIComponent(category.name)}`);
@@ -46,7 +56,7 @@ const TodasCategorias = () => {
       style={[styles.categoryCard, { backgroundColor: item.color }]}
       onPress={() => handleResultPress(item)}
     >
-      <FontAwesomeIcon icon={item.icon} color="#fff" size={40} />
+      <FontAwesomeIcon icon={iconMap[item.icon]} color="#fff" size={40} />
       <Text style={styles.categoryName}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -62,7 +72,7 @@ const TodasCategorias = () => {
         Explorar todo
       </Text>
       <FlatList
-        data={categories}
+        data={data.categories} // Asegúrate de que 'data.categories' esté disponible
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={2}

@@ -11,47 +11,10 @@ import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import ResultadosBusqueda from "./ResultadosBusqueda";
 import BusquedasRecientes from "./BusquedasRecientes";
+import data from "../../data/data.json";
 
-// Base de datos de ejercicios
-const exerciseDatabase = [
-  "Sentadillas - Fuerza de piernas",
-  "Plancha - Core",
-  "Burpees - Cardio",
-  "Yoga para principiantes - Flexibilidad",
-  "Zumba - Baile cardio",
-  "Levantamiento de pesas - Fuerza de brazos",
-  "Pilates - Estabilidad central",
-  "Natación - Cardio de bajo impacto",
-  "Estiramientos - Flexibilidad general",
-  "HIIT - Entrenamiento de alta intensidad",
-  "Caminata - Cardio de bajo impacto",
-  "Flexiones - Fuerza de brazos",
-  "Abdominales - Core",
-  "Ciclismo - Cardio de bajo impacto",
-  "Boxeo - Cardio y fuerza",
-  "Entrenamiento de resistencia - Fuerza general",
-  "Ejercicios de equilibrio - Estabilidad",
-  "Ejercicios de movilidad - Movilidad general",
-  "Ejercicios de coordinación - Coordinación",
-  "Ejercicios de agilidad - Agilidad",
-  "Ejercicios de fuerza explosiva - Fuerza explosiva",
-  "Ejercicios de velocidad - Velocidad",
-  "Ejercicios de flexibilidad - Flexibilidad",
-  "Ejercicios de resistencia - Resistencia",
-  "Ejercicios de fuerza - Fuerza",
-  "Ejercicios de cardio - Cardio",
-  "Ejercicios de calentamiento - Calentamiento",
-  "Ejercicios de enfriamiento - Enfriamiento",
-  "Ejercicios de estiramiento - Estiramiento",
-  "Ejercicios de relajación - Relajación",
-  "Ejercicios de respiración - Respiración",
-  "Ejercicios de meditación - Meditación",
-  "Ejercicios de yoga - Yoga",
-  "Ejercicios de pilates - Pilates",
-  "Ejercicios de baile - Baile",
-  "Ejercicios de gimnasia - Gimnasia",
-  "Ejercicios de calistenia - Calistenia",
-];
+// Llama a la data de los ejercicios del archivo data.json
+const exercises = data.exercises;
 
 export default function BuscadorEjercicio() {
   const { isDarkMode } = useDarkMode();
@@ -63,12 +26,13 @@ export default function BuscadorEjercicio() {
 
   useEffect(() => {
     if (searchTerm.trim()) {
-      const results = exerciseDatabase.filter((exercise) =>
-        exercise.toLowerCase().includes(searchTerm.toLowerCase())
+      // Filtrar los ejercicios basados en el nombre
+      const results = exercises.filter((exercise) =>
+        exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setSearchResults(results);
       setShowRecentSearches(false);
-      setNoResults(results.length === 0); // Muestra 'No hay resultados' solo si no hay resultados
+      setNoResults(results.length === 0); // Muestra 'No hay resultados' si no encuentra nada
     } else {
       setSearchResults([]);
       setShowRecentSearches(true);
@@ -135,7 +99,7 @@ export default function BuscadorEjercicio() {
 
       {searchResults.length > 0 && (
         <ResultadosBusqueda
-          results={searchResults}
+          results={searchResults.map((result) => result.name)} // Solo muestra los nombres
           onSelectResult={(selectedResult) =>
             setRecentSearches((prev) => [selectedResult, ...prev.slice(0, 4)])
           }

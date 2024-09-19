@@ -1,0 +1,100 @@
+{
+    "categories": [
+        {
+            "id": "1",
+            "name": "Cardio",
+            "icon": "faHeartbeat",
+            "color": "#FF6B6B"
+        },
+        {
+            "id": "2",
+            "name": "Fuerza",
+            "icon": "faDumbbell",
+            "color": "#4ECDC4"
+        },
+        {
+            "id": "3",
+            "name": "Flexibilidad",
+            "icon": "faLeaf",
+            "color": "#45B649"
+        },
+        {
+            "id": "4",
+            "name": "Correr",
+            "icon": "faRunning",
+            "color": "#FF8C00"
+        },
+        {
+            "id": "5",
+            "name": "Bicicleta",
+            "icon": "faBiking",
+            "color": "#FFC107"
+        },
+        {
+            "id": "6",
+            "name": "Natación",
+            "icon": "faSwimmer",
+            "color": "#03A9F4"
+        },
+        {
+            "id": "7",
+            "name": "Meditación",
+            "icon": "faPersonPraying",
+            "color": "#9C27B0"
+        },
+        {
+            "id": "8",
+            "name": "Nutrición",
+            "icon": "faAppleAlt",
+            "color": "#4CAF50"
+        },
+        {
+            "id": "9",
+            "name": "Sueño",
+            "icon": "faBed",
+            "color": "#FF5722"
+        }
+    ],
+    "exercises": [
+        {
+            "id": "1",
+            "name": "Correr",
+            "category": "4",
+            "duration": "30",
+            "calories": "300",
+            "image": "correr.jpg"
+        },
+        {
+            "id": "2",
+            "name": "Saltar la cuerda",
+            "category": "1",
+            "duration": "15",
+            "calories": "200",
+            "image": "saltar.jpg"
+        },
+        {
+            "id": "3",
+            "name": "Flexiones",
+            "category": "2",
+            "duration": "10",
+            "calories": "100",
+            "image": "flexiones.jpg"
+        },
+        {
+            "id": "4",
+            "name": "Sentadillas",
+            "category": "2",
+            "duration": "10",
+            "calories": "100",
+            "image": "sentadillas.jpg"
+        },
+        {
+            "id": "5",
+            "name": "Estiramiento",
+            "category": "3",
+            "duration": "10",
+            "calories": "100",
+            "image": "estiramiento.jpg"
+        }
+    ]
+}
