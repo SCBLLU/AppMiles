@@ -19,6 +19,7 @@ import {
   faBed,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
+import { useRouter } from "expo-router";
 
 const categories = [
   { id: "1", name: "Cardio", icon: faHeartbeat, color: "#FF6B6B" },
@@ -34,10 +35,16 @@ const categories = [
 
 const TodasCategorias = () => {
   const { isDarkMode } = useDarkMode();
+  const router = useRouter();
 
-  const renderItem = ({ item, index }) => (
+  const handleResultPress = (category) => {
+    router.push(`/categories/${encodeURIComponent(category.name)}`);
+  };
+
+  const renderItem = ({ item }) => (
     <TouchableOpacity
       style={[styles.categoryCard, { backgroundColor: item.color }]}
+      onPress={() => handleResultPress(item)}
     >
       <FontAwesomeIcon icon={item.icon} color="#fff" size={40} />
       <Text style={styles.categoryName}>{item.name}</Text>
