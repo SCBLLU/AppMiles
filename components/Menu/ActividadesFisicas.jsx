@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
+  LayoutAnimation,
+  Platform,
+  UIManager,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -14,116 +16,105 @@ import {
   faRunning,
   faSwimmer,
   faPersonHiking,
-  faAngleUp, // Icono para "ver menos"
-  faAngleDown, // Icono para "ver más"
+  faAngleUp,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 
-// Definimos las actividades iniciales
-const initialActivities = [
-  {
-    id: "1",
-    title: "Caminata",
-    icon: <FontAwesomeIcon icon={faWalking} size={30} />,
-  },
-  {
-    id: "2",
-    title: "Pesas",
-    icon: <FontAwesomeIcon icon={faDumbbell} size={30} />,
-  },
-  {
-    id: "3",
-    title: "Ciclismo",
-    icon: <FontAwesomeIcon icon={faBiking} size={30} />,
-  },
-  {
-    id: "4",
-    title: "Ver más", // Este será el botón "Ver más"
-    icon: <FontAwesomeIcon icon={faAngleDown} size={30} />,
-  },
-];
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
-// Definimos las actividades adicionales
-const additionalActivities = [
-  {
-    id: "5",
-    title: "Correr",
-    icon: <FontAwesomeIcon icon={faRunning} size={30} />,
-  },
-  {
-    id: "6",
-    title: "Natación",
-    icon: <FontAwesomeIcon icon={faSwimmer} size={30} />,
-  },
-  {
-    id: "7",
-    title: "Senderismo",
-    icon: <FontAwesomeIcon icon={faPersonHiking} size={30} />,
-  },
-  {
-    id: "8",
-    title: "Ver menos", // Este será el botón "Ver menos"
-    icon: <FontAwesomeIcon icon={faAngleUp} size={30} />,
-  },
+const allActivities = [
+  { id: "1", title: "Caminata", icon: faWalking },
+  { id: "2", title: "Pesas", icon: faDumbbell },
+  { id: "3", title: "Ciclismo", icon: faBiking },
+  { id: "4", title: "Correr", icon: faRunning },
+  { id: "5", title: "Natación", icon: faSwimmer },
+  { id: "6", title: "Senderismo", icon: faPersonHiking },
 ];
 
 const ActividadesFisicas = () => {
   const { isDarkMode } = useDarkMode();
-  const [activities, setActivities] = useState(initialActivities);
   const [showMore, setShowMore] = useState(false);
 
-  const handleToggleActivities = () => {
-    setShowMore((prev) => !prev);
-    if (!showMore) {
-      // Mostrar todas las actividades y eliminar "Ver más"
-      setActivities([
-        ...initialActivities.slice(0, 3),
-        ...additionalActivities,
-      ]);
-    } else {
-      // Volver a las actividades iniciales y eliminar "Ver menos"
-      setActivities(initialActivities);
-    }
-  };
+  const visibleActivities = useMemo(() => {
+    return showMore ? allActivities : allActivities.slice(0, 3);
+  }, [showMore]);
 
-  const renderActivity = ({ item }) => (
-    <View key={item.id} style={styles.activityContainer}>
+  const handleToggleActivities = useCallback(() => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setShowMore((prev) => !prev);
+  }, []);
+
+  const renderActivity = useCallback(
+    (item) => (
+      <View key={item.id} style={styles.activityContainer}>
+        <TouchableOpacity
+          style={[
+            styles.activityCard,
+            { backgroundColor: isDarkMode ? "#444" : "#fff" },
+          ]}
+          activeOpacity={0.7}
+        >
+          <FontAwesomeIcon
+            icon={item.icon}
+            size={30}
+            color={isDarkMode ? "#ccc" : "#333"}
+          />
+        </TouchableOpacity>
+        <Text
+          style={[
+            styles.activityTitle,
+            { color: isDarkMode ? "#ccc" : "#333" },
+          ]}
+        >
+          {item.title}
+        </Text>
+      </View>
+    ),
+    [isDarkMode]
+  );
+
+  const toggleButton = useMemo(
+    () => (
       <TouchableOpacity
         style={[
-          styles.activityCard,
-          { backgroundColor: isDarkMode ? "#444" : "#fff" },
+          styles.toggleButton,
+          { backgroundColor: isDarkMode ? "#555" : "#eee" },
         ]}
-        onPress={
-          item.title === "Ver más" || item.title === "Ver menos"
-            ? handleToggleActivities
-            : undefined
-        }
+        onPress={handleToggleActivities}
+        activeOpacity={0.8}
       >
-        {item.icon}
+        <FontAwesomeIcon
+          icon={showMore ? faAngleUp : faAngleDown}
+          size={30}
+          color={isDarkMode ? "#ccc" : "#333"}
+        />
+        <Text
+          style={[styles.toggleText, { color: isDarkMode ? "#ccc" : "#333" }]}
+        >
+          {showMore ? "Ver menos" : "Ver más"}
+        </Text>
       </TouchableOpacity>
-      <Text
-        style={[styles.activityTitle, { color: isDarkMode ? "#ccc" : "#333" }]}
-      >
-        {item.title}
-      </Text>
-    </View>
+    ),
+    [showMore, isDarkMode, handleToggleActivities]
   );
 
   return (
     <View
       style={[
         styles.container,
-        { backgroundColor: isDarkMode ? "#333" : "#F3F4F6" },
+        { backgroundColor: isDarkMode ? "#222" : "#F3F4F6" },
       ]}
     >
-      <FlatList
-        data={activities}
-        renderItem={renderActivity}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.flatListContainer}
-      />
+      <View style={styles.activitiesContainer}>
+        {visibleActivities.map(renderActivity)}
+      </View>
+      {toggleButton}
     </View>
   );
 };
@@ -131,27 +122,54 @@ const ActividadesFisicas = () => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
+    paddingHorizontal: 10,
     borderRadius: 20,
     marginHorizontal: 15,
+    elevation: 3,
   },
-  flatListContainer: {
-    paddingHorizontal: 20,
+  activitiesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginBottom: 15,
   },
   activityContainer: {
     alignItems: "center",
-    marginHorizontal: 10,
+    marginBottom: 20,
+    flexBasis: "30%",
   },
   activityCard: {
     alignItems: "center",
     justifyContent: "center",
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
     elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   activityTitle: {
-    marginTop: 5,
-    fontSize: 12,
+    marginTop: 8,
+    fontSize: 13,
+    textAlign: "center",
+    fontWeight: "500",
+  },
+  toggleButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 30,
+    elevation: 5,
+    flexDirection: "row",
+    alignSelf: "center",
+  },
+  toggleText: {
+    marginLeft: 8,
+    fontSize: 14,
+    fontWeight: "600",
   },
 });
 
