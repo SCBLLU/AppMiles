@@ -1,3 +1,4 @@
+// ActividadesFisicas.js
 import React, { useState, useCallback, useMemo } from "react";
 import {
   View,
@@ -20,6 +21,7 @@ import {
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
+import { useRouter } from "expo-router";
 
 if (
   Platform.OS === "android" &&
@@ -40,6 +42,7 @@ const allActivities = [
 const ActividadesFisicas = () => {
   const { isDarkMode } = useDarkMode();
   const [showMore, setShowMore] = useState(false);
+  const router = useRouter(); // Inicializa el router para la navegación
 
   const visibleActivities = useMemo(() => {
     return showMore ? allActivities : allActivities.slice(0, 3);
@@ -50,6 +53,17 @@ const ActividadesFisicas = () => {
     setShowMore((prev) => !prev);
   }, []);
 
+  const handleActivityPress = useCallback(
+    (activity) => {
+      // Navegamos a la ruta dinámica y pasamos los parámetros
+      router.push({
+        pathname: `/exercise-timer/${activity.id}`, // Usamos el id para la ruta dinámica
+        params: { title: activity.title }, // Pasamos el título de la actividad
+      });
+    },
+    [router]
+  );
+
   const renderActivity = useCallback(
     (item) => (
       <View key={item.id} style={styles.activityContainer}>
@@ -59,6 +73,7 @@ const ActividadesFisicas = () => {
             { backgroundColor: isDarkMode ? "#444" : "#fff" },
           ]}
           activeOpacity={0.7}
+          onPress={() => handleActivityPress(item)} // Redirige al hacer clic
         >
           <FontAwesomeIcon
             icon={item.icon}
@@ -76,11 +91,22 @@ const ActividadesFisicas = () => {
         </Text>
       </View>
     ),
-    [isDarkMode]
+    [isDarkMode, handleActivityPress]
   );
 
-  const toggleButton = useMemo(
-    () => (
+  return (
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDarkMode ? "#222" : "#F3F4F6" },
+      ]}
+    >
+      <Text style={[styles.header, { color: isDarkMode ? "#fff" : "#000" }]}>
+        Actividades Físicas
+      </Text>
+      <View style={styles.activitiesContainer}>
+        {visibleActivities.map(renderActivity)}
+      </View>
       <TouchableOpacity
         style={[
           styles.toggleButton,
@@ -100,24 +126,6 @@ const ActividadesFisicas = () => {
           {showMore ? "Ver menos" : "Ver más"}
         </Text>
       </TouchableOpacity>
-    ),
-    [showMore, isDarkMode, handleToggleActivities]
-  );
-
-  return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDarkMode ? "#222" : "#F3F4F6" },
-      ]}
-    >
-      <Text style={[styles.header, { color: isDarkMode ? "#fff" : "#000" }]}>
-        Actividades Físicas
-      </Text>
-      <View style={styles.activitiesContainer}>
-        {visibleActivities.map(renderActivity)}
-      </View>
-      {toggleButton}
     </View>
   );
 };

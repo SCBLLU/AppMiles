@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import data from "../../data/data.json"; // Ajusta la ruta según tu estructura de archivos
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 export default function ExerciseDetails() {
   const { exerciseId } = useLocalSearchParams();
