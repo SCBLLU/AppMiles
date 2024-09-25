@@ -78,8 +78,9 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
               style={[
                 styles.input,
                 {
-                  backgroundColor: isDarkMode ? "#282c34" : "#fff",
+                  backgroundColor: isDarkMode ? "#fff" : "#fff",
                   color: isDarkMode ? "#e0e0e0" : "#333",
+                  borderColor: isDarkMode ? "#282c34" : "#282c34",
                 },
               ]}
               placeholder="Número de Tarjeta"
@@ -92,8 +93,9 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
                   styles.input,
                   styles.inputHalf,
                   {
-                    backgroundColor: isDarkMode ? "#282c34" : "#fff",
+                    backgroundColor: isDarkMode ? "#fff" : "#fff",
                     color: isDarkMode ? "#e0e0e0" : "#333",
+                    borderColor: isDarkMode ? "#282c34" : "#282c34",
                   },
                 ]}
                 placeholder="MM/YY"
@@ -105,8 +107,9 @@ export default function MetodoPago({ selectedPlan, visible, onCancel }) {
                   styles.input,
                   styles.inputHalf,
                   {
-                    backgroundColor: isDarkMode ? "#282c34" : "#fff",
+                    backgroundColor: isDarkMode ? "#fff" : "#fff",
                     color: isDarkMode ? "#e0e0e0" : "#333",
+                    borderColor: isDarkMode ? "#282c34" : "#282c34",
                   },
                 ]}
                 placeholder="CVC"
