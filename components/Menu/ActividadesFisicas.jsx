@@ -111,6 +111,9 @@ const ActividadesFisicas = () => {
         { backgroundColor: isDarkMode ? "#222" : "#F3F4F6" },
       ]}
     >
+      <Text style={[styles.header, { color: isDarkMode ? "#fff" : "#000" }]}>
+        Actividades Físicas
+      </Text>
       <View style={styles.activitiesContainer}>
         {visibleActivities.map(renderActivity)}
       </View>
@@ -126,6 +129,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginHorizontal: 15,
     elevation: 3,
+  },
+  header: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 15,
+    textAlign: "center",
   },
   activitiesContainer: {
     flexDirection: "row",
