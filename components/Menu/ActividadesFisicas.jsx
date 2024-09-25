@@ -11,13 +11,15 @@ import {
   faWalking,
   faDumbbell,
   faBiking,
-  faEllipsisH,
   faRunning,
   faSwimmer,
   faPersonHiking,
+  faAngleUp, // Icono para "ver menos"
+  faAngleDown, // Icono para "ver más"
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 
+// Definimos las actividades iniciales
 const initialActivities = [
   {
     id: "1",
@@ -36,11 +38,12 @@ const initialActivities = [
   },
   {
     id: "4",
-    title: "Más",
-    icon: <FontAwesomeIcon icon={faEllipsisH} size={30} />,
+    title: "Ver más", // Este será el botón "Ver más"
+    icon: <FontAwesomeIcon icon={faAngleDown} size={30} />,
   },
 ];
 
+// Definimos las actividades adicionales
 const additionalActivities = [
   {
     id: "5",
@@ -57,6 +60,11 @@ const additionalActivities = [
     title: "Senderismo",
     icon: <FontAwesomeIcon icon={faPersonHiking} size={30} />,
   },
+  {
+    id: "8",
+    title: "Ver menos", // Este será el botón "Ver menos"
+    icon: <FontAwesomeIcon icon={faAngleUp} size={30} />,
+  },
 ];
 
 const ActividadesFisicas = () => {
@@ -64,13 +72,17 @@ const ActividadesFisicas = () => {
   const [activities, setActivities] = useState(initialActivities);
   const [showMore, setShowMore] = useState(false);
 
-  const handleShowMore = () => {
+  const handleToggleActivities = () => {
+    setShowMore((prev) => !prev);
     if (!showMore) {
-      setActivities([...activities.slice(0, 3), ...additionalActivities]);
-      setShowMore(true);
+      // Mostrar todas las actividades y eliminar "Ver más"
+      setActivities([
+        ...initialActivities.slice(0, 3),
+        ...additionalActivities,
+      ]);
     } else {
+      // Volver a las actividades iniciales y eliminar "Ver menos"
       setActivities(initialActivities);
-      setShowMore(false);
     }
   };
 
@@ -81,11 +93,13 @@ const ActividadesFisicas = () => {
           styles.activityCard,
           { backgroundColor: isDarkMode ? "#444" : "#fff" },
         ]}
-        onPress={item.id === "4" ? handleShowMore : undefined}
+        onPress={
+          item.title === "Ver más" || item.title === "Ver menos"
+            ? handleToggleActivities
+            : undefined
+        }
       >
-        {React.cloneElement(item.icon, {
-          color: isDarkMode ? "#fff" : "#282c34",
-        })}
+        {item.icon}
       </TouchableOpacity>
       <Text
         style={[styles.activityTitle, { color: isDarkMode ? "#ccc" : "#333" }]}
