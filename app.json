@@ -18,14 +18,21 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.scbllu.App_MIles"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "primeraapp", 
+    "scheme": "primeraapp",
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "61da00ff-74ad-4437-8172-1e4be2fb3c90"
+      }
+    },
+    "owner": "scbllu"
   }
 }
