@@ -2,30 +2,32 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import data from "../../data/data.json";
+
 const ExerciseDetails = () => {
   const { id } = useLocalSearchParams();
 
-  // Función para renderizar el mensaje de carga o error
-  const renderLoadingOrError = () => (
+  // Función para renderizar mensajes de carga o error
+  const renderLoadingOrError = (message) => (
     <View style={styles.container}>
-      <Text style={styles.title}>Cargando...</Text>
+      <Text style={styles.title}>{message}</Text>
     </View>
   );
 
   // Verificar si id está definido
   if (!id) {
-    return renderLoadingOrError();
+    return renderLoadingOrError("ID de ejercicio no proporcionado.");
   }
 
   // Buscar el ejercicio en los datos importados
   const exercise = data.exercises.find((ex) => ex.id === id.toString());
 
   if (!exercise) {
-    return renderLoadingOrError();
+    return renderLoadingOrError("Ejercicio no encontrado.");
   }
 
   // Obtener la categoría del ejercicio
   const category = data.categories.find((cat) => cat.id === exercise.category);
+
 
   return (
     <View style={styles.container}>

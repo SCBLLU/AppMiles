@@ -40,15 +40,18 @@ export default function BuscadorEjercicio() {
     }
   }, [searchTerm]);
 
-  const handleSearch = () => {
-    if (searchTerm.trim() && !recentSearches.includes(searchTerm.trim())) {
-      setRecentSearches((prev) => [searchTerm.trim(), ...prev.slice(0, 4)]);
+  const handleSearch = (selectedExercise) => {
+    if (
+      selectedExercise &&
+      !recentSearches.some((search) => search.id === selectedExercise.id)
+    ) {
+      setRecentSearches((prev) => [selectedExercise, ...prev.slice(0, 4)]);
     }
     setSearchTerm("");
   };
 
   const handleRemoveSearch = (item) => {
-    setRecentSearches((prev) => prev.filter((search) => search !== item));
+    setRecentSearches((prev) => prev.filter((search) => search.id !== item.id)); // Usa el ID para eliminar
   };
 
   const clearSearch = () => {
@@ -99,19 +102,19 @@ export default function BuscadorEjercicio() {
 
       {searchResults.length > 0 && (
         <ResultadosBusqueda
-          results={searchResults} // Pasa los resultados completos, no solo los nombres
-          onSelectResult={(selectedResult) =>
-            setRecentSearches((prev) => [
-              selectedResult.name,
-              ...prev.slice(0, 4),
-            ])
-          }
+          results={searchResults} // Pasa los resultados completos
+          onSelectResult={(selectedResult) => {
+            handleSearch(selectedResult); // Guarda el ejercicio completo
+          }}
         />
       )}
       {showRecentSearches && recentSearches.length > 0 && (
         <BusquedasRecientes
           searches={recentSearches}
-          onSelectSearch={setSearchTerm}
+          onSelectSearch={(exercise) => {
+            setSearchTerm(exercise.name);
+            handleSearch(exercise); // Guarda el ejercicio completo
+          }}
           onRemoveSearch={handleRemoveSearch}
         />
       )}

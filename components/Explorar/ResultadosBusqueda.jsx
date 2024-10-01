@@ -15,9 +15,9 @@ const ResultadosBusqueda = ({ results, onSelectResult }) => {
   const router = useRouter();
 
   const handleResultPress = (exercise) => {
-    onSelectResult(exercise);
+    onSelectResult(exercise); // Llama a la función para actualizar la búsqueda reciente
     if (exercise?.id) {
-      router.push(`/exercise/${encodeURIComponent(exercise.id)}`);
+      router.push(`/exercise/${encodeURIComponent(exercise.id)}`); // Navega a la ruta del ejercicio
     }
   };
 
@@ -42,13 +42,20 @@ const ResultadosBusqueda = ({ results, onSelectResult }) => {
             onPress={() => handleResultPress(item)}
           >
             <Image
-              source={{ uri: "https://via.placeholder.com/50" }}
+              source={{
+                uri: item.imageUrl || "https://via.placeholder.com/50",
+              }} // Usa imageUrl si existe
               style={styles.exerciseImage}
             />
             <Text
               style={{ color: isDarkMode ? "#fff" : "#000", marginLeft: 10 }}
             >
               {item.name}
+            </Text>
+            <Text
+              style={{ color: isDarkMode ? "#bbb" : "#666", marginLeft: 10 }} // Muestra la categoría
+            >
+              {item.duration} minutos
             </Text>
           </TouchableOpacity>
         )}

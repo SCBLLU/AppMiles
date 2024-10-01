@@ -5,62 +5,89 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
+  Image,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faClock, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faClock } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
 
-const BusquedasRecientes = ({ searches, onSelectSearch, onRemoveSearch }) => {
+const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
 
-  // Función para manejar la selección de búsqueda
-  const handleSelectSearch = (item) => {
-    onSelectSearch(item);
-    // Asegúrate de que `item.id` sea el valor que deseas pasar
-    router.push(`/exercise/${encodeURIComponent(item.id)}`);
+  if (searches.length === 0) {
+    return null; // No hay búsquedas recientes
+  }
+
+  const handleSearchPress = (exerciseId) => {
+    // Navegar a la ruta dinámica
+    router.push(`/exercise/${encodeURIComponent(exerciseId)}`);
   };
 
-  // Función para renderizar cada ítem de búsqueda
   const renderItem = ({ item }) => (
-    <View
+    <TouchableOpacity
       style={[
         styles.searchItem,
-        { backgroundColor: isDarkMode ? "#444" : "#f9f9f9" },
+        { backgroundColor: isDarkMode ? "#282828" : "#f0f0f0" },
       ]}
+      onPress={() => handleSearchPress(item.id)} // Usa item.id en lugar de exerciseId
     >
+      <Image
+        source={{ uri: item.imageUrl || "https://placeholder.com/40" }} // Cambia aquí si tienes una imagen por defecto
+        style={styles.exerciseImage}
+      />
+      <View style={styles.searchInfo}>
+        <Text
+          style={[styles.searchText, { color: isDarkMode ? "#fff" : "#000" }]}
+        >
+          {item.name}
+        </Text>
+        <Text
+          style={[
+            styles.searchSubtext,
+            { color: isDarkMode ? "#b3b3b3" : "#666" },
+          ]}
+        >
+          {item.duration} minutos
+        </Text>
+      </View>
       <TouchableOpacity
-        onPress={() => handleSelectSearch(item)}
-        style={styles.searchButton}
+        style={styles.removeButton}
+        onPress={() => onRemoveSearch(item)} // Usa el objeto completo para eliminar
       >
         <FontAwesomeIcon
-          icon={faClock}
-          color={isDarkMode ? "#1ac356" : "#000"}
-          style={styles.icon}
+          icon={faTimes}
+          size={16}
+          color={isDarkMode ? "#b3b3b3" : "#666"}
         />
-        <Text style={{ color: isDarkMode ? "#ccc" : "#333" }}>{item}</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => onRemoveSearch(item)}>
-        <FontAwesomeIcon icon={faTimes} color={isDarkMode ? "#fff" : "#000"} />
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
     <View
       style={[
         styles.container,
-        { backgroundColor: isDarkMode ? "#333" : "#fff" },
+        { backgroundColor: isDarkMode ? "#121212" : "#fff" },
       ]}
     >
-      <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}>
-        Búsquedas recientes
-      </Text>
+      <View style={styles.header}>
+        <FontAwesomeIcon
+          icon={faClock}
+          size={20}
+          color={isDarkMode ? "#fff" : "#000"}
+          style={styles.headerIcon}
+        />
+        <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}>
+          Búsquedas recientes
+        </Text>
+      </View>
       <FlatList
         data={searches}
         renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id.toString()} // Usa item.id
+        showsVerticalScrollIndicator={false}
         scrollEnabled={false}
       />
     </View>
@@ -69,28 +96,47 @@ const BusquedasRecientes = ({ searches, onSelectSearch, onRemoveSearch }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    borderRadius: 20,
+    flex: 1,
+    padding: 16,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  headerIcon: {
+    marginRight: 8,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 15,
   },
   searchItem: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    padding: 20,
-    borderRadius: 20,
-    marginVertical: 5,
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 8,
   },
-  searchButton: {
-    flexDirection: "row",
-    alignItems: "center",
+  exerciseImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 4,
+    marginRight: 12,
   },
-  icon: {
-    marginRight: 10,
+  searchInfo: {
+    flex: 1,
+  },
+  searchText: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  searchSubtext: {
+    fontSize: 14,
+    marginTop: 2,
+  },
+  removeButton: {
+    padding: 8,
   },
 });
 
