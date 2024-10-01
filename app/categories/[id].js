@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, Stack } from "expo-router";
 import { iconMap, categories } from "../../components/Explorar/TodasCategorias";
 import data from "../../data/data.json";
 import { useRouter } from "expo-router";
@@ -36,80 +36,114 @@ const CategoryDetails = () => {
     };
 
     return (
-        <View
-            style={[
-                styles.container,
-                { backgroundColor: isDarkMode ? "#121212" : "#fff" },
-            ]}
-        >
-            <View style={[styles.categoryHeader, { backgroundColor: isDarkMode ? "#1e1e1e" : "#fff" }]}>
-                <FontAwesomeIcon
-                    icon={iconMap[selectedCategory.icon]}
-                    color={selectedCategory.color}
-                    size={80}
-                />
-                <View style={styles.categoryTextContainer}>
-                    <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}>
-                        {selectedCategory.name}
-                    </Text>
+        <>
+            <Stack.Screen
+                options={{
+                    headerShown: true,
+                    title: "Regresar",
+                    headerStyle: {
+                        backgroundColor: isDarkMode ? "#121212" : "#fff",
+                    },
+                    headerTintColor: isDarkMode ? "#fff" : "#000",
+                }}
+            />
+            <View
+                style={[
+                    styles.container,
+                    { backgroundColor: isDarkMode ? "#121212" : "#fff" },
+                ]}
+            >
+                <View
+                    style={[
+                        styles.categoryHeader,
+                        { backgroundColor: isDarkMode ? "#1e1e1e" : "#fff" },
+                    ]}
+                >
+                    <FontAwesomeIcon
+                        icon={iconMap[selectedCategory.icon]}
+                        color={selectedCategory.color}
+                        size={80}
+                    />
+                    <View style={styles.categoryTextContainer}>
+                        <Text
+                            style={[
+                                styles.title,
+                                { color: isDarkMode ? "#fff" : "#000" },
+                            ]}
+                        >
+                            {selectedCategory.name}
+                        </Text>
+                        <Text
+                            style={[
+                                styles.description,
+                                { color: isDarkMode ? "#b3b3b3" : "#666" },
+                            ]}
+                        >
+                            {selectedCategory.description ||
+                                "No hay descripción disponible."}
+                        </Text>
+                    </View>
+                </View>
+
+                <Text
+                    style={[
+                        styles.exercisesTitle,
+                        { color: isDarkMode ? "#fff" : "#000" },
+                    ]}
+                >
+                    Ejercicios de esta categoría:
+                </Text>
+
+                {exercises.length === 0 ? (
                     <Text
                         style={[
-                            styles.description,
+                            styles.noExercisesText,
                             { color: isDarkMode ? "#b3b3b3" : "#666" },
                         ]}
                     >
-                        {selectedCategory.description || "No hay descripción disponible."}
+                        No hay ejercicios agregados en esta categoría por el momento.
                     </Text>
-                </View>
+                ) : (
+                    <FlatList
+                        data={exercises}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                style={[
+                                    styles.exerciseItem,
+                                    {
+                                        backgroundColor: isDarkMode
+                                            ? "#1e1e1e"
+                                            : "#f9f9f9",
+                                        borderColor: selectedCategory.color,
+                                    },
+                                ]}
+                                onPress={() => handleExercisePress(item)}
+                            >
+                                <Text
+                                    style={[
+                                        styles.exerciseName,
+                                        { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
+                                >
+                                    {item.name}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.exerciseDetails,
+                                        { color: isDarkMode ? "#b3b3b3" : "#666" },
+                                    ]}
+                                >
+                                    Duración: {item.duration} min | Calorías:{" "}
+                                    {item.calories}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                        keyExtractor={(item) => item.id.toString()}
+                        contentContainerStyle={{ paddingBottom: 100 }}
+                    />
+                )}
             </View>
-
-            <Text
-                style={[styles.exercisesTitle, { color: isDarkMode ? "#fff" : "#000" }]}
-            >
-                Ejercicios de esta categoría:
-            </Text>
-
-            {exercises.length === 0 ? (
-                <Text style={[styles.noExercisesText, { color: isDarkMode ? "#b3b3b3" : "#666" }]}>
-                    No hay ejercicios agregados en esta categoría por el momento.
-                </Text>
-            ) : (
-                <FlatList
-                    data={exercises}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity
-                            style={[
-                                styles.exerciseItem,
-                                {
-                                    backgroundColor: isDarkMode ? "#1e1e1e" : "#f9f9f9",
-                                    borderColor: selectedCategory.color,
-                                },
-                            ]}
-                            onPress={() => handleExercisePress(item)}
-                        >
-                            <Text
-                                style={[
-                                    styles.exerciseName,
-                                    { color: isDarkMode ? "#fff" : "#000" },
-                                ]}
-                            >
-                                {item.name}
-                            </Text>
-                            <Text
-                                style={[
-                                    styles.exerciseDetails,
-                                    { color: isDarkMode ? "#b3b3b3" : "#666" },
-                                ]}
-                            >
-                                Duración: {item.duration} min | Calorías: {item.calories}
-                            </Text>
-                        </TouchableOpacity>
-                    )}
-                    keyExtractor={(item) => item.id.toString()}
-                    contentContainerStyle={{ paddingBottom: 100 }}
-                />
-            )}
-        </View>
+        </>
     );
 };
 
