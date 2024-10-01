@@ -9,24 +9,20 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useLocalSearchParams } from "expo-router";
 import { iconMap, categories } from "../../components/Explorar/TodasCategorias";
-import data from "../../data/data.json"; // Asegúrate de que esta ruta sea correcta
-import { useRouter } from "expo-router"; // Asegúrate de importar useRouter
-import { useDarkMode } from "../../components/Utils/DarkModeProvider"; // Importa el modo oscuro
+import data from "../../data/data.json";
+import { useRouter } from "expo-router";
+import { useDarkMode } from "../../components/Utils/DarkModeProvider";
 
 const CategoryDetails = () => {
     const { id } = useLocalSearchParams();
-    const router = useRouter(); // Inicializa el enrutador
-    const { isDarkMode } = useDarkMode(); // Obtén el estado del modo oscuro
+    const router = useRouter();
+    const { isDarkMode } = useDarkMode();
 
-    // Buscar la categoría correspondiente en los datos
     const selectedCategory = categories.find((cat) => cat.id === String(id));
-
-    // Obtener todos los ejercicios de la categoría
     const exercises = data.exercises.filter(
         (exercise) => exercise.category === selectedCategory.id
     );
 
-    // Condición de carga
     if (!selectedCategory) {
         return (
             <View style={styles.container}>
@@ -35,12 +31,10 @@ const CategoryDetails = () => {
         );
     }
 
-    // Manejar la navegación a los detalles del ejercicio
     const handleExercisePress = (exercise) => {
-        router.push(`/exercise/${encodeURIComponent(exercise.id)}`); // Navegar a los detalles del ejercicio
+        router.push(`/exercise/${encodeURIComponent(exercise.id)}`);
     };
 
-    // Renderizar información de la categoría
     return (
         <View
             style={[
@@ -69,7 +63,6 @@ const CategoryDetails = () => {
                 </View>
             </View>
 
-            {/* Renderizar la lista de ejercicios */}
             <Text
                 style={[styles.exercisesTitle, { color: isDarkMode ? "#fff" : "#000" }]}
             >
@@ -113,7 +106,7 @@ const CategoryDetails = () => {
                         </TouchableOpacity>
                     )}
                     keyExtractor={(item) => item.id.toString()}
-                    contentContainerStyle={{ paddingBottom: 100 }} // Espacio adicional al final
+                    contentContainerStyle={{ paddingBottom: 100 }}
                 />
             )}
         </View>
