@@ -6,18 +6,20 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
-  faHeartbeat,
-  faDumbbell,
-  faLeaf,
-  faRunning,
-  faBiking,
-  faSwimmer,
-  faPersonPraying,
-  faAppleAlt,
-  faBed,
+  faHeartbeat, // Cardio
+  faDumbbell,  // Fuerza
+  faLeaf,      // Flexibilidad
+  faRunning,   // Correr
+  faBiking,    // Bicicleta
+  faSwimmer,   // Natación
+  faPersonPraying, // Meditación
+  faAppleAlt,  // Nutrición
+  faBed        // Sueño
 } from "@fortawesome/free-solid-svg-icons";
+
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
 import data from "../../data/data.json"; // Asegúrate de que esta ruta sea correcta
@@ -26,15 +28,15 @@ import data from "../../data/data.json"; // Asegúrate de que esta ruta sea corr
 export const categories = data.categories || [];
 
 export const iconMap = {
-  faHeartbeat,
-  faDumbbell,
-  faLeaf,
-  faRunning,
-  faBiking,
-  faSwimmer,
-  faPersonPraying,
-  faAppleAlt,
-  faBed,
+  faHeartbeat: faHeartbeat,
+  faDumbbell: faDumbbell,
+  faLeaf: faLeaf,
+  faRunning: faRunning,
+  faBiking: faBiking,
+  faSwimmer: faSwimmer,
+  faPersonPraying: faPersonPraying,
+  faAppleAlt: faAppleAlt,
+  faBed: faBed,
 };
 
 const TodasCategorias = () => {

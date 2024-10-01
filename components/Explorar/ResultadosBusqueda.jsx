@@ -58,7 +58,7 @@ const ResultadosBusqueda = ({ results, onSelectResult }) => {
                 <Text
                   style={{ color: isDarkMode ? "#bbb" : "#666" }}
                 >
-                  {item.duration} minutos
+                  {category ? category.name : "Categoría desconocida"} {/* Mostrar el nombre de la categoría */}
                 </Text>
               </View>
             </TouchableOpacity>

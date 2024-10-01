@@ -42,28 +42,15 @@ const Login = () => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View
-        style={[
-          styles.container,
-          { backgroundColor: isDarkMode ? "#121212" : "#fff" },
-        ]}
-      >
+      <View style={[styles.container, { backgroundColor: isDarkMode ? "#121212" : "#fff" }]}>
         <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}>
           Inicio de sesión
         </Text>
 
         <View style={styles.inputContainer}>
-          <Text style={[styles.label, { color: isDarkMode ? "#fff" : "#000" }]}>
-            Usuario
-          </Text>
+          <Text style={[styles.label, { color: isDarkMode ? "#fff" : "#000" }]}>Usuario</Text>
           <TextInput
-            style={[
-              styles.input,
-              {
-                borderColor: isDarkMode ? "#fff" : "#333",
-                color: isDarkMode ? "#fff" : "#000",
-              },
-            ]}
+            style={[styles.input, { borderColor: isDarkMode ? "#fff" : "#333", color: isDarkMode ? "#fff" : "#000" }]}
             placeholder="Email o nombre de usuario"
             placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
             value={username}
@@ -72,28 +59,17 @@ const Login = () => {
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={[styles.label, { color: isDarkMode ? "#fff" : "#000" }]}>
-            Contraseña
-          </Text>
+          <Text style={[styles.label, { color: isDarkMode ? "#fff" : "#000" }]}>Contraseña</Text>
           <View style={styles.passwordContainer}>
             <TextInput
-              style={[
-                styles.passwordInput,
-                {
-                  borderColor: isDarkMode ? "#fff" : "#333",
-                  color: isDarkMode ? "#fff" : "#000",
-                },
-              ]}
+              style={[styles.passwordInput, { borderColor: isDarkMode ? "#fff" : "#333", color: isDarkMode ? "#fff" : "#000" }]}
               placeholder="Contraseña"
               placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
               secureTextEntry={!showPassword}
               value={password}
               onChangeText={setPassword}
             />
-            <TouchableOpacity
-              onPress={() => setShowPassword(!showPassword)}
-              style={styles.icon}
-            >
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.icon}>
               {showPassword ? (
                 <EyeOff size={24} color={isDarkMode ? "#fff" : "gray"} />
               ) : (
@@ -104,19 +80,14 @@ const Login = () => {
         </View>
 
         {loading ? (
-          <ActivityIndicator
-            size="large"
-            color="#1DB954"
-            style={styles.loader}
-          />
+          <ActivityIndicator size="large" color="#1DB954" style={styles.loader} />
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Iniciar sesión</Text>
           </TouchableOpacity>
         )}
-        <Text
-          style={[styles.Subtitles, { color: isDarkMode ? "#fff" : "#000" }]}
-        >
+
+        <Text style={[styles.subtitle, { color: isDarkMode ? "#fff" : "#000" }]}>
           ¿Olvidaste tu contraseña?
         </Text>
       </View>
@@ -129,6 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 30,
+    paddingVertical: 20,
   },
   title: {
     fontSize: 28,
@@ -136,47 +108,49 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
   },
-  Subtitles: {
-    fontSize: 18,
-    marginTop: 25,
+  subtitle: {
+    fontSize: 16,
+    marginTop: 15,
     textAlign: "center",
   },
   inputContainer: {
     marginBottom: 20,
+    width: "100%",
   },
   label: {
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: "600",
     marginBottom: 5,
   },
   input: {
     height: 50,
     borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    fontSize: 16,
   },
   passwordContainer: {
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 8,
     height: 50,
     position: "relative",
   },
   passwordInput: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
   },
   icon: {
-    position: "absolute",
-    right: 10,
     padding: 10,
   },
   button: {
     backgroundColor: "#1DB954",
-    borderRadius: 5,
+    borderRadius: 8,
     paddingVertical: 15,
     alignItems: "center",
+    elevation: 2,
   },
   buttonText: {
     fontSize: 18,

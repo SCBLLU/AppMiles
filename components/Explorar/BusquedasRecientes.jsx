@@ -10,13 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faTimes, faClock } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
-import data from "../../data/data.json"; // Importar los datos para obtener la categoría
+import data from "../../data/data.json"; // Asegúrate de tener los datos
 
 const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
 
-  if (searches.length === 0) {
+  // Comprobación para evitar el error
+  if (!searches || searches.length === 0) {
     return null; // No hay búsquedas recientes
   }
 
@@ -54,7 +55,7 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
               { color: isDarkMode ? "#b3b3b3" : "#666" },
             ]}
           >
-            {item.duration} minutos
+            {category ? category.name : "Categoría desconocida"} {/* Mostrar el nombre de la categoría */}
           </Text>
         </View>
         <TouchableOpacity
@@ -93,8 +94,9 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
         data={searches}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()} // Usa item.id
-        showsVerticalScrollIndicator={false}
-        scrollEnabled={false}
+        horizontal={true} // Establece la dirección horizontal
+        showsHorizontalScrollIndicator={false} // Oculta el indicador de desplazamiento
+        contentContainerStyle={{ paddingHorizontal: 16 }} // Agrega un poco de espacio a los lados
       />
     </View>
   );
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 12,
     borderRadius: 8,
-    marginBottom: 8,
+    marginRight: 8, // Espacio entre elementos
   },
   categoryCircle: {
     width: 40,

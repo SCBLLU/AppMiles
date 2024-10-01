@@ -4,28 +4,28 @@
             "id": "1",
             "name": "Cardio",
             "icon": "faHeartbeat",
-            "color": "#FF6B6B",
+            "color": "#FF3D00",
             "description": "Ejercicios que aumentan la frecuencia cardíaca y mejoran la salud cardiovascular."
         },
         {
             "id": "2",
             "name": "Fuerza",
             "icon": "faDumbbell",
-            "color": "#4ECDC4",
+            "color": "#009688",
             "description": "Entrenamiento que desarrolla la fuerza muscular y tonifica el cuerpo."
         },
         {
             "id": "3",
             "name": "Flexibilidad",
             "icon": "faLeaf",
-            "color": "#45B649",
+            "color": "#4CAF50",
             "description": "Actividades que mejoran la amplitud de movimiento y reducen el riesgo de lesiones."
         },
         {
             "id": "4",
             "name": "Correr",
             "icon": "faRunning",
-            "color": "#FF8C00",
+            "color": "#FF9800",
             "description": "Ejercicio cardiovascular que quema calorías y mejora la resistencia."
         },
         {
@@ -39,14 +39,14 @@
             "id": "6",
             "name": "Natación",
             "icon": "faSwimmer",
-            "color": "#03A9F4",
+            "color": "#2196F3",
             "description": "Ejercicio completo que mejora la salud cardiovascular y la fuerza muscular."
         },
         {
             "id": "7",
             "name": "Meditación",
             "icon": "faPersonPraying",
-            "color": "#9C27B0",
+            "color": "#673AB7",
             "description": "Práctica que reduce el estrés y mejora la concentración."
         },
         {
@@ -67,7 +67,7 @@
     "exercises": [
         {
             "id": "1",
-            "name": "Correr",
+            "name": "Maratón 1000 Metros",
             "category": "4",
             "duration": "30",
             "calories": "300"
@@ -99,6 +99,41 @@
             "category": "3",
             "duration": "10",
             "calories": "100"
+        },
+        {
+            "id": "6",
+            "name": "Burpees",
+            "category": "2",
+            "duration": "15",
+            "calories": "150"
+        },
+        {
+            "id": "7",
+            "name": "Ciclismo de montaña",
+            "category": "5",
+            "duration": "45",
+            "calories": "600"
+        },
+        {
+            "id": "8",
+            "name": "Nadar 500 metros",
+            "category": "6",
+            "duration": "30",
+            "calories": "350"
+        },
+        {
+            "id": "9",
+            "name": "Yoga",
+            "category": "3",
+            "duration": "30",
+            "calories": "120"
+        },
+        {
+            "id": "10",
+            "name": "Caminata rápida",
+            "category": "1",
+            "duration": "25",
+            "calories": "200"
         }
     ]
 }

@@ -39,7 +39,7 @@ const User = ({ navigation }) => {
   const { notifications, toggleNotifications } = useNotifications();
   navigation = useNavigation();
 
-  const profileImage = require("../assets/profile.jpg");
+  const profileImage = require("../assets/profile2.jpg");
 
   return (
     <View
