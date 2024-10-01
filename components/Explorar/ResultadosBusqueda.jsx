@@ -4,11 +4,11 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
-  Image,
   StyleSheet,
 } from "react-native";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
+import data from "../../data/data.json";
 
 const ResultadosBusqueda = ({ results, onSelectResult }) => {
   const { isDarkMode } = useDarkMode();
@@ -33,32 +33,37 @@ const ResultadosBusqueda = ({ results, onSelectResult }) => {
       </Text>
       <FlatList
         data={results}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[
-              styles.resultCard,
-              { backgroundColor: isDarkMode ? "#444" : "#f9f9f9" },
-            ]}
-            onPress={() => handleResultPress(item)}
-          >
-            <Image
-              source={{
-                uri: item.imageUrl || "https://via.placeholder.com/50",
-              }} // Usa imageUrl si existe
-              style={styles.exerciseImage}
-            />
-            <Text
-              style={{ color: isDarkMode ? "#fff" : "#000", marginLeft: 10 }}
+        renderItem={({ item }) => {
+          const category = data.categories.find(
+            (cat) => cat.id === item.category
+          );
+          return (
+            <TouchableOpacity
+              style={[
+                styles.resultCard,
+                { backgroundColor: isDarkMode ? "#444" : "#f9f9f9" },
+              ]}
+              onPress={() => handleResultPress(item)}
             >
-              {item.name}
-            </Text>
-            <Text
-              style={{ color: isDarkMode ? "#bbb" : "#666", marginLeft: 10 }} // Muestra la categoría
-            >
-              {item.duration} minutos
-            </Text>
-          </TouchableOpacity>
-        )}
+              <View
+                style={[
+                  styles.categoryCircle,
+                  { backgroundColor: category ? category.color : "#ccc" },
+                ]}
+              />
+              <View style={styles.textContainer}>
+                <Text style={{ color: isDarkMode ? "#fff" : "#000" }}>
+                  {item.name}
+                </Text>
+                <Text
+                  style={{ color: isDarkMode ? "#bbb" : "#666" }}
+                >
+                  {item.duration} minutos
+                </Text>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
         keyExtractor={(item) => item.id.toString()}
         scrollEnabled={false}
       />
@@ -84,10 +89,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 10,
   },
-  exerciseImage: {
+  categoryCircle: {
     width: 50,
     height: 50,
     borderRadius: 25,
+  },
+  textContainer: {
+    marginLeft: 15,
   },
 });
 
