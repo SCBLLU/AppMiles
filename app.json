@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "primera_app",
-    "slug": "primera_app",
-    "version": "1.0.0",
+    "name": "app-miles",
+    "slug": "app-miles",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,21 +18,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.scbllu.App_MIles"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "primeraapp",
+    "scheme": "app-miles", 
     "plugins": [
       "expo-router"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "61da00ff-74ad-4437-8172-1e4be2fb3c90"
-      }
-    },
-    "owner": "scbllu"
+    ]
   }
 }
