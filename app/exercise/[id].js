@@ -1,24 +1,31 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import data from "../../data/data.json"; // Ajusta la ruta según tu estructura de archivos
+import data from "../../data/data.json";
+const ExerciseDetails = () => {
+  const { id } = useLocalSearchParams();
 
-export default function ExerciseDetails() {
-  const { exerciseId } = useLocalSearchParams();
+  // Función para renderizar el mensaje de carga o error
+  const renderLoadingOrError = () => (
+    <View style={styles.container}>
+      <Text style={styles.title}>Cargando...</Text>
+    </View>
+  );
+
+  // Verificar si id está definido
+  if (!id) {
+    return renderLoadingOrError();
+  }
 
   // Buscar el ejercicio en los datos importados
-  const exercise = data.exercises.find(ex => ex.id === exerciseId);
+  const exercise = data.exercises.find((ex) => ex.id === id.toString());
 
   if (!exercise) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Cargando...</Text>
-      </View>
-    );
+    return renderLoadingOrError();
   }
 
   // Obtener la categoría del ejercicio
-  const category = data.categories.find(cat => cat.id === exercise.category);
+  const category = data.categories.find((cat) => cat.id === exercise.category);
 
   return (
     <View style={styles.container}>
@@ -35,7 +42,7 @@ export default function ExerciseDetails() {
       )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -53,8 +60,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   categoryContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 10,
     borderRadius: 8,
   },
@@ -64,3 +71,5 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 });
+
+export default ExerciseDetails;

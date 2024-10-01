@@ -2,11 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useLocalSearchParams } from "expo-router";
-import { iconMap, categories } from "../../components/Explorar/TodasCategorias"; // Asegúrate de que la ruta sea correcta
+import { iconMap, categories } from "../../components/Explorar/TodasCategorias";
 
 const CategoryDetails = () => {
-    const { id } = useLocalSearchParams(); // Captura el ID de la categoría
-
+    const { id } = useLocalSearchParams();
     // Buscar la categoría correspondiente en los datos
     const selectedCategory = categories.find((cat) => cat.id === String(id));
 

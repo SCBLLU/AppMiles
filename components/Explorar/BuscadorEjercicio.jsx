@@ -99,9 +99,12 @@ export default function BuscadorEjercicio() {
 
       {searchResults.length > 0 && (
         <ResultadosBusqueda
-          results={searchResults.map((result) => result.name)} // Solo muestra los nombres
+          results={searchResults} // Pasa los resultados completos, no solo los nombres
           onSelectResult={(selectedResult) =>
-            setRecentSearches((prev) => [selectedResult, ...prev.slice(0, 4)])
+            setRecentSearches((prev) => [
+              selectedResult.name,
+              ...prev.slice(0, 4),
+            ])
           }
         />
       )}

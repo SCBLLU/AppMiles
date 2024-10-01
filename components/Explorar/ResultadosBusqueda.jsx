@@ -16,7 +16,9 @@ const ResultadosBusqueda = ({ results, onSelectResult }) => {
 
   const handleResultPress = (exercise) => {
     onSelectResult(exercise);
-    router.push(`/exercise/${encodeURIComponent(exercise)}`);
+    if (exercise?.id) {
+      router.push(`/exercise/${encodeURIComponent(exercise.id)}`);
+    }
   };
 
   return (
@@ -46,11 +48,11 @@ const ResultadosBusqueda = ({ results, onSelectResult }) => {
             <Text
               style={{ color: isDarkMode ? "#fff" : "#000", marginLeft: 10 }}
             >
-              {item}
+              {item.name}
             </Text>
           </TouchableOpacity>
         )}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.id.toString()}
         scrollEnabled={false}
       />
     </View>

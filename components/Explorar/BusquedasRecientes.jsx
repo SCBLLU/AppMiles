@@ -15,6 +15,14 @@ const BusquedasRecientes = ({ searches, onSelectSearch, onRemoveSearch }) => {
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
 
+  // Función para manejar la selección de búsqueda
+  const handleSelectSearch = (item) => {
+    onSelectSearch(item);
+    // Asegúrate de que `item.id` sea el valor que deseas pasar
+    router.push(`/exercise/${encodeURIComponent(item.id)}`);
+  };
+
+  // Función para renderizar cada ítem de búsqueda
   const renderItem = ({ item }) => (
     <View
       style={[
@@ -23,10 +31,7 @@ const BusquedasRecientes = ({ searches, onSelectSearch, onRemoveSearch }) => {
       ]}
     >
       <TouchableOpacity
-        onPress={() => {
-          onSelectSearch(item);
-          router.push(`/exercise/${encodeURIComponent(item)}`);
-        }}
+        onPress={() => handleSelectSearch(item)}
         style={styles.searchButton}
       >
         <FontAwesomeIcon
