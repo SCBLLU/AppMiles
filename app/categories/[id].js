@@ -2,32 +2,38 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useLocalSearchParams } from "expo-router";
-import data from "../../data/data.json"; // Ajusta la ruta si es necesario
+import { iconMap, categories } from "../../components/Explorar/TodasCategorias"; // Asegúrate de que la ruta sea correcta
 
-export default function CategoryDetails() {
-    const { category } = useLocalSearchParams();
+const CategoryDetails = () => {
+    const { id } = useLocalSearchParams(); // Captura el ID de la categoría
 
-    // Buscar la categoría correspondiente en los datos importados
-    const selectedCategory = data.categories.find((cat) => cat.name === category);
+    // Buscar la categoría correspondiente en los datos
+    const selectedCategory = categories.find((cat) => cat.id === String(id));
 
+    // Condición de carga
     if (!selectedCategory) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Cargando... </Text>
+                <Text style={styles.title}>Categoría no encontrada.</Text>
             </View>
         );
     }
 
+    // Renderizar información de la categoría
     return (
         <View style={styles.container}>
-            <FontAwesomeIcon icon={selectedCategory.icon} color={selectedCategory.color} size={80} />
+            <FontAwesomeIcon
+                icon={iconMap[selectedCategory.icon]}
+                color={selectedCategory.color}
+                size={80}
+            />
             <Text style={styles.title}>{selectedCategory.name}</Text>
             <Text style={styles.description}>
-                Aquí puedes mostrar información detallada sobre {selectedCategory.name}, como beneficios, instrucciones, etc.
+                {selectedCategory.description || "No hay descripción disponible."}
             </Text>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -46,5 +52,8 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 16,
         textAlign: "center",
+        marginTop: 10,
     },
 });
+
+export default CategoryDetails;

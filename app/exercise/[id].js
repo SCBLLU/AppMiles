@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import data from "../../data/data.json"; // Ajusta la ruta según tu estructura de archivos
 
@@ -23,13 +23,6 @@ export default function ExerciseDetails() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{exercise.name}</Text>
-      {/*       {exercise.image && (
-        <Image
-          source={require(`../../assets/${exercise.image}`)} // Ajusta la ruta según la ubicación real de tus imágenes
-          style={styles.image}
-          resizeMode="cover"
-        />
-      )} */}
       <Text style={styles.description}>
         Duración: {exercise.duration} minutos{"\n"}
         Calorías quemadas: {exercise.calories}{"\n"}
@@ -37,7 +30,6 @@ export default function ExerciseDetails() {
       </Text>
       {category && (
         <View style={[styles.categoryContainer, { backgroundColor: category.color }]}>
-
           <Text style={styles.categoryText}>{category.name}</Text>
         </View>
       )}
@@ -59,12 +51,6 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginBottom: 20,
-  },
-  image: {
-    width: Dimensions.get('window').width - 40,
-    height: 200,
-    marginBottom: 20,
-    alignSelf: 'center',
   },
   categoryContainer: {
     flexDirection: 'row',

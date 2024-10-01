@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlay, faPause, faRedo } from "@fortawesome/free-solid-svg-icons";
 import { useLocalSearchParams } from "expo-router";
-import { useDarkMode } from "..//../components/Utils/DarkModeProvider";
+import { useDarkMode } from "../../components/Utils/DarkModeProvider";
 
 const ExerciseTimer = () => {
     const { title } = useLocalSearchParams(); // Captura el título del ejercicio

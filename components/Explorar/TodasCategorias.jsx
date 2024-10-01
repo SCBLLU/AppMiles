@@ -22,16 +22,19 @@ import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
 import data from "../../data/data.json"; // Asegúrate de que esta ruta sea correcta
 
-const iconMap = {
-  faHeartbeat: faHeartbeat,
-  faDumbbell: faDumbbell,
-  faLeaf: faLeaf,
-  faRunning: faRunning,
-  faBiking: faBiking,
-  faSwimmer: faSwimmer,
-  faPersonPraying: faPersonPraying,
-  faAppleAlt: faAppleAlt,
-  faBed: faBed,
+// Extraer categorías del archivo JSON
+export const categories = data.categories || [];
+
+export const iconMap = {
+  faHeartbeat,
+  faDumbbell,
+  faLeaf,
+  faRunning,
+  faBiking,
+  faSwimmer,
+  faPersonPraying,
+  faAppleAlt,
+  faBed,
 };
 
 const TodasCategorias = () => {
@@ -39,16 +42,18 @@ const TodasCategorias = () => {
   const router = useRouter();
 
   // Manejar si los datos no están disponibles
-  if (!data || !data.categories) {
+  if (!categories.length) {
     return (
-      <View>
-        <Text>Cargando categorías...</Text>
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Cargando categorías...</Text>
       </View>
     );
   }
 
   const handleResultPress = (category) => {
-    router.push(`/categories/${encodeURIComponent(category.name)}`);
+    router.push(`/categories/${category.id}`, {
+      description: category.description,
+    });
   };
 
   const renderItem = ({ item }) => (
@@ -72,7 +77,7 @@ const TodasCategorias = () => {
         Explorar todo
       </Text>
       <FlatList
-        data={data.categories} // Asegúrate de que 'data.categories' esté disponible
+        data={categories}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={2}
@@ -87,6 +92,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loadingText: {
+    fontSize: 18,
+    color: "#000",
   },
   title: {
     fontSize: 24,

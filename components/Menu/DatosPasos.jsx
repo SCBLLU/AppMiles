@@ -7,7 +7,7 @@ const DatosPasos = ({ currentSteps, goalSteps }) => {
   const { isDarkMode } = useDarkMode();
 
   // Calcula el porcentaje y limita a 100%
-  const percentage = Math.min((currentSteps / goalSteps) * 100, 100); // Corregido el límite a 100%
+  const percentage = Math.min((currentSteps / goalSteps) * 100, 300); // Corregido el límite a +100%
   // Calcula el ancho de la barra de progreso
   const progressWidth = (percentage / 100) * Dimensions.get("window").width;
 
