@@ -162,5 +162,17 @@
             "title": "Senderismo",
             "icon": "faPersonHiking"
         }
+    ],
+    "personal": [
+        {
+            "id": "1",
+            "name": "Pablo",
+            "type": "Entrenador"
+        },
+        {
+            "id": "2",
+            "name": "María",
+            "type": "Nutricionista"
+        }
     ]
 }
