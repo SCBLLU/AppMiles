@@ -167,12 +167,58 @@
         {
             "id": "1",
             "name": "Pablo",
-            "type": "Entrenador"
+            "type": "Entrenador",
+            "imageUrl": "https://example.com/pablo.jpg",
+            "ranking": 4.8,
+            "description": "Pablo es un entrenador certificado con más de 10 años de experiencia en fitness y entrenamiento personalizado. Se especializa en entrenamiento de fuerza y acondicionamiento físico.",
+            "specialties": [
+                "Entrenamiento de fuerza",
+                "HIIT",
+                "Pérdida de peso"
+            ],
+            "price": 89.99
         },
         {
             "id": "2",
             "name": "María",
-            "type": "Nutricionista"
+            "type": "Nutricionista",
+            "imageUrl": "https://example.com/maria.jpg",
+            "ranking": 4.9,
+            "description": "María es una nutricionista registrada con un enfoque en nutrición deportiva y planes de alimentación personalizados. Tiene una maestría en Ciencias de la Nutrición y más de 8 años de experiencia.",
+            "specialties": [
+                "Nutrición deportiva",
+                "Planes de alimentación",
+                "Pérdida de peso"
+            ],
+            "price": 79.99
+        },
+        {
+            "id": "3",
+            "name": "Carlos",
+            "type": "Entrenador",
+            "imageUrl": "https://example.com/carlos.jpg",
+            "ranking": 4.7,
+            "description": "Carlos es un entrenador especializado en yoga y pilates. Con más de 15 años de experiencia, Carlos se enfoca en mejorar la flexibilidad, el equilibrio y la fuerza central de sus clientes.",
+            "specialties": [
+                "Yoga",
+                "Pilates",
+                "Meditación"
+            ],
+            "price": 69.99
+        },
+        {
+            "id": "4",
+            "name": "Ana",
+            "type": "Nutricionista",
+            "imageUrl": "https://example.com/ana.jpg",
+            "ranking": 4.6,
+            "description": "Ana es una nutricionista especializada en nutrición plant-based y dietas para condiciones médicas específicas. Tiene un doctorado en Nutrición Clínica y más de 12 años de experiencia.",
+            "specialties": [
+                "Nutrición plant-based",
+                "Dietas terapéuticas",
+                "Alergias alimentarias"
+            ],
+            "price": 89.99
         }
     ]
 }
