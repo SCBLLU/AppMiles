@@ -1,4 +1,3 @@
-// ActividadesFisicas.js
 import React, { useState, useCallback, useMemo } from "react";
 import {
   View,
@@ -22,6 +21,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
+import data from "../../data/data.json";
 
 if (
   Platform.OS === "android" &&
@@ -30,22 +30,24 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const allActivities = [
-  { id: "1", title: "Caminata", icon: faWalking },
-  { id: "2", title: "Pesas", icon: faDumbbell },
-  { id: "3", title: "Ciclismo", icon: faBiking },
-  { id: "4", title: "Correr", icon: faRunning },
-  { id: "5", title: "Natación", icon: faSwimmer },
-  { id: "6", title: "Senderismo", icon: faPersonHiking },
-];
+const iconMap = {
+  faWalking,
+  faDumbbell,
+  faBiking,
+  faRunning,
+  faSwimmer,
+  faPersonHiking,
+};
+
+const activityTimer = data.activityTimer;
 
 const ActividadesFisicas = () => {
   const { isDarkMode } = useDarkMode();
   const [showMore, setShowMore] = useState(false);
-  const router = useRouter(); // Inicializa el router para la navegación
+  const router = useRouter();
 
   const visibleActivities = useMemo(() => {
-    return showMore ? allActivities : allActivities.slice(0, 3);
+    return showMore ? activityTimer : activityTimer.slice(0, 3);
   }, [showMore]);
 
   const handleToggleActivities = useCallback(() => {
@@ -55,10 +57,9 @@ const ActividadesFisicas = () => {
 
   const handleActivityPress = useCallback(
     (activity) => {
-      // Navegamos a la ruta dinámica y pasamos los parámetros
       router.push({
-        pathname: `/exercise-timer/${activity.id}`, // Usamos el id para la ruta dinámica
-        params: { title: activity.title }, // Pasamos el título de la actividad
+        pathname: `/exercise-timer/${activity.id}`,
+        params: { title: activity.title },
       });
     },
     [router]
@@ -73,10 +74,10 @@ const ActividadesFisicas = () => {
             { backgroundColor: isDarkMode ? "#444" : "#fff" },
           ]}
           activeOpacity={0.7}
-          onPress={() => handleActivityPress(item)} // Redirige al hacer clic
+          onPress={() => handleActivityPress(item)}
         >
           <FontAwesomeIcon
-            icon={item.icon}
+            icon={iconMap[item.icon]}
             size={30}
             color={isDarkMode ? "#ccc" : "#333"}
           />

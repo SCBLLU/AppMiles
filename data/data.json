@@ -135,5 +135,32 @@
             "duration": "25",
             "calories": "200"
         }
+    ],
+    "activityTimer": [
+        {
+            "id": "1",
+            "title": "Caminata",
+            "icon": "faWalking"
+        },
+        {
+            "id": "2",
+            "title": "Correr",
+            "icon": "faRunning"
+        },
+        {
+            "id": "3",
+            "title": "Ciclismo",
+            "icon": "faBiking"
+        },
+        {
+            "id": "4",
+            "title": "Natación",
+            "icon": "faSwimmer"
+        },
+        {
+            "id": "5",
+            "title": "Senderismo",
+            "icon": "faPersonHiking"
+        }
     ]
 }

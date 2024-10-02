@@ -7,7 +7,12 @@ const Características = () => {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <View style={[styles.section, { backgroundColor: isDarkMode ? "#333" : "#F3F4F6" }]}>
+    <View
+      style={[
+        styles.section,
+        { backgroundColor: isDarkMode ? "#333" : "#F3F4F6" },
+      ]}
+    >
       <View style={styles.container}>
         <Text style={[styles.heading, { color: isDarkMode ? "#fff" : "#000" }]}>
           Características Principales
@@ -41,7 +46,9 @@ const FeatureCard = ({ Icon, title, description, buttonText }) => {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <View style={[styles.card, { backgroundColor: isDarkMode ? "#444" : "#fff" }]}>
+    <View
+      style={[styles.card, { backgroundColor: isDarkMode ? "#444" : "#fff" }]}
+    >
       <View style={styles.cardHeader}>
         <Icon
           width={32}
@@ -49,16 +56,27 @@ const FeatureCard = ({ Icon, title, description, buttonText }) => {
           color={isDarkMode ? "#fff" : "#000"}
           style={styles.icon}
         />
-        <Text style={[styles.cardTitle, { color: isDarkMode ? "#fff" : "#000" }]}>
+        <Text
+          style={[styles.cardTitle, { color: isDarkMode ? "#fff" : "#000" }]}
+        >
           {title}
         </Text>
-        <Text style={[styles.cardDescription, { color: isDarkMode ? "#ccc" : "#6B7280" }]}>
+        <Text
+          style={[
+            styles.cardDescription,
+            { color: isDarkMode ? "#ccc" : "#6B7280" },
+          ]}
+        >
           {description}
         </Text>
       </View>
       <View style={styles.cardContent}>
-        <TouchableOpacity style={[styles.button, { borderColor: isDarkMode ? "#fff" : "#000" }]}>
-          <Text style={[styles.buttonText, { color: isDarkMode ? "#fff" : "#000" }]}>
+        <TouchableOpacity
+          style={[styles.button, { borderColor: isDarkMode ? "#fff" : "#000" }]}
+        >
+          <Text
+            style={[styles.buttonText, { color: isDarkMode ? "#fff" : "#000" }]}
+          >
             {buttonText}
           </Text>
         </TouchableOpacity>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlay, faPause, faRedo } from "@fortawesome/free-solid-svg-icons";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { useDarkMode } from "../../components/Utils/DarkModeProvider";
 
 const ExerciseTimer = () => {
@@ -34,75 +34,85 @@ const ExerciseTimer = () => {
     };
 
     return (
-        <View
-            style={[
-                styles.container,
-                { backgroundColor: isDarkMode ? "#121212" : "#F3F4F6" }, // Fondo cambia según el modo
-            ]}
-        >
-            {/* Título del ejercicio */}
-            <Text
+        <>
+
+            <Stack.Screen
+                options={{
+                    headerTitle: "Regresar",
+                }}
+
+            />
+            <View
                 style={[
-                    styles.title,
-                    { color: isDarkMode ? "#ffffff" : "#333333" }, // Color del texto según el modo
+                    styles.container,
+                    { backgroundColor: isDarkMode ? "#121212" : "#F3F4F6" }, // Fondo cambia según el modo
                 ]}
             >
-                {title ? title : "Ejercicio"}
-            </Text>
-
-            {/* Información adicional */}
-            <Text
-                style={[
-                    styles.subTitle,
-                    { color: isDarkMode ? "#cccccc" : "#666666" },
-                ]}
-            >
-                ¡Mantén el ritmo! El cronómetro te ayudará a gestionar tu tiempo.
-            </Text>
-
-            {/* Cronómetro */}
-            <Text
-                style={[
-                    styles.timer,
-                    { color: isDarkMode ? "#76FF03" : "#333333" }, // Color del cronómetro
-                ]}
-            >
-                {Math.floor(seconds / 60)}:{seconds % 60 < 10 ? "0" : ""}
-                {seconds % 60}
-            </Text>
-
-            {/* Botones */}
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
+                {/* Título del ejercicio */}
+                <Text
                     style={[
-                        styles.button,
-                        isActive ? styles.pauseButton : styles.startButton,
-                        { backgroundColor: isDarkMode ? "#444" : "#273AB7" }, // Fondo según el modo y estado
+                        styles.title,
+                        { color: isDarkMode ? "#ffffff" : "#333333" }, // Color del texto según el modo
                     ]}
-                    onPress={handleStartStop}
                 >
-                    <FontAwesomeIcon
-                        icon={isActive ? faPause : faPlay}
-                        size={20}
-                        color="#ffffff"
-                    />
-                    <Text style={styles.buttonText}>
-                        {isActive ? "Pausar" : "Iniciar"}
-                    </Text>
-                </TouchableOpacity>
+                    {title ? title : "Ejercicio"}
+                </Text>
 
-                <TouchableOpacity
+                {/* Información adicional */}
+                <Text
                     style={[
-                        styles.button,
-                        { backgroundColor: isDarkMode ? "#444" : "#FF1744" }, // Botón reiniciar cambia con el modo
+                        styles.subTitle,
+                        { color: isDarkMode ? "#cccccc" : "#666666" },
                     ]}
-                    onPress={handleReset}
                 >
-                    <FontAwesomeIcon icon={faRedo} size={20} color="#ffffff" />
-                    <Text style={styles.buttonText}>Reiniciar</Text>
-                </TouchableOpacity>
+                    ¡Mantén el ritmo! El cronómetro te ayudará a gestionar tu tiempo.
+                </Text>
+
+                {/* Cronómetro */}
+                <Text
+                    style={[
+                        styles.timer,
+                        { color: isDarkMode ? "#76FF03" : "#333333" }, // Color del cronómetro
+                    ]}
+                >
+                    {Math.floor(seconds / 60)}:{seconds % 60 < 10 ? "0" : ""}
+                    {seconds % 60}
+                </Text>
+
+                {/* Botones */}
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                        style={[
+                            styles.button,
+                            isActive ? styles.pauseButton : styles.startButton,
+                            { backgroundColor: isDarkMode ? "#444" : "#273AB7" }, // Fondo según el modo y estado
+                        ]}
+                        onPress={handleStartStop}
+                    >
+                        <FontAwesomeIcon
+                            icon={isActive ? faPause : faPlay}
+                            size={20}
+                            color="#ffffff"
+                        />
+                        <Text style={styles.buttonText}>
+                            {isActive ? "Pausar" : "Iniciar"}
+                        </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[
+                            styles.button,
+                            { backgroundColor: isDarkMode ? "#444" : "#FF1744" }, // Botón reiniciar cambia con el modo
+                        ]}
+                        onPress={handleReset}
+                    >
+                        <FontAwesomeIcon icon={faRedo} size={20} color="#ffffff" />
+                        <Text style={styles.buttonText}>Reiniciar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+
+        </>
     );
 };
 
