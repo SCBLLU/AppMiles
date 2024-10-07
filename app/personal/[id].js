@@ -1,18 +1,19 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams, Stack } from 'expo-router';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { useLocalSearchParams, Stack, useRouter } from 'expo-router';
 import { useDarkMode } from '../../components/Utils/DarkModeProvider';
+import { Ionicons } from '@expo/vector-icons';
 import data from '../../data/data.json';
 
 const PersonalDetails = () => {
-    const { id } = useLocalSearchParams(); // Obtener el ID del personal desde la URL
-    const { isDarkMode } = useDarkMode(); // Obtener el estado del modo oscuro
-    const personal = data.personal || []; // Obtener el listado de personal desde el JSON
-
-    // Buscar el personal por el id
+    const { id } = useLocalSearchParams();
+    const { isDarkMode } = useDarkMode();
+    const router = useRouter();
+    const personal = data.personal || [];
     const selectedPersonal = personal.find((p) => p.id === String(id));
 
-    // Lógica si no se encuentra el personal
+    const [isFollowing, setIsFollowing] = useState(false);
+
     if (!selectedPersonal) {
         return (
             <View style={[styles.container, isDarkMode && styles.containerDark]}>
@@ -23,14 +24,20 @@ const PersonalDetails = () => {
         );
     }
 
-    // Función para manejar la suscripción
-    const handleSubscribe = () => {
-        console.log('Suscripción solicitada');
+    const handleFollow = () => {
+        setIsFollowing(!isFollowing);
     };
+
+    const renderMerchItem = ({ item }) => (
+        <TouchableOpacity style={styles.merchItem}>
+            <Image source={{ uri: item.imageUrl }} style={styles.merchImage} />
+            <Text style={[styles.merchName, isDarkMode && styles.textDark]}>{item.name}</Text>
+            <Text style={[styles.merchPrice, isDarkMode && styles.textMutedDark]}>${item.price}</Text>
+        </TouchableOpacity>
+    );
 
     return (
         <>
-
             <Stack.Screen
                 options={{
                     headerTitle: "Regresar",
@@ -42,32 +49,58 @@ const PersonalDetails = () => {
             />
 
             <ScrollView style={[styles.container, isDarkMode && styles.containerDark]}>
-                <Image
-                    source={{ uri: selectedPersonal.imageUrl || "https://via.placeholder.com/200" }}
-                    style={styles.avatar}
-                />
-                <Text style={[styles.title, isDarkMode && styles.textDark]}>
-                    {selectedPersonal.name}
-                </Text>
-                <Text style={[styles.subtitle, isDarkMode && styles.textMutedDark]}>
-                    {selectedPersonal.type}
+                <View style={styles.header}>
+                    <Image
+                        source={{ uri: selectedPersonal.imageUrl || "https://via.placeholder.com/200" }}
+                        style={styles.avatar}
+                    />
+                    <View style={styles.headerInfo}>
+                        <Text style={[styles.title, isDarkMode && styles.textDark]}>
+                            {selectedPersonal.name}
+                        </Text>
+                        <Text style={[styles.subtitle, isDarkMode && styles.textMutedDark]}>
+                            {selectedPersonal.type}
+                        </Text>
+                        <View style={styles.stats}>
+                            <Text style={[styles.statText, isDarkMode && styles.textDark]}>
+                                <Ionicons name="people" size={16} color={isDarkMode ? "#fff" : "#000"} /> 1.5K seguidores
+                            </Text>
+                            <Text style={[styles.statText, isDarkMode && styles.textDark]}>
+                                <Ionicons name="star" size={16} color={isDarkMode ? "#fff" : "#000"} /> {selectedPersonal.ranking || "N/A"}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+
+                <View style={styles.actionButtons}>
+                    <TouchableOpacity
+                        style={[styles.followButton, isFollowing && styles.followingButton]}
+                        onPress={handleFollow}
+                    >
+                        <Text style={styles.followButtonText}>
+                            {isFollowing ? 'Siguiendo' : 'Seguir'}
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.iconButton}>
+                        <Ionicons name="share-social" size={24} color={isDarkMode ? "#fff" : "#000"} />
+                    </TouchableOpacity>
+                </View>
+
+                <Text style={[styles.sectionTitle, isDarkMode && styles.textDark]}>
+                    Sobre mí
                 </Text>
                 <Text style={[styles.description, isDarkMode && styles.textDark]}>
                     {selectedPersonal.description || 'No hay descripción disponible.'}
                 </Text>
 
-                {/* Sección de planes de suscripción */}
                 <Text style={[styles.sectionTitle, isDarkMode && styles.textDark]}>
                     Planes de Suscripción
                 </Text>
                 <View style={[styles.card, isDarkMode && styles.cardDark]}>
-                    <Text style={[styles.name, isDarkMode && styles.textLight]}>
+                    <Text style={[styles.planName, isDarkMode && styles.textLight]}>
                         Plan {selectedPersonal.type}
                     </Text>
-                    <Text style={[styles.type, isDarkMode && styles.textMuted]}>
-                        {selectedPersonal.type}
-                    </Text>
-                    <Text style={[styles.price, isDarkMode && styles.priceDark]}>
+                    <Text style={[styles.planPrice, isDarkMode && styles.priceDark]}>
                         ${selectedPersonal.price}/mes
                     </Text>
                     <View style={styles.featuresContainer}>
@@ -85,40 +118,62 @@ const PersonalDetails = () => {
                         </Text>
                     </View>
                     <TouchableOpacity
-                        style={[styles.subscribeButton, isDarkMode && styles.subscribeButtonDark]}
-                        onPress={handleSubscribe}
+                        style={styles.subscribeButton}
+                        onPress={() => console.log('Suscripción solicitada')}
                     >
                         <Text style={styles.subscribeButtonText}>Suscribirse</Text>
                     </TouchableOpacity>
                 </View>
+
+                <Text style={[styles.sectionTitle, isDarkMode && styles.textDark]}>
+                    Merchandising
+                </Text>
+                <FlatList
+                    data={[
+                        { id: '1', name: 'Camiseta', price: 29.99, imageUrl: 'https://via.placeholder.com/100' },
+                        { id: '2', name: 'Botella', price: 14.99, imageUrl: 'https://via.placeholder.com/100' },
+                        { id: '3', name: 'Gorra', price: 19.99, imageUrl: 'https://via.placeholder.com/100' },
+                        { id: '4', name: 'Mochila', price: 39.99, imageUrl: 'https://via.placeholder.com/100' },
+                        { id: '5', name: 'Toalla', price: 9.99, imageUrl: 'https://via.placeholder.com/100' },
+                        { id: '6', name: 'Calcetines', price: 4.99, imageUrl: 'https://via.placeholder.com/100' },
+                        { id: '7', name: 'Pulsera', price: 2.99, imageUrl: 'https://via.placeholder.com/100' },
+                        { id: '8', name: 'Mascarilla', price: 3.99, imageUrl: 'https://via.placeholder.com/100' },
+                    ]}
+                    renderItem={renderMerchItem}
+                    keyExtractor={item => item.id}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                />
             </ScrollView>
         </>
-
-
     );
 };
 
-// Estilos
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
         backgroundColor: '#fff',
     },
     containerDark: {
         backgroundColor: '#121212',
     },
+    header: {
+        flexDirection: 'row',
+        padding: 20,
+        alignItems: 'center',
+    },
     avatar: {
-        width: 200,
-        height: 200,
-        borderRadius: 100,
-        alignSelf: 'center',
-        marginBottom: 20,
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        marginRight: 20,
+    },
+    headerInfo: {
+        flex: 1,
     },
     title: {
-        fontSize: 28,
+        fontSize: 24,
         fontWeight: 'bold',
-        textAlign: 'center',
         color: '#000',
     },
     textDark: {
@@ -128,28 +183,66 @@ const styles = StyleSheet.create({
         color: '#b3b3b3',
     },
     subtitle: {
-        fontSize: 18,
-        textAlign: 'center',
-        marginTop: 5,
-        marginBottom: 20,
+        fontSize: 16,
         color: '#666',
+        marginTop: 4,
+    },
+    stats: {
+        flexDirection: 'row',
+        marginTop: 8,
+    },
+    statText: {
+        fontSize: 14,
+        marginRight: 16,
+        color: '#000',
+    },
+    actionButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        marginBottom: 20,
+    },
+    followButton: {
+        backgroundColor: '#1DB954',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+        flex: 1,
+        marginRight: 10,
+    },
+    followingButton: {
+        backgroundColor: '#333',
+    },
+    followButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    iconButton: {
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        padding: 10,
+        borderRadius: 20,
+    },
+    sectionTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 10,
+        paddingHorizontal: 20,
+        color: '#000',
     },
     description: {
         fontSize: 16,
         lineHeight: 24,
+        paddingHorizontal: 20,
         marginBottom: 20,
-        color: '#000',
-    },
-    sectionTitle: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        marginBottom: 16,
         color: '#000',
     },
     card: {
         borderRadius: 8,
         padding: 16,
-        marginBottom: 16,
+        marginHorizontal: 20,
+        marginBottom: 20,
         backgroundColor: "#fff",
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
@@ -160,8 +253,8 @@ const styles = StyleSheet.create({
     cardDark: {
         backgroundColor: "#2c2c2c",
     },
-    name: {
-        fontSize: 24,
+    planName: {
+        fontSize: 20,
         fontWeight: "bold",
         marginBottom: 8,
         color: "#333",
@@ -169,22 +262,14 @@ const styles = StyleSheet.create({
     textLight: {
         color: "#fff",
     },
-    textMuted: {
-        color: "#b3b3b3",
-    },
-    type: {
-        fontSize: 16,
-        marginBottom: 8,
-        color: "#666",
-    },
-    price: {
-        fontSize: 20,
+    planPrice: {
+        fontSize: 18,
         fontWeight: "600",
         marginBottom: 16,
-        color: "#ffa000",
+        color: "#1DB954",
     },
     priceDark: {
-        color: "#ffd700",
+        color: "#1DB954",
     },
     featuresContainer: {
         marginBottom: 16,
@@ -196,17 +281,33 @@ const styles = StyleSheet.create({
     },
     subscribeButton: {
         paddingVertical: 12,
-        borderRadius: 8,
+        borderRadius: 20,
         alignItems: "center",
-        backgroundColor: "#009688",
-    },
-    subscribeButtonDark: {
-        backgroundColor: "#FF3D00",
+        backgroundColor: "#1DB954",
     },
     subscribeButtonText: {
         color: "#fff",
         fontSize: 16,
         fontWeight: "600",
+    },
+    merchItem: {
+        width: 120,
+        marginRight: 16,
+    },
+    merchImage: {
+        width: 120,
+        height: 120,
+        borderRadius: 8,
+        marginBottom: 8,
+    },
+    merchName: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#000',
+    },
+    merchPrice: {
+        fontSize: 14,
+        color: '#666',
     },
 });
 
