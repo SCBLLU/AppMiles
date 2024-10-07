@@ -39,6 +39,10 @@ const ExerciseTimer = () => {
             <Stack.Screen
                 options={{
                     headerTitle: "Regresar",
+                    headerStyle: {
+                        backgroundColor: isDarkMode ? "#121212" : "#fff",
+                    },
+                    headerTintColor: isDarkMode ? "#fff" : "#000",
                 }}
 
             />

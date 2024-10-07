@@ -18,6 +18,7 @@ import {
   faPersonHiking,
   faAngleUp,
   faAngleDown,
+  faLungs,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
@@ -37,6 +38,7 @@ const iconMap = {
   faRunning,
   faSwimmer,
   faPersonHiking,
+  faLungs
 };
 
 const activityTimer = data.activityTimer;

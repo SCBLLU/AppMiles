@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useLocalSearchParams, Stack } from 'expo-router';
 import { useDarkMode } from '../../components/Utils/DarkModeProvider';
 import data from '../../data/data.json';
-import SubscriptionCard from '../../components/Explorar/Personal/SubscriptionCard';
 
 const PersonalDetails = () => {
-    const { id } = useLocalSearchParams();
-    const { isDarkMode } = useDarkMode();
-    const personal = data.personal || [];
+    const { id } = useLocalSearchParams(); // Obtener el ID del personal desde la URL
+    const { isDarkMode } = useDarkMode(); // Obtener el estado del modo oscuro
+    const personal = data.personal || []; // Obtener el listado de personal desde el JSON
 
+    // Buscar el personal por el id
     const selectedPersonal = personal.find((p) => p.id === String(id));
 
+    // Lógica si no se encuentra el personal
     if (!selectedPersonal) {
         return (
             <View style={[styles.container, isDarkMode && styles.containerDark]}>
@@ -22,45 +23,82 @@ const PersonalDetails = () => {
         );
     }
 
+    // Función para manejar la suscripción
     const handleSubscribe = () => {
-        // Implementar lógica de suscripción aquí
         console.log('Suscripción solicitada');
     };
 
     return (
-        <ScrollView style={[styles.container, isDarkMode && styles.containerDark]}>
-            <Image
-                source={{ uri: selectedPersonal.imageUrl || "https://via.placeholder.com/200" }}
-                style={styles.avatar}
+        <>
+
+            <Stack.Screen
+                options={{
+                    headerTitle: "Regresar",
+                    headerStyle: {
+                        backgroundColor: isDarkMode ? "#121212" : "#fff",
+                    },
+                    headerTintColor: isDarkMode ? "#fff" : "#000",
+                }}
             />
-            <Text style={[styles.title, isDarkMode && styles.textDark]}>
-                {selectedPersonal.name}
-            </Text>
-            <Text style={[styles.subtitle, isDarkMode && styles.textMutedDark]}>
-                {selectedPersonal.type}
-            </Text>
-            <Text style={[styles.description, isDarkMode && styles.textDark]}>
-                {selectedPersonal.description || 'No hay descripción disponible.'}
-            </Text>
-            <Text style={[styles.sectionTitle, isDarkMode && styles.textDark]}>
-                Planes de Suscripción
-            </Text>
-            <SubscriptionCard
-                name={`Plan ${selectedPersonal.type}`}
-                type={selectedPersonal.type}
-                price={selectedPersonal.price}
-                features={[
-                    'Asesoría personalizada',
-                    'Acceso a contenido exclusivo',
-                    'Seguimiento de progreso',
-                    'Consultas ilimitadas'
-                ]}
-                onSubscribe={handleSubscribe}
-            />
-        </ScrollView>
+
+            <ScrollView style={[styles.container, isDarkMode && styles.containerDark]}>
+                <Image
+                    source={{ uri: selectedPersonal.imageUrl || "https://via.placeholder.com/200" }}
+                    style={styles.avatar}
+                />
+                <Text style={[styles.title, isDarkMode && styles.textDark]}>
+                    {selectedPersonal.name}
+                </Text>
+                <Text style={[styles.subtitle, isDarkMode && styles.textMutedDark]}>
+                    {selectedPersonal.type}
+                </Text>
+                <Text style={[styles.description, isDarkMode && styles.textDark]}>
+                    {selectedPersonal.description || 'No hay descripción disponible.'}
+                </Text>
+
+                {/* Sección de planes de suscripción */}
+                <Text style={[styles.sectionTitle, isDarkMode && styles.textDark]}>
+                    Planes de Suscripción
+                </Text>
+                <View style={[styles.card, isDarkMode && styles.cardDark]}>
+                    <Text style={[styles.name, isDarkMode && styles.textLight]}>
+                        Plan {selectedPersonal.type}
+                    </Text>
+                    <Text style={[styles.type, isDarkMode && styles.textMuted]}>
+                        {selectedPersonal.type}
+                    </Text>
+                    <Text style={[styles.price, isDarkMode && styles.priceDark]}>
+                        ${selectedPersonal.price}/mes
+                    </Text>
+                    <View style={styles.featuresContainer}>
+                        <Text style={[styles.feature, isDarkMode && styles.textLight]}>
+                            • Asesoría personalizada
+                        </Text>
+                        <Text style={[styles.feature, isDarkMode && styles.textLight]}>
+                            • Acceso a contenido exclusivo
+                        </Text>
+                        <Text style={[styles.feature, isDarkMode && styles.textLight]}>
+                            • Seguimiento de progreso
+                        </Text>
+                        <Text style={[styles.feature, isDarkMode && styles.textLight]}>
+                            • Consultas ilimitadas
+                        </Text>
+                    </View>
+                    <TouchableOpacity
+                        style={[styles.subscribeButton, isDarkMode && styles.subscribeButtonDark]}
+                        onPress={handleSubscribe}
+                    >
+                        <Text style={styles.subscribeButtonText}>Suscribirse</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        </>
+
+
     );
 };
 
+// Estilos
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -107,6 +145,68 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 16,
         color: '#000',
+    },
+    card: {
+        borderRadius: 8,
+        padding: 16,
+        marginBottom: 16,
+        backgroundColor: "#fff",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    cardDark: {
+        backgroundColor: "#2c2c2c",
+    },
+    name: {
+        fontSize: 24,
+        fontWeight: "bold",
+        marginBottom: 8,
+        color: "#333",
+    },
+    textLight: {
+        color: "#fff",
+    },
+    textMuted: {
+        color: "#b3b3b3",
+    },
+    type: {
+        fontSize: 16,
+        marginBottom: 8,
+        color: "#666",
+    },
+    price: {
+        fontSize: 20,
+        fontWeight: "600",
+        marginBottom: 16,
+        color: "#ffa000",
+    },
+    priceDark: {
+        color: "#ffd700",
+    },
+    featuresContainer: {
+        marginBottom: 16,
+    },
+    feature: {
+        fontSize: 14,
+        marginBottom: 4,
+        color: "#333",
+    },
+    subscribeButton: {
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: "center",
+        backgroundColor: "#009688",
+    },
+    subscribeButtonDark: {
+        backgroundColor: "#FF3D00",
+    },
+    subscribeButtonText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "600",
     },
 });
 
