@@ -87,7 +87,6 @@ export default function BuscadorEjercicio() {
           placeholderTextColor={isDarkMode ? "#bbb" : "#888"}
           value={searchTerm}
           onChangeText={setSearchTerm}
-          onSubmitEditing={handleSearch}
         />
         {searchTerm !== "" && (
           <TouchableOpacity onPress={clearSearch} style={styles.clearButton}>
