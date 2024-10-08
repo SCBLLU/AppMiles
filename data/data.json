@@ -188,14 +188,28 @@
                     "name": "Botella de agua reutilizable",
                     "description": "Mantén tu hidratación en cualquier lugar con esta botella de agua ecológica.",
                     "price": 19.99,
-                    "imageUrl": "https://example.com/botella-agua.png"
+                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0272%2F7605%2F0568%2Fproducts%2Fdamn2lp_d7e03e5a-650b-4afd-8746-beaf9b8c1d7d.png%3Fv%3D1690926244%26width%3D828&w=828&q=75"
                 },
                 {
                     "id": "2",
                     "name": "Toalla de gimnasio",
                     "description": "Toalla suave y absorbente, perfecta para tus sesiones de entrenamiento.",
                     "price": 24.99,
-                    "imageUrl": "https://example.com/toalla-gimnasio.png"
+                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0272%2F7605%2F0568%2Fproducts%2FKLBlackCassette.png%3Fv%3D1657573410%26width%3D828&w=828&q=75"
+                },
+                {
+                    "id": "3",
+                    "name": "Cuaderno de ejercicios",
+                    "description": "Cuaderno para llevar un registro de tus entrenamientos y metas de fitness.",
+                    "price": 12.99,
+                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0272%2F7605%2F0568%2Ffiles%2FUntitledSession0873P-1_1.jpg%3Fv%3D1694634483%26width%3D828&w=828&q=75"
+                },
+                {
+                    "id": "4",
+                    "name": "Pesas ajustables",
+                    "description": "Set de pesas ajustables para entrenar en casa o en el gimnasio.",
+                    "price": 49.99,
+                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0844%2F3999%2F0571%2Ffiles%2FTravis-Scott-Product-Image-1500-G2.png%3Fv%3D1703443774%26width%3D828&w=828&q=75"
                 }
             ]
         },
@@ -218,14 +232,21 @@
                     "name": "Cuaderno de recetas",
                     "description": "Un cuaderno para que anotes tus recetas favoritas y planes de alimentación.",
                     "price": 15.99,
-                    "imageUrl": "https://example.com/cuaderno-recetas.png"
+                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0390%2F6749%2Fproducts%2FE_CC2_BoxSets-03_BoxSet2_1.png%3Fv%3D1658175224%26width%3D828&w=828&q=75"
                 },
                 {
                     "id": "4",
                     "name": "Botella de proteínas",
                     "description": "Botella para mezclar tus batidos de proteínas de manera sencilla.",
                     "price": 21.99,
-                    "imageUrl": "https://example.com/botella-proteinas.png"
+                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0390%2F6749%2Fproducts%2FE_CC2_2LP-01.png%3Fv%3D1657736210%26width%3D828&w=828&q=75"
+                },
+                {
+                    "id": "5",
+                    "name": "Set de especias",
+                    "description": "Un set de especias para dar sabor a tus comidas saludables.",
+                    "price": 18.99,
+                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0390%2F6749%2Ffiles%2FKamikaze-Vinyl-Green_1.png%3Fv%3D1687283871%26width%3D828&w=828&q=75"
                 }
             ]
         },
@@ -256,6 +277,13 @@
                     "description": "Pelota de pilates para mejorar tu equilibrio y flexibilidad.",
                     "price": 29.99,
                     "imageUrl": "https://example.com/pelota-pilates.png"
+                },
+                {
+                    "id": "7",
+                    "name": "Set de velas aromáticas",
+                    "description": "Set de velas aromáticas para crear un ambiente relajante en tu espacio de yoga.",
+                    "price": 19.99,
+                    "imageUrl": "https://example.com/set-velas-aromaticas.png"
                 }
             ]
         },
@@ -286,6 +314,13 @@
                     "description": "Un set de especias para realzar tus comidas plant-based.",
                     "price": 18.99,
                     "imageUrl": "https://example.com/set-especias.png"
+                },
+                {
+                    "id": "9",
+                    "name": "Botella de agua reutilizable",
+                    "description": "Botella de agua ecológica para mantenerte hidratado en todo momento.",
+                    "price": 19.99,
+                    "imageUrl": "https://example.com/botella-agua.png"
                 }
             ]
         }
@@ -294,20 +329,17 @@
         {
             "id": "plan1",
             "name": "Plan Básico",
-            "price": 5,
-            "description": "Acceso básico a contenido exclusivo."
+            "price": 8
         },
         {
             "id": "plan2",
             "name": "Plan Premium",
-            "price": 10,
-            "description": "Acceso completo a contenido exclusivo y mercancía."
+            "price": 10
         },
         {
             "id": "plan3",
             "name": "Plan Familiar",
-            "price": 15,
-            "description": "Acceso para hasta 4 miembros de la familia."
+            "price": 15
         }
     ]
 }

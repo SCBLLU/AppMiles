@@ -4,10 +4,8 @@ import { View, Text, StyleSheet } from 'react-native';
 const AboutMe = ({ description, isDarkMode }) => {
     return (
         <View style={[styles.container, isDarkMode && styles.containerDark]}>
-            <Text style={[styles.title, isDarkMode && styles.textDark]}>
-                Acerca de mí
-            </Text>
-            <Text style={[styles.description, isDarkMode && styles.textMutedDark]}>
+            <Text style={[styles.title, { color: isDarkMode ? '#fff' : '#000' }]}>Acerca de mí</Text>
+            <Text style={[styles.description, { color: isDarkMode ? '#b3b3b3' : '#333' }]}>
                 {description}
             </Text>
         </View>
@@ -16,29 +14,22 @@ const AboutMe = ({ description, isDarkMode }) => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
-        backgroundColor: '#f9f9f9',
+        padding: 10,
         borderRadius: 8,
         marginBottom: 20,
+        shadowRadius: 5,
     },
     containerDark: {
-        backgroundColor: '#2c2c2c',
+        backgroundColor: '#121212', // Fondo oscuro para modo oscuro
     },
     title: {
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 10,
-        color: '#333',
-    },
-    textDark: {
-        color: '#fff',
     },
     description: {
         fontSize: 16,
-        color: '#666',
-    },
-    textMutedDark: {
-        color: '#b3b3b3',
+        lineHeight: 22,
     },
 });
 

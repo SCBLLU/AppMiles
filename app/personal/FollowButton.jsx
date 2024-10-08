@@ -3,7 +3,11 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const FollowButton = ({ isFollowing, onFollow }) => (
     <TouchableOpacity
-        style={[styles.followButton, isFollowing && styles.followingButton]}
+        style={[
+            styles.baseButton,
+            isFollowing ? styles.followingButton : styles.notFollowingButton,
+            isFollowing && styles.buttonShadow,
+        ]}
         onPress={onFollow}
     >
         <Text style={styles.followButtonText}>
@@ -13,21 +17,33 @@ const FollowButton = ({ isFollowing, onFollow }) => (
 );
 
 const styles = StyleSheet.create({
-    followButton: {
-        backgroundColor: '#1DB954',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+    baseButton: {
+        marginTop: 25,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
         borderRadius: 20,
-        flex: 1,
-        marginRight: 10,
+        marginRight: 8,
     },
     followingButton: {
-        backgroundColor: '#333',
+        backgroundColor: '#333', // Color de fondo cuando está siguiendo
+    },
+    notFollowingButton: {
+        backgroundColor: '#1DB954', // Color de fondo cuando no está siguiendo
+    },
+    buttonShadow: {
+        elevation: 2, // Sombra para Android
+        shadowColor: '#000', // Sombra para iOS
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
     },
     followButtonText: {
-        color: '#fff',
-        fontWeight: 'bold',
+        color: '#fff', // Color del texto
+        fontWeight: '600', // Subtle weight increase
         textAlign: 'center',
+        fontSize: 14,
     },
 });
 

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, FlatList, Text } from 'react-native';
 import { useLocalSearchParams, Stack } from 'expo-router';
 import { useDarkMode } from '../../components/Utils/DarkModeProvider';
-import MetodoPago from './MetodoPago';
 import data from '../../data/data.json';
 import Header from './Header';
-import AboutMe from './AboutMe';
 import FollowButton from './FollowButton';
+import AboutMe from './AboutMe';
 import SubscriptionPlan from './SubscriptionPlan';
+import MetodoPago from './MetodoPago';
 import MerchItem from './MerchItem';
+import Footer from './Footer';
 
 const PersonalDetails = () => {
     const { id } = useLocalSearchParams();
@@ -16,29 +17,21 @@ const PersonalDetails = () => {
     const personal = data.personal || [];
     const selectedPersonal = personal.find((p) => p.id === String(id));
 
-    // Obtener merchData del archivo JSON
     const merchData = selectedPersonal?.merch || [];
     const [isFollowing, setIsFollowing] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [isPaymentVisible, setPaymentVisible] = useState(false);
-
-    // Acceder a los planes globales
-    const plans = data.plans || []; // Cambiado para acceder a los planes globalmente
+    const plans = data.plans || [];
 
     if (!selectedPersonal) {
         return (
-            <View style={[styles.container, isDarkMode && styles.containerDark]}>
-                <Text style={[styles.title, isDarkMode && styles.textDark]}>
-                    Personal no encontrado.
-                </Text>
+            <View style={[styles.container, isDarkMode ? styles.containerDark : styles.containerLight]}>
+                <Text style={styles.title}>Personal no encontrado.</Text>
             </View>
         );
     }
 
-    const handleFollow = () => {
-        setIsFollowing(prev => !prev);
-    };
-
+    const handleFollow = () => setIsFollowing(prev => !prev);
     const handleSubscribe = (planId) => {
         const plan = plans.find(plan => plan.id === planId);
         if (plan) {
@@ -58,20 +51,18 @@ const PersonalDetails = () => {
                     headerTitle: "Regresar",
                     headerBackTitleVisible: false,
                     headerStyle: {
-                        backgroundColor: isDarkMode ? "#121212" : "#fff",
+                        backgroundColor: isDarkMode ? "#1B1B1B" : "#fff",
                     },
                     headerTintColor: isDarkMode ? "#fff" : "#000",
                 }}
             />
 
-            <ScrollView style={[styles.container, isDarkMode && styles.containerDark]}>
+            <ScrollView style={[styles.container, isDarkMode ? styles.containerDark : styles.containerLight]}>
                 <Header personal={selectedPersonal} isDarkMode={isDarkMode} />
                 <FollowButton isFollowing={isFollowing} onFollow={handleFollow} />
                 <AboutMe description={selectedPersonal.description} isDarkMode={isDarkMode} />
 
-                <Text style={[styles.sectionTitle, isDarkMode && styles.textDark]}>
-                    Planes de Suscripción
-                </Text>
+                <Text style={[styles.sectionTitle, { color: isDarkMode ? '#1DB954' : '#000' }]}>Planes de Suscripción</Text>
                 {plans.map((plan) => (
                     <SubscriptionPlan
                         key={plan.id}
@@ -82,11 +73,9 @@ const PersonalDetails = () => {
                     />
                 ))}
 
-                <Text style={[styles.sectionTitle, isDarkMode && styles.textDark]}>
-                    Merchandising
-                </Text>
+                <Text style={[styles.sectionTitle, { color: isDarkMode ? '#1DB954' : '#000' }]}>Merchandising</Text>
                 <FlatList
-                    style={{ paddingHorizontal: 20, paddingBottom: 20 }}
+                    style={styles.merchList}
                     data={merchData}
                     renderItem={renderMerchItem}
                     keyExtractor={item => item.id.toString()}
@@ -101,6 +90,7 @@ const PersonalDetails = () => {
                         onCancel={() => setPaymentVisible(false)}
                     />
                 )}
+                <Footer />
             </ScrollView>
         </>
     );
@@ -109,6 +99,9 @@ const PersonalDetails = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 10,
+    },
+    containerLight: {
         backgroundColor: '#fff',
     },
     containerDark: {
@@ -118,14 +111,15 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
+        color: '#fff',
     },
     sectionTitle: {
         fontSize: 20,
         fontWeight: 'bold',
         marginVertical: 10,
     },
-    textDark: {
-        color: '#fff',
+    merchList: {
+        paddingVertical: 10,
     },
 });
 

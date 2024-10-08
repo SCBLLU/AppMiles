@@ -5,16 +5,15 @@ import { useDarkMode } from "./DarkModeProvider"; // Ajusta la ruta según tu es
 const Screen = ({ children }) => {
   const { isDarkMode } = useDarkMode(); // Obtén el estado del modo oscuro
 
+  // Definimos los colores para el modo claro y oscuro
+  const backgroundColor = isDarkMode ? "#121212" : "#ffffff";
+  const statusBarStyle = isDarkMode ? "light-content" : "dark-content";
+
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDarkMode ? "#121212" : "#fff" }, // Ajusta el color de fondo
-      ]}
-    >
+    <View style={[styles.container, { backgroundColor }]}>
       <StatusBar
-        barStyle={isDarkMode ? "light-content" : "dark-content"} // Define el estilo del contenido del estatus bar
-        backgroundColor={isDarkMode ? "#121212" : "#fff"} // Define el color de fondo del estatus bar
+        barStyle={statusBarStyle} // Define el estilo del contenido del estatus bar
+        backgroundColor={backgroundColor} // Define el color de fondo del estatus bar
         translucent={false} // Evita que el estatus bar sea transparente
       />
       {children}
