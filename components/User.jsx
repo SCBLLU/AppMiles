@@ -74,6 +74,7 @@ const User = () => {
         animationType="fade"
         transparent={false}
         visible={isOpen}
+        hardwareAccelerated={true}
         onRequestClose={() => setIsOpen(false)}
       >
         <View
@@ -278,26 +279,32 @@ const User = () => {
       </Modal>
 
       {/* Modal de zoom de la imagen con botón de cierre */}
-      <Modal
-        visible={isImageModalOpen}
-        transparent={true}
-        onRequestClose={() => setIsImageModalOpen(false)}
-      >
-        <View style={styles.imageModalContainer}>
-          <TouchableOpacity
-            onPress={() => setIsImageModalOpen(false)} // Cerrar modal con botón
-            style={styles.closeZoomButton}
-          >
-            <Ionicons name="close" size={30} color="#FFF" />
-          </TouchableOpacity>
-          <ImageViewer
-            imageUrls={images}
-            enableSwipeDown={true}
-            onSwipeDown={() => setIsImageModalOpen(false)}
-            backgroundColor={isDarkMode ? "#000" : "#fff"}
-          />
-        </View>
-      </Modal>
+      {isImageModalOpen && (
+        <Modal
+          animationType="fade"
+          visible={isImageModalOpen}
+          transparent={true}
+          hardwareAccelerated={true}
+          onRequestClose={() => setIsImageModalOpen(false)}
+        >
+          <View style={styles.imageModalContainer}>
+            <TouchableOpacity
+              onPress={() => setIsImageModalOpen(false)}
+              style={styles.closeZoomButton}
+            >
+              <Ionicons name="close" size={30} color="#FFF" />
+            </TouchableOpacity>
+            <ImageViewer
+              imageUrls={images}
+              enableSwipeDown={true}
+              onSwipeDown={() => setIsImageModalOpen(false)}
+              backgroundColor={isDarkMode ? "#000" : "#fff"}
+            />
+          </View>
+        </Modal>
+      )}
+
+
     </View>
   );
 };
