@@ -35,12 +35,7 @@ export default function Layout() {
                                 headerShown: false,
                             }}
                         />
-                        <Stack.Screen
-                            name="subscriptions"
-                            options={{
-                                headerShown: false,
-                            }}
-                        />
+
                         <Stack.Screen
                             name="collaborate"
                             options={{

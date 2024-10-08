@@ -4,7 +4,6 @@ import { Link } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faHome,
-  faGem,
   faUsers,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
@@ -34,13 +33,7 @@ const Navegacion = () => {
           style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
         />
       </Link>
-      <Link href="/subscriptions" style={styles.NavegacionItem}>
-        <FontAwesomeIcon
-          icon={faGem}
-          size={25}
-          style={[styles.icon, { color: isDarkMode ? "#fff" : "#000" }]}
-        />
-      </Link>
+
       <Link href="/collaborate" style={styles.NavegacionItem}>
         <FontAwesomeIcon
           icon={faUsers}
