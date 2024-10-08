@@ -5,15 +5,17 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
-  ScrollView,
   Image,
+  ScrollView,
   Platform,
   StatusBar,
+  Switch,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDarkMode } from "./Utils/DarkModeProvider";
 import { useNotifications } from "./Utils/NotificationsProvider";
 import { UserContext } from "./Utils/UserContext"; // Asegúrate de importar correctamente el contexto
+import ImageViewer from "react-native-image-zoom-viewer"; // Importar ImageViewer para el zoom
 import { useNavigation } from "@react-navigation/native";
 
 const InfoItem = ({ icon, text, isDarkMode }) => (
@@ -31,15 +33,26 @@ const InfoItem = ({ icon, text, isDarkMode }) => (
   </View>
 );
 
-const User = ({ navigation }) => {
+const User = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false); // Estado para el modal de zoom de imagen
   const { username } = useContext(UserContext); // Obtén el nombre de usuario
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { notifications, toggleNotifications } = useNotifications();
-  navigation = useNavigation();
+  const navigation = useNavigation();
 
   const profileImage = require("../assets/profile.jpg");
+
+  // Imagen para el visor de zoom
+  const images = [
+    {
+      url: '', // Imagen local, así que dejamos la URL en blanco
+      props: {
+        source: profileImage, // Imagen local
+      },
+    },
+  ];
 
   return (
     <View
@@ -48,6 +61,7 @@ const User = ({ navigation }) => {
         { backgroundColor: isDarkMode ? "#121212" : "#fff" },
       ]}
     >
+      {/* Botón de perfil */}
       <TouchableOpacity
         onPress={() => setIsOpen(true)}
         style={styles.profileButton}
@@ -55,6 +69,7 @@ const User = ({ navigation }) => {
         <Image source={profileImage} style={styles.profileImageStyle} />
       </TouchableOpacity>
 
+      {/* Modal del perfil */}
       <Modal
         animationType="fade"
         transparent={false}
@@ -89,9 +104,13 @@ const User = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <View style={styles.avatarContainer}>
+            {/* Imagen de perfil */}
+            <TouchableOpacity
+              onPress={() => setIsImageModalOpen(true)} // Abrir modal de zoom de imagen al hacer clic
+              style={styles.avatarContainer}
+            >
               <Image source={profileImage} style={styles.avatarLargeStyle} />
-            </View>
+            </TouchableOpacity>
 
             <View style={styles.userInfoContainer}>
               <Text
@@ -112,6 +131,7 @@ const User = ({ navigation }) => {
               </Text>
             </View>
 
+            {/* Información del usuario */}
             <View style={styles.infoContainer}>
               <InfoItem
                 icon="calendar-outline"
@@ -130,18 +150,15 @@ const User = ({ navigation }) => {
               />
             </View>
 
+            {/* Botón de configuración */}
             <TouchableOpacity
               style={[
                 styles.settingsButton,
                 { backgroundColor: isDarkMode ? "#2C2C2C" : "#E0E0E0" },
               ]}
               onPress={() => {
-                if (Platform.OS === "ios") {
-                  setIsOpen(false); // Cerrar el modal del perfil primero en iOS
-                  global.setTimeout(() => setIsSettingsVisible(true), 50); // Esperar y abrir configuración en iOS
-                } else {
-                  setIsSettingsVisible(true); // Directamente abrir configuración en Android
-                }
+                setIsOpen(false);
+                setIsSettingsVisible(true);
               }}
             >
               <Ionicons
@@ -159,6 +176,7 @@ const User = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
 
+            {/* Botón para salir de la app */}
             <TouchableOpacity
               style={[
                 styles.buttonOut,
@@ -187,86 +205,102 @@ const User = ({ navigation }) => {
         </View>
       </Modal>
 
-      <SettingsModal
-        isVisible={isSettingsVisible}
-        onClose={() => setIsSettingsVisible(false)}
-        isDarkMode={isDarkMode}
-        toggleDarkMode={toggleDarkMode}
-        notifications={notifications}
-        toggleNotifications={toggleNotifications}
-      />
+      {/* Modal de configuraciones */}
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={isSettingsVisible}
+        onRequestClose={() => setIsSettingsVisible(false)}
+      >
+        <View
+          style={[
+            styles.modalContent,
+            { backgroundColor: isDarkMode ? "#121212" : "#fff" },
+          ]}
+        >
+          <View style={styles.header}>
+            <Text
+              style={[
+                styles.title,
+                { color: isDarkMode ? "#FFFFFF" : "#000000" },
+              ]}
+            >
+              Configuraciones
+            </Text>
+            <TouchableOpacity
+              onPress={() => setIsSettingsVisible(false)}
+              style={styles.closeButton}
+            >
+              <Ionicons
+                name="close"
+                size={28}
+                color={isDarkMode ? "#FFFFFF" : "#000000"}
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* Configuración de Modo Oscuro */}
+          <View style={styles.settingsItem}>
+            <Text
+              style={[
+                styles.settingsText,
+                { color: isDarkMode ? "#FFFFFF" : "#000000" },
+              ]}
+            >
+              Modo Oscuro
+            </Text>
+            <Switch
+              value={isDarkMode}
+              onValueChange={toggleDarkMode}
+              trackColor={{ true: "#4CAF50", false: "#767577" }}
+              thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
+            />
+          </View>
+
+          {/* Configuración de Notificaciones */}
+          <View style={styles.settingsItem}>
+            <Text
+              style={[
+                styles.settingsText,
+                { color: isDarkMode ? "#FFFFFF" : "#000000" },
+              ]}
+            >
+              Notificaciones
+            </Text>
+            <Switch
+              value={notifications}
+              onValueChange={toggleNotifications}
+              trackColor={{ true: "#4CAF50", false: "#767577" }}
+              thumbColor={notifications ? "#fff" : "#f4f3f4"}
+            />
+          </View>
+        </View>
+      </Modal>
+
+      {/* Modal de zoom de la imagen con botón de cierre */}
+      <Modal
+        visible={isImageModalOpen}
+        transparent={true}
+        onRequestClose={() => setIsImageModalOpen(false)}
+      >
+        <View style={styles.imageModalContainer}>
+          <TouchableOpacity
+            onPress={() => setIsImageModalOpen(false)} // Cerrar modal con botón
+            style={styles.closeZoomButton}
+          >
+            <Ionicons name="close" size={30} color="#FFF" />
+          </TouchableOpacity>
+          <ImageViewer
+            imageUrls={images}
+            enableSwipeDown={true}
+            onSwipeDown={() => setIsImageModalOpen(false)}
+            backgroundColor={isDarkMode ? "#000" : "#fff"}
+          />
+        </View>
+      </Modal>
     </View>
   );
 };
-
-const SettingsModal = ({
-  isVisible,
-  onClose,
-  isDarkMode,
-  toggleDarkMode,
-  notifications,
-  toggleNotifications,
-}) => (
-  <Modal animationType="none" transparent={true} visible={isVisible}>
-    <View
-      style={[
-        styles.settingsModal,
-        { backgroundColor: isDarkMode ? "#121212" : "#F5F5F5" },
-      ]}
-    >
-      <View style={styles.settingsHeader}>
-        <Text
-          style={[
-            styles.settingsTitle,
-            { color: isDarkMode ? "#FFFFFF" : "#000000" },
-          ]}
-        >
-          Configuración
-        </Text>
-        <TouchableOpacity onPress={onClose}>
-          <Ionicons
-            name="close"
-            size={28}
-            color={isDarkMode ? "#FFFFFF" : "#000000"}
-          />
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity style={styles.settingsItem} onPress={toggleDarkMode}>
-        <Text
-          style={[
-            styles.settingsText,
-            { color: isDarkMode ? "#FFFFFF" : "#000000" },
-          ]}
-        >
-          Modo Oscuro
-        </Text>
-        <Ionicons
-          name={isDarkMode ? "moon" : "sunny"}
-          size={24}
-          color={isDarkMode ? "#FFFFFF" : "#000000"}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.settingsItem}
-        onPress={toggleNotifications}
-      >
-        <Text
-          style={[
-            styles.settingsText,
-            { color: isDarkMode ? "#FFFFFF" : "#000000" },
-          ]}
-        >
-          Notificaciones
-        </Text>
-        <Ionicons
-          name={notifications ? "notifications" : "notifications-off"}
-          size={24}
-          color={isDarkMode ? "#FFFFFF" : "#000000"}
-        />
-      </TouchableOpacity>
-    </View>
-  </Modal>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -375,9 +409,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E0E0E0",
+    paddingVertical: 20,
   },
   settingsText: {
     fontSize: 18,
@@ -389,6 +421,19 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginTop: 10,
+  },
+  imageModalContainer: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.9)",
+  },
+  closeZoomButton: {
+    position: "absolute",
+    top: 50,
+    right: 20,
+    zIndex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    borderRadius: 30,
+    padding: 10,
   },
 });
 

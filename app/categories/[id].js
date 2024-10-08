@@ -41,6 +41,7 @@ const CategoryDetails = () => {
                 options={{
                     headerShown: true,
                     title: "Regresar",
+                    headerBackTitleVisible: false, // Oculta el título del botón de retroceso en iOS
                     headerStyle: {
                         backgroundColor: isDarkMode ? "#121212" : "#fff",
                     },
