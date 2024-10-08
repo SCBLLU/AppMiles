@@ -181,7 +181,23 @@
                 "HIIT",
                 "Pérdida de peso"
             ],
-            "price": 89.99
+            "price": 89.99,
+            "merch": [
+                {
+                    "id": "1",
+                    "name": "Botella de agua reutilizable",
+                    "description": "Mantén tu hidratación en cualquier lugar con esta botella de agua ecológica.",
+                    "price": 19.99,
+                    "imageUrl": "https://example.com/botella-agua.png"
+                },
+                {
+                    "id": "2",
+                    "name": "Toalla de gimnasio",
+                    "description": "Toalla suave y absorbente, perfecta para tus sesiones de entrenamiento.",
+                    "price": 24.99,
+                    "imageUrl": "https://example.com/toalla-gimnasio.png"
+                }
+            ]
         },
         {
             "id": "2",
@@ -195,7 +211,23 @@
                 "Planes de alimentación",
                 "Pérdida de peso"
             ],
-            "price": 79.99
+            "price": 79.99,
+            "merch": [
+                {
+                    "id": "3",
+                    "name": "Cuaderno de recetas",
+                    "description": "Un cuaderno para que anotes tus recetas favoritas y planes de alimentación.",
+                    "price": 15.99,
+                    "imageUrl": "https://example.com/cuaderno-recetas.png"
+                },
+                {
+                    "id": "4",
+                    "name": "Botella de proteínas",
+                    "description": "Botella para mezclar tus batidos de proteínas de manera sencilla.",
+                    "price": 21.99,
+                    "imageUrl": "https://example.com/botella-proteinas.png"
+                }
+            ]
         },
         {
             "id": "3",
@@ -209,7 +241,23 @@
                 "Pilates",
                 "Meditación"
             ],
-            "price": 69.99
+            "price": 69.99,
+            "merch": [
+                {
+                    "id": "5",
+                    "name": "Almohadilla de yoga",
+                    "description": "Almohadilla antideslizante para una práctica cómoda de yoga.",
+                    "price": 39.99,
+                    "imageUrl": "https://example.com/almohadilla-yoga.png"
+                },
+                {
+                    "id": "6",
+                    "name": "Pelota de pilates",
+                    "description": "Pelota de pilates para mejorar tu equilibrio y flexibilidad.",
+                    "price": 29.99,
+                    "imageUrl": "https://example.com/pelota-pilates.png"
+                }
+            ]
         },
         {
             "id": "4",
@@ -223,7 +271,43 @@
                 "Dietas terapéuticas",
                 "Alergias alimentarias"
             ],
-            "price": 89.99
+            "price": 89.99,
+            "merch": [
+                {
+                    "id": "7",
+                    "name": "Libro de cocina plant-based",
+                    "description": "Libro lleno de recetas saludables y deliciosas para una dieta plant-based.",
+                    "price": 24.99,
+                    "imageUrl": "https://example.com/libro-cocina-plant-based.png"
+                },
+                {
+                    "id": "8",
+                    "name": "Set de especias",
+                    "description": "Un set de especias para realzar tus comidas plant-based.",
+                    "price": 18.99,
+                    "imageUrl": "https://example.com/set-especias.png"
+                }
+            ]
+        }
+    ],
+    "plans": [
+        {
+            "id": "plan1",
+            "name": "Plan Básico",
+            "price": 5,
+            "description": "Acceso básico a contenido exclusivo."
+        },
+        {
+            "id": "plan2",
+            "name": "Plan Premium",
+            "price": 10,
+            "description": "Acceso completo a contenido exclusivo y mercancía."
+        },
+        {
+            "id": "plan3",
+            "name": "Plan Familiar",
+            "price": 15,
+            "description": "Acceso para hasta 4 miembros de la familia."
         }
     ]
 }
