@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
+  Image, // Importar Image
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faTimes, faClock } from "@fortawesome/free-solid-svg-icons";
@@ -16,18 +17,16 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
 
-  // Comprobación para evitar el error
   if (!searches || searches.length === 0) {
     return null; // No hay búsquedas recientes
   }
 
   const handleSearchPress = (exerciseId) => {
-    // Navegar a la ruta dinámica
     router.push(`/exercise/${encodeURIComponent(exerciseId)}`);
   };
 
   const renderItem = ({ item }) => {
-    const category = data.categories.find(cat => cat.id === item.category); // Obtener la categoría del ejercicio
+    const category = data.categories.find(cat => cat.id === item.category);
 
     return (
       <TouchableOpacity
@@ -35,14 +34,17 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
           styles.searchItem,
           { backgroundColor: isDarkMode ? "#282828" : "#f0f0f0" },
         ]}
-        onPress={() => handleSearchPress(item.id)} // Usa item.id en lugar de exerciseId
+        onPress={() => handleSearchPress(item.id)}
+        activeOpacity={0.8} // Efecto de feedback al presionar
       >
-        <View
-          style={[
-            styles.categoryCircle,
-            { backgroundColor: category ? category.color : "#ccc" }, // Color de la categoría
-          ]}
-        />
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: item.image }} // Cargar la imagen desde la fuente
+            style={styles.image}
+            resizeMode="cover" // Ajustar el modo de la imagen
+          />
+        </View>
+
         <View style={styles.searchInfo}>
           <Text
             style={[styles.searchText, { color: isDarkMode ? "#fff" : "#000" }]}
@@ -55,12 +57,13 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
               { color: isDarkMode ? "#b3b3b3" : "#666" },
             ]}
           >
-            {category ? category.name : "Categoría desconocida"} {/* Mostrar el nombre de la categoría */}
+            {category ? category.name : "Categoría desconocida"}
           </Text>
         </View>
         <TouchableOpacity
           style={styles.removeButton}
-          onPress={() => onRemoveSearch(item)} // Usa el objeto completo para eliminar
+          onPress={() => onRemoveSearch(item)}
+          activeOpacity={0.7} // Efecto de feedback al presionar
         >
           <FontAwesomeIcon
             icon={faTimes}
@@ -125,11 +128,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginRight: 8, // Espacio entre elementos
   },
-  categoryCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+  imageContainer: {
+    width: 50, // Ancho del contenedor de imagen
+    height: 50, // Alto del contenedor de imagen
+    borderRadius: 25, // Para esquinas redondeadas
+    overflow: "hidden", // Esconder el desbordamiento
     marginRight: 12,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
   },
   searchInfo: {
     flex: 1,

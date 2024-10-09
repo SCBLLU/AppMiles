@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  Image,
 } from "react-native";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
@@ -44,21 +45,22 @@ const ResultadosBusqueda = ({ results, onSelectResult }) => {
                 { backgroundColor: isDarkMode ? "#444" : "#f9f9f9" },
               ]}
               onPress={() => handleResultPress(item)}
+              activeOpacity={0.7} // Efecto de feedback al presionar
             >
-              <View
-                style={[
-                  styles.categoryCircle,
-                  { backgroundColor: category ? category.color : "#ccc" },
-                ]}
-              />
+              <View style={styles.imageContainer}>
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.image}
+                />
+              </View>
               <View style={styles.textContainer}>
-                <Text style={{ color: isDarkMode ? "#fff" : "#000" }}>
+                <Text style={[styles.resultText, { color: isDarkMode ? "#fff" : "#000" }]}>
                   {item.name}
                 </Text>
                 <Text
-                  style={{ color: isDarkMode ? "#bbb" : "#666" }}
+                  style={[styles.categoryText, { color: isDarkMode ? "#bbb" : "#666" }]}
                 >
-                  {category ? category.name : "Categoría desconocida"} {/* Mostrar el nombre de la categoría */}
+                  {category ? category.name : "Categoría desconocida"}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -89,13 +91,27 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 10,
   },
-  categoryCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+  imageContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    overflow: "hidden",
+    marginRight: 12,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 30, // Para esquinas redondeadas
   },
   textContainer: {
-    marginLeft: 15,
+    flex: 1, // Para que el contenedor de texto use el espacio disponible
+  },
+  resultText: {
+    fontSize: 14, // Tamaño de fuente más grande para el nombre
+    fontWeight: "600", // Cambiar peso de fuente para destacar
+  },
+  categoryText: {
+    fontSize: 14, // Tamaño de fuente para la categoría
   },
 });
 
