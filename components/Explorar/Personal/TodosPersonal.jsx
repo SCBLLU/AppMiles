@@ -116,7 +116,6 @@ export default function PersonalScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
   },
   encabezado: {

@@ -5,20 +5,20 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
-  Image, // Importar Image
+  Image,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faTimes, faClock } from "@fortawesome/free-solid-svg-icons";
 import { useDarkMode } from "../Utils/DarkModeProvider";
 import { useRouter } from "expo-router";
-import data from "../../data/data.json"; // Asegúrate de tener los datos
+import data from "../../data/data.json";
 
 const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
   const { isDarkMode } = useDarkMode();
   const router = useRouter();
 
   if (!searches || searches.length === 0) {
-    return null; // No hay búsquedas recientes
+    return null;
   }
 
   const handleSearchPress = (exerciseId) => {
@@ -35,13 +35,13 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
           { backgroundColor: isDarkMode ? "#282828" : "#f0f0f0" },
         ]}
         onPress={() => handleSearchPress(item.id)}
-        activeOpacity={0.8} // Efecto de feedback al presionar
+        activeOpacity={0.8}
       >
         <View style={styles.imageContainer}>
           <Image
-            source={{ uri: item.image }} // Cargar la imagen desde la fuente
+            source={{ uri: item.image }}
             style={styles.image}
-            resizeMode="cover" // Ajustar el modo de la imagen
+            resizeMode="cover"
           />
         </View>
 
@@ -63,7 +63,7 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
         <TouchableOpacity
           style={styles.removeButton}
           onPress={() => onRemoveSearch(item)}
-          activeOpacity={0.7} // Efecto de feedback al presionar
+          activeOpacity={0.7}
         >
           <FontAwesomeIcon
             icon={faTimes}
@@ -96,10 +96,10 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
       <FlatList
         data={searches}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()} // Usa item.id
-        horizontal={true} // Establece la dirección horizontal
-        showsHorizontalScrollIndicator={false} // Oculta el indicador de desplazamiento
-        contentContainerStyle={{ paddingHorizontal: 16 }} // Agrega un poco de espacio a los lados
+        keyExtractor={(item) => item.id.toString()}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
       />
     </View>
   );
@@ -107,7 +107,6 @@ const BusquedasRecientes = ({ searches, onRemoveSearch }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
   },
   header: {
     flexDirection: "row",
@@ -126,18 +125,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 12,
     borderRadius: 8,
-    marginRight: 8, // Espacio entre elementos
+    marginRight: 8,
+    height: 70, // Establece una altura fija
   },
   imageContainer: {
-    width: 50, // Ancho del contenedor de imagen
-    height: 50, // Alto del contenedor de imagen
-    borderRadius: 25, // Para esquinas redondeadas
-    overflow: "hidden", // Esconder el desbordamiento
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    overflow: "hidden",
     marginRight: 12,
   },
   image: {
     width: "100%",
     height: "100%",
+    resizeMode: "contain", // Asegúrate de que la imagen mantenga su aspecto
   },
   searchInfo: {
     flex: 1,

@@ -7,7 +7,7 @@ import PersonalScreen from "../components/Explorar/Personal/TodosPersonal";
 export default function Explore() {
   return (
     <Screen>
-      <ScrollView>
+      <ScrollView contentContainerStyle= {{}}>
         <BuscadorEjercicio />
         <PersonalScreen />
         <TodasCategorias />

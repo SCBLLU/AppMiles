@@ -79,7 +79,6 @@ const ExerciseDetails = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
   },
   title: {
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
   categoryContainer: {
     padding: 10,
     borderRadius: 10,
+    alignSelf: "flex-start",
   },
   categoryText: {
     color: "#fff",

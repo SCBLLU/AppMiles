@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
         paddingVertical: 30,
         borderRadius: 8,
         marginBottom: 20,
-        shadowRadius: 5,
     },
     containerDark: {
         backgroundColor: '#121212', // Fondo oscuro para modo oscuro
