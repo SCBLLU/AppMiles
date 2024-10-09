@@ -14,7 +14,7 @@ const AboutMe = ({ description, isDarkMode }) => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10,
+        paddingVertical: 30,
         borderRadius: 8,
         marginBottom: 20,
         shadowRadius: 5,

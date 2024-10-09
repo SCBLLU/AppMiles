@@ -1,20 +1,46 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useRef } from 'react';
+import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 
-const FollowButton = ({ isFollowing, onFollow }) => (
-    <TouchableOpacity
-        style={[
-            styles.baseButton,
-            isFollowing ? styles.followingButton : styles.notFollowingButton,
-            isFollowing && styles.buttonShadow,
-        ]}
-        onPress={onFollow}
-    >
-        <Text style={styles.followButtonText}>
-            {isFollowing ? 'Siguiendo' : 'Seguir'}
-        </Text>
-    </TouchableOpacity>
-);
+const FollowButton = ({ isFollowing, onFollow }) => {
+    // Referencia a la animación
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+
+    // Función para manejar la animación y la acción de seguir
+    const handlePress = () => {
+        // Iniciar animación
+        Animated.sequence([
+            Animated.timing(scaleAnim, {
+                toValue: 0.95,
+                duration: 100,
+                useNativeDriver: true, // Usar el driver nativo para mejor rendimiento
+            }),
+            Animated.timing(scaleAnim, {
+                toValue: 1,
+                duration: 100,
+                useNativeDriver: true,
+            }),
+        ]).start();
+
+        onFollow(); // Llama a la función de seguimiento
+    };
+
+    return (
+        <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+            <TouchableOpacity
+                style={[
+                    styles.baseButton,
+                    isFollowing ? styles.followingButton : styles.notFollowingButton,
+                    isFollowing && styles.buttonShadow,
+                ]}
+                onPress={handlePress}
+            >
+                <Text style={styles.followButtonText}>
+                    {isFollowing ? 'Siguiendo' : 'Seguir'}
+                </Text>
+            </TouchableOpacity>
+        </Animated.View>
+    );
+};
 
 const styles = StyleSheet.create({
     baseButton: {
