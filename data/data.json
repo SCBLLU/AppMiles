@@ -70,70 +70,173 @@
             "name": "Maratón 1000 Metros",
             "category": "4",
             "duration": "30",
-            "calories": "300"
+            "calories": "300",
+            "image": "https://th.bing.com/th/id/OIP.21JEd2CRxbzC_sRRUOPhUAHaE8?rs=1&pid=ImgDetMain",
+            "muscles": [
+                "Piernas",
+                "Resistencia"
+            ],
+            "tips": "Mantén una buena postura al correr."
         },
         {
             "id": "2",
             "name": "Saltar la cuerda",
             "category": "1",
             "duration": "15",
-            "calories": "200"
+            "calories": "200",
+            "image": "https://th.bing.com/th/id/R.2b6f3ebbe9b230e6ecbfacf969321a6b?rik=NhSukXVx1k0VBg&pid=ImgRaw&r=0",
+            "muscles": [
+                "Piernas",
+                "Cardio"
+            ],
+            "tips": "Intenta mantener un ritmo constante y usar la cuerda adecuada para tu altura."
         },
         {
             "id": "3",
-            "name": "Flexiones",
-            "category": "2",
-            "duration": "10",
-            "calories": "100"
+            "name": "Burpees",
+            "category": "1",
+            "duration": "20",
+            "calories": "250",
+            "image": "https://th.bing.com/th/id/OIP.iqaAUI6iicjqiyuW83el5wHaEK?rs=1&pid=ImgDetMain",
+            "muscles": [
+                "Pecho",
+                "Piernas",
+                "Core"
+            ],
+            "tips": "Asegúrate de aterrizar suavemente al saltar."
         },
         {
             "id": "4",
-            "name": "Sentadillas",
-            "category": "2",
-            "duration": "10",
-            "calories": "100"
+            "name": "Ciclismo en ruta",
+            "category": "5",
+            "duration": "60",
+            "calories": "500",
+            "image": "https://th.bing.com/th/id/R.029f2efd869752f76e48fd88675ec720?rik=iufdDkAXB0I7dg&pid=ImgRaw&r=0",
+            "muscles": [
+                "Piernas",
+                "Core"
+            ],
+            "tips": "Mantén una postura erguida y cambia de marcha según el terreno."
         },
         {
             "id": "5",
-            "name": "Estiramiento",
-            "category": "3",
-            "duration": "10",
-            "calories": "100"
+            "name": "Entrenamiento de fuerza con pesas",
+            "category": "2",
+            "duration": "45",
+            "calories": "400",
+            "image": "https://th.bing.com/th/id/R.78d23e334df42caf432ad1ca8c7e96f9?rik=FbHqpP00plF3DQ&pid=ImgRaw&r=0",
+            "muscles": [
+                "Brazos",
+                "Pecho",
+                "Espalda"
+            ],
+            "tips": "Utiliza un peso que te desafíe, pero que te permita mantener la forma correcta."
         },
         {
             "id": "6",
-            "name": "Burpees",
+            "name": "Flexiones de brazos",
             "category": "2",
-            "duration": "15",
-            "calories": "150"
+            "duration": "10",
+            "calories": "100",
+            "image": "https://th.bing.com/th/id/R.6b192fd4de31fbf4b48a57fec637b1a0?rik=PwYVZOJwquTiZg&pid=ImgRaw&r=0&sres=1&sresct=1",
+            "muscles": [
+                "Pecho",
+                "Hombros",
+                "Tríceps"
+            ],
+            "tips": "Mantén el cuerpo en línea recta desde la cabeza hasta los pies."
         },
         {
             "id": "7",
-            "name": "Ciclismo de montaña",
-            "category": "5",
-            "duration": "45",
-            "calories": "600"
+            "name": "Estiramientos de isquiotibiales",
+            "category": "3",
+            "duration": "5",
+            "calories": "50",
+            "image": "https://th.bing.com/th/id/OIP.Ivz_sWNv1-bR8BeH7nv5XgHaE8?rs=1&pid=ImgDetMain",
+            "muscles": [
+                "Isquiotibiales"
+            ],
+            "tips": "Mantén cada estiramiento durante al menos 30 segundos."
         },
         {
             "id": "8",
-            "name": "Nadar 500 metros",
-            "category": "6",
-            "duration": "30",
-            "calories": "350"
-        },
-        {
-            "id": "9",
             "name": "Yoga",
             "category": "3",
             "duration": "30",
-            "calories": "120"
+            "calories": "200",
+            "image": "https://th.bing.com/th/id/OIP.Mhu5hGQb0KzFqL5aDEduSgHaE8?rs=1&pid=ImgDetMain",
+            "muscles": [
+                "Cuerpo completo"
+            ],
+            "tips": "Concéntrate en tu respiración mientras realizas cada postura."
+        },
+        {
+            "id": "9",
+            "name": "Nado estilo libre",
+            "category": "6",
+            "duration": "30",
+            "calories": "400",
+            "image": "https://th.bing.com/th/id/OIP.tjGbTihh0xsIrljs4J--4AHaFj?rs=1&pid=ImgDetMain",
+            "muscles": [
+                "Espalda",
+                "Brazos",
+                "Piernas"
+            ],
+            "tips": "Mantén una buena técnica de respiración."
         },
         {
             "id": "10",
-            "name": "Caminata rápida",
-            "category": "1",
-            "duration": "25",
-            "calories": "200"
+            "name": "Nado de espalda",
+            "category": "6",
+            "duration": "30",
+            "calories": "350",
+            "image": "https://th.bing.com/th/id/R.7bba72d7715ad2706767fc2fc8a59f37?rik=8bhzPdWFIWC7ng&riu=http%3a%2f%2fbeachbaby.net%2fwp-content%2fuploads%2f2019%2f09%2fbackstroke.jpg&ehk=rFfwGcVIW1sCdN4CrJ6ikz6vQqtP24JDZfpGFehPUE0%3d&risl=&pid=ImgRaw&r=0",
+            "muscles": [
+                "Espalda",
+                "Brazos",
+                "Core"
+            ],
+            "tips": "Relaja tus caderas para facilitar el movimiento."
+        },
+        {
+            "id": "11",
+            "name": "Meditación mindfulness",
+            "category": "7",
+            "duration": "15",
+            "calories": "0",
+            "image": "https://th.bing.com/th/id/OIP.4w5hbA_PrDiI8VZAlXvxdwHaEK?rs=1&pid=ImgDetMain",
+            "muscles": [],
+            "tips": "Concéntrate en tu respiración y suelta los pensamientos."
+        },
+        {
+            "id": "12",
+            "name": "Té de hierbas",
+            "category": "8",
+            "duration": "0",
+            "calories": "0",
+            "image": "https://www.gastrolabweb.com/u/fotografias/m/2020/7/7/f1280x720-1522_133197_5050.jpg",
+            "muscles": [],
+            "tips": "Disfruta de una taza de té para relajarte."
+        },
+        {
+            "id": "13",
+            "name": "Dormir 8 horas",
+            "category": "9",
+            "duration": "480",
+            "calories": "0",
+            "image": "https://media.gq.com.mx/photos/5f8dabe6c10dacf7b3e877dc/16:9/w_2560%2Cc_limit/SIESTA.jpg",
+            "muscles": [],
+            "tips": "Establece una rutina de sueño regular."
+        },
+        {
+            "id": "14",
+            "name": "Siesta breve",
+            "category": "9",
+            "duration": "30",
+            "calories": "0",
+            "image": "https://th.bing.com/th/id/OIP.z1K4JjkIb0uNFaKarytOMwHaEK?rs=1&pid=ImgDetMain",
+            "muscles": [],
+            "tips": "No excedas los 30 minutos para evitar la somnolencia."
         }
     ],
     "activityTimer": [
