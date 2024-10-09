@@ -1,40 +1,50 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Users, Book, Activity } from "lucide-react-native"; // Usando lucide-react-native para los íconos
+import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from "react-native";
+import { Users, Book } from "lucide-react-native";
 import { useDarkMode } from "../Utils/DarkModeProvider";
+import { useRouter } from "expo-router";
 
-const Características = () => {
+const Caracteristicas = () => {
   const { isDarkMode } = useDarkMode();
+  const router = useRouter();
+  const { width } = useWindowDimensions();
+
+  const navigateToExplore = () => {
+    router.push("/explore");
+  };
+
+  const isSmallScreen = width < 768;
 
   return (
-    <View
-      style={[
-        styles.section,
-        { backgroundColor: isDarkMode ? "#333" : "#F3F4F6" },
-      ]}
-    >
+    <View style={[
+      styles.section,
+      { backgroundColor: isDarkMode ? "#1A1A1A" : "#F3F4F6" }
+    ]}>
       <View style={styles.container}>
-        <Text style={[styles.heading, { color: isDarkMode ? "#fff" : "#000" }]}>
+        <Text style={[
+          styles.heading,
+          { color: isDarkMode ? "#fff" : "#000" }
+        ]}>
           Características Principales
         </Text>
-        <View style={styles.grid}>
+        <View style={[styles.grid, isSmallScreen && styles.gridSmall]}>
           <FeatureCard
             Icon={Users}
             title="Entrenadores Reales"
             description="Recibe orientación personalizada de expertos certificados en fitness."
             buttonText="Ver Entrenadores"
+            onPress={navigateToExplore}
+            isDarkMode={isDarkMode}
+            isSmallScreen={isSmallScreen}
           />
           <FeatureCard
             Icon={Book}
-            title="Cursos Especializados"
-            description="Aprende técnicas avanzadas con nuestros cursos detallados."
-            buttonText="Explorar Cursos"
-          />
-          <FeatureCard
-            Icon={Activity}
-            title="Seguimiento de Progreso"
-            description="Monitorea tu evolución y alcanza tus metas más rápido."
-            buttonText="Iniciar Seguimiento"
+            title="Ejercicios Especializados"
+            description="Aprende técnicas avanzadas con nuestros ejercicios detallados."
+            buttonText="Explorar Ejercicios"
+            onPress={navigateToExplore}
+            isDarkMode={isDarkMode}
+            isSmallScreen={isSmallScreen}
           />
         </View>
       </View>
@@ -42,45 +52,45 @@ const Características = () => {
   );
 };
 
-const FeatureCard = ({ Icon, title, description, buttonText }) => {
-  const { isDarkMode } = useDarkMode();
-
+const FeatureCard = ({ Icon, title, description, buttonText, onPress, isDarkMode, isSmallScreen }) => {
   return (
-    <View
-      style={[styles.card, { backgroundColor: isDarkMode ? "#444" : "#fff" }]}
-    >
+    <View style={[
+      styles.card,
+      { backgroundColor: isDarkMode ? "#2C2C2C" : "#fff" },
+      isSmallScreen && styles.cardSmall
+    ]}>
       <View style={styles.cardHeader}>
         <Icon
-          width={32}
-          height={32}
-          color={isDarkMode ? "#fff" : "#000"}
+          width={48}
+          height={48}
+          color={isDarkMode ? "#1DB954" : "#0F9D58"}
           style={styles.icon}
         />
-        <Text
-          style={[styles.cardTitle, { color: isDarkMode ? "#fff" : "#000" }]}
-        >
+        <Text style={[
+          styles.cardTitle,
+          { color: isDarkMode ? "#fff" : "#000" }
+        ]}>
           {title}
         </Text>
-        <Text
-          style={[
-            styles.cardDescription,
-            { color: isDarkMode ? "#ccc" : "#6B7280" },
-          ]}
-        >
+        <Text style={[
+          styles.cardDescription,
+          { color: isDarkMode ? "#ccc" : "#6B7280" }
+        ]}>
           {description}
         </Text>
       </View>
-      <View style={styles.cardContent}>
-        <TouchableOpacity
-          style={[styles.button, { borderColor: isDarkMode ? "#fff" : "#000" }]}
-        >
-          <Text
-            style={[styles.buttonText, { color: isDarkMode ? "#fff" : "#000" }]}
-          >
-            {buttonText}
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          { backgroundColor: isDarkMode ? "#1DB954" : "#0F9D58" }
+        ]}
+        onPress={onPress}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.buttonText}>
+          {buttonText}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -88,62 +98,71 @@ const FeatureCard = ({ Icon, title, description, buttonText }) => {
 const styles = StyleSheet.create({
   section: {
     paddingVertical: 48,
-    margin: 15,
-    borderRadius: 20,
+    margin: 16,
+    borderRadius: 24,
+    elevation: 4,
   },
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 16,
   },
   heading: {
     fontSize: 36,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 24,
+    marginBottom: 32,
+    letterSpacing: 0.5,
   },
   grid: {
     flexDirection: "row",
-    flexWrap: "wrap",
     justifyContent: "space-between",
   },
+  gridSmall: {
+    flexDirection: "column",
+  },
   card: {
-    width: "100%",
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
+    width: "48%",
+    borderRadius: 16,
+    padding: 24,
+    marginBottom: 24,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: { width: 0, height: 4 },
     elevation: 5,
+  },
+  cardSmall: {
+    width: "100%",
   },
   cardHeader: {
     alignItems: "center",
-    marginBottom: 16,
+    marginBottom: 20,
   },
   icon: {
-    marginBottom: 8,
+    marginBottom: 16,
   },
   cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 4,
-  },
-  cardDescription: {
-    fontSize: 14,
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 8,
     textAlign: "center",
   },
-  cardContent: {
-    marginTop: 16,
+  cardDescription: {
+    fontSize: 16,
+    textAlign: "center",
+    lineHeight: 24,
   },
   button: {
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingVertical: 12,
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
     alignItems: "center",
+    marginTop: 20,
   },
   buttonText: {
+    color: "#fff",
     fontWeight: "bold",
+    fontSize: 16,
   },
 });
 
-export default Características;
+export default Caracteristicas;

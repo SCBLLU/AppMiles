@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
     categoryContainer: {
         flexDirection: "row",
         justifyContent: "space-around",
-        marginBottom: 16,
+        marginBottom: 20,
+        marginTop: 10,
+
     },
     categoryButton: {
         paddingVertical: 8,

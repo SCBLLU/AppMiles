@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { View, FlatList, StyleSheet, Text } from "react-native";
+import { View, FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { useDarkMode } from "../../Utils/DarkModeProvider";
 import data from "../../../data/data.json";
@@ -7,6 +7,7 @@ import ExploreButton from "./ExploreButton";
 import SearchInput from "./SearchInput";
 import CategorySelector from "./CategorySelector";
 import PersonalCard from "./PersonalCard";
+import { Ionicons } from '@expo/vector-icons';
 
 const categories = [
   { id: "all", name: "Todos" },
@@ -19,6 +20,7 @@ export default function PersonalScreen() {
   const [showPersonalList, setShowPersonalList] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
   const router = useRouter();
 
   const filteredPersonal = useCallback(() => {
@@ -46,27 +48,69 @@ export default function PersonalScreen() {
     </Text>
   );
 
+  const handleToggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const displayedPersonal = showAll ? filteredPersonal() : filteredPersonal().slice(0, 3);
+
   return (
     <View style={[styles.container, isDarkMode && styles.containerDark]}>
+      <Text style={[styles.encabezado, isDarkMode && styles.textDark]}>
+        Explorar todo
+      </Text>
       {!showPersonalList ? (
         <ExploreButton onPress={() => setShowPersonalList(true)} isDarkMode={isDarkMode} />
       ) : (
         <>
-          <Text style={[styles.title, isDarkMode && styles.textDark]}>Nuestro Personal</Text>
-          <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} isDarkMode={isDarkMode} />
-          <CategorySelector categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} isDarkMode={isDarkMode} />
+          <View style={styles.headerContainer}>
+            <Text style={[styles.title, isDarkMode && styles.textDark]}>Nuestro Personal</Text>
+            <TouchableOpacity onPress={() => setShowPersonalList(false)} style={styles.closeButton}>
+              <Ionicons name="close" size={24} color={isDarkMode ? "#fff" : "#000"} />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.searchAndCategoryContainer}>
+            <SearchInput
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              isDarkMode={isDarkMode}
+            />
+            <CategorySelector
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              isDarkMode={isDarkMode}
+            />
+          </View>
+
           <FlatList
-            data={filteredPersonal()}
+            data={displayedPersonal}
             renderItem={renderPersonalItem}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
-            ListEmptyComponent={noResultsMessage} // Muestra el mensaje cuando no hay resultados
+            ListEmptyComponent={noResultsMessage}
             scrollEnabled={false}
           />
+
+          {filteredPersonal().length > 3 && (
+            <TouchableOpacity onPress={handleToggleShowAll} style={styles.toggleButton}>
+              <Text style={styles.toggleButtonText}>
+                {showAll ? "Ver menos" : "Ver más"}
+              </Text>
+              <Ionicons
+                name={showAll ? "chevron-up" : "chevron-down"}
+                size={20}
+                color="#fff"
+                style={styles.toggleButtonIcon}
+              />
+            </TouchableOpacity>
+          )}
         </>
       )}
     </View>
+
   );
 }
 
@@ -75,27 +119,54 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  containerDark: {
-    backgroundColor: "#121212",
-  },
-  title: {
+  encabezado: {
     fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 16,
+    marginBottom: 20,
     color: "#333",
-    textAlign: "center",
   },
-  textDark: {
-    color: "#fff",
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
   },
-  listContainer: {
-    paddingBottom: 16,
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  closeButton: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
   noResultsText: {
     fontSize: 16,
     textAlign: "center",
     marginTop: 20,
-    color: "#333", // Color de texto en modo claro
+    color: "#333",
+  },
+  toggleButton: {
+    marginTop: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: 'center',
+    backgroundColor: "#1DB954",
+    borderRadius: 25,
+  },
+  toggleButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+    marginRight: 5,
+  },
+  toggleButtonIcon: {
+    marginLeft: 5,
+  },
+  textDark: {
+    color: "#fff",
   },
 });
-

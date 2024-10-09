@@ -75,9 +75,7 @@ const TodasCategorias = () => {
         { backgroundColor: isDarkMode ? "#121212" : "#fff" },
       ]}
     >
-      <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}>
-        Explorar todo
-      </Text>
+
       <FlatList
         data={categories}
         renderItem={renderItem}
