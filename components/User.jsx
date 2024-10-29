@@ -312,7 +312,7 @@ const User = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "flex-start",
+    alignItems: "flex-end",
     justifyContent: "center",
   },
   profileButton: {

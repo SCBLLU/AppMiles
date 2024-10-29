@@ -1,9 +1,15 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { useColorScheme } from "react-native";
 
 const DarkModeContext = createContext();
 
 export const DarkModeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false); // Estado para modo oscuro
+  const systemColorScheme = useColorScheme();
+  const [isDarkMode, setIsDarkMode] = useState(systemColorScheme === "dark");
+
+  useEffect(() => {
+    setIsDarkMode(systemColorScheme === "dark");
+  }, [systemColorScheme]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(prev => !prev);
