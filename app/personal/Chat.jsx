@@ -27,10 +27,8 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
     },
   ]);
 
-  // Crear referencia para el ScrollView
   const scrollViewRef = useRef();
 
-  // Desplazarse al final cada vez que se actualiza chatHistory
   useEffect(() => {
     scrollViewRef.current?.scrollToEnd({ animated: true });
   }, [chatHistory]);
@@ -79,7 +77,7 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
             }),
           },
         ]);
-      }, 2000);
+      }, 6000);
     }
   };
 
@@ -236,49 +234,61 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingTop: 20,
+    paddingHorizontal: 10,
     minHeight: "70%",
     maxHeight: "90%",
+    elevation: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
   },
   modalHeader: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: "rgba(0, 0, 0, 0.1)",
   },
   modalTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
   },
   modalSubtitle: {
     fontSize: 14,
+    color: "#8f8f8f",
   },
   closeButton: {
     padding: 4,
   },
   messagesList: {
     flex: 1,
-    padding: 20,
+    paddingVertical: 20,
   },
   messageItem: {
     flexDirection: "row",
-    marginBottom: 15,
-    padding: 10,
-    borderRadius: 12,
-    maxWidth: "80%",
+    marginBottom: 20,
+    padding: 12,
+    borderRadius: 18,
+    maxWidth: "75%",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
   },
   userMessage: {
     alignSelf: "flex-end",
+    backgroundColor: "#007aff",
   },
   trainerMessage: {
     alignSelf: "flex-start",
   },
   messageAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     marginRight: 12,
   },
   messageContent: {
@@ -288,31 +298,32 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   messageText: {
-    fontSize: 14,
-    marginBottom: 4,
+    fontSize: 15,
+    lineHeight: 20,
   },
   timestamp: {
     fontSize: 12,
+    marginTop: 4,
+    color: "#8c8c8c",
   },
   inputContainer: {
     flexDirection: "row",
-    padding: 15,
-    alignItems: "flex-end",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: "rgba(0, 0, 0, 0.1)",
   },
   input: {
     flex: 1,
+    padding: 10,
     borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
+    fontSize: 16,
     marginRight: 10,
-    maxHeight: 100,
   },
   sendButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 10,
+    borderRadius: 50,
   },
 });
 
