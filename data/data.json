@@ -291,28 +291,49 @@
                     "name": "Botella de agua reutilizable",
                     "description": "Mantén tu hidratación en cualquier lugar con esta botella de agua ecológica.",
                     "price": 19.99,
-                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0272%2F7605%2F0568%2Fproducts%2Fdamn2lp_d7e03e5a-650b-4afd-8746-beaf9b8c1d7d.png%3Fv%3D1690926244%26width%3D828&w=828&q=75"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.rv7Ko4zALPZY4VHi1VEwQgHaHa?rs=1&pid=ImgDetMain"
                 },
                 {
                     "id": "2",
                     "name": "Toalla de gimnasio",
                     "description": "Toalla suave y absorbente, perfecta para tus sesiones de entrenamiento.",
                     "price": 24.99,
-                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0272%2F7605%2F0568%2Fproducts%2FKLBlackCassette.png%3Fv%3D1657573410%26width%3D828&w=828&q=75"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.ywCjk3l_e_UXtV07_rDVLQHaHa?rs=1&pid=ImgDetMain"
                 },
                 {
                     "id": "3",
                     "name": "Cuaderno de ejercicios",
                     "description": "Cuaderno para llevar un registro de tus entrenamientos y metas de fitness.",
                     "price": 12.99,
-                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0272%2F7605%2F0568%2Ffiles%2FUntitledSession0873P-1_1.jpg%3Fv%3D1694634483%26width%3D828&w=828&q=75"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.ys_9JNHPBklsKDjTEf9nGAHaHa?rs=1&pid=ImgDetMain"
                 },
                 {
                     "id": "4",
                     "name": "Pesas ajustables",
                     "description": "Set de pesas ajustables para entrenar en casa o en el gimnasio.",
                     "price": 49.99,
-                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0844%2F3999%2F0571%2Ffiles%2FTravis-Scott-Product-Image-1500-G2.png%3Fv%3D1703443774%26width%3D828&w=828&q=75"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.0v9kiqxBjeqs4oVe7FfGCgAAAA?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "5",
+                    "name": "Banda de resistencia",
+                    "description": "Banda de resistencia para ejercicios de fuerza y tonificación muscular.",
+                    "price": 14.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.tfdLkim0XLJRnGaRtE8iRAHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "6",
+                    "name": "Balón de estabilidad",
+                    "description": "Balón de estabilidad para mejorar el equilibrio y la fuerza del core.",
+                    "price": 29.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.OgjWmyyy0uyg-rgX3YcuNgHaHT?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "7",
+                    "name": "Set de pesas rusas",
+                    "description": "Set de pesas rusas para entrenamientos de fuerza y acondicionamiento.",
+                    "price": 59.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.gfDeGDgCldfx_SHm_iK7AAHaGH?rs=1&pid=ImgDetMain"
                 }
             ]
         },
@@ -335,21 +356,63 @@
                     "name": "Cuaderno de recetas",
                     "description": "Un cuaderno para que anotes tus recetas favoritas y planes de alimentación.",
                     "price": 15.99,
-                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0390%2F6749%2Fproducts%2FE_CC2_BoxSets-03_BoxSet2_1.png%3Fv%3D1658175224%26width%3D828&w=828&q=75"
+                    "imageUrl": "https://th.bing.com/th/id/R.cd8447290807d44f2cb74b8187536ad8?rik=zhaNlU2SZZQXCA&pid=ImgRaw&r=0"
                 },
                 {
                     "id": "4",
                     "name": "Botella de proteínas",
                     "description": "Botella para mezclar tus batidos de proteínas de manera sencilla.",
                     "price": 21.99,
-                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0390%2F6749%2Fproducts%2FE_CC2_2LP-01.png%3Fv%3D1657736210%26width%3D828&w=828&q=75"
+                    "imageUrl": "https://res.cloudinary.com/walmart-labs/image/upload/w_960,dpr_auto,f_auto,q_auto:best/gr/images/product-images/img_large/00084560403177L.jpg"
                 },
                 {
                     "id": "5",
                     "name": "Set de especias",
                     "description": "Un set de especias para dar sabor a tus comidas saludables.",
                     "price": 18.99,
-                    "imageUrl": "https://shop.spotify.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0390%2F6749%2Ffiles%2FKamikaze-Vinyl-Green_1.png%3Fv%3D1687283871%26width%3D828&w=828&q=75"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.s5w5o7yKsI5_smuBEBEFkwHaGI?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "6",
+                    "name": "Libro de cocina saludable",
+                    "description": "Libro lleno de recetas saludables y deliciosas para tu bienestar.",
+                    "price": 24.99,
+                    "imageUrl": "https://www.muysaludables.com/wp-content/uploads/2019/01/Libro-Cocina-tu-cambio.jpg"
+                },
+                {
+                    "id": "7",
+                    "name": "Set de tupperware",
+                    "description": "Set de tupperware para almacenar tus comidas saludables y llevarlas contigo.",
+                    "price": 29.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.IiVD_G7vm-budqe9K9xwswHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "8",
+                    "name": "Balanza de cocina",
+                    "description": "Balanza de cocina para medir tus porciones con precisión.",
+                    "price": 19.99,
+                    "imageUrl": "https://th.bing.com/th/id/R.d8137aa6696c397e44af9d4d28fda465?rik=Soq5ZNX7I7DVdA&pid=ImgRaw&r=0"
+                },
+                {
+                    "id": "9",
+                    "name": "Set de batidoras",
+                    "description": "Set de batidoras para preparar tus batidos y smoothies favoritos.",
+                    "price": 34.99,
+                    "imageUrl": "https://images-eu.ssl-images-amazon.com/images/I/31oYCf4BLdL.jpg"
+                },
+                {
+                    "id": "10",
+                    "name": "Termo para alimentos",
+                    "description": "Termo para mantener tus comidas calientes o frías durante el día.",
+                    "price": 24.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.HsXtH-a3cK8QeQluH9FSYAHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "11",
+                    "name": "Set de cuchillos de cocina",
+                    "description": "Set de cuchillos de cocina de alta calidad para preparar tus comidas con facilidad.",
+                    "price": 49.99,
+                    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61GwIwNQaJL._AC_SL1001_.jpg"
                 }
             ]
         },
@@ -372,21 +435,49 @@
                     "name": "Almohadilla de yoga",
                     "description": "Almohadilla antideslizante para una práctica cómoda de yoga.",
                     "price": 39.99,
-                    "imageUrl": "https://example.com/almohadilla-yoga.png"
+                    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61Gvcn5pQZL._AC_UL1007_.jpg"
                 },
                 {
                     "id": "6",
                     "name": "Pelota de pilates",
                     "description": "Pelota de pilates para mejorar tu equilibrio y flexibilidad.",
                     "price": 29.99,
-                    "imageUrl": "https://example.com/pelota-pilates.png"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.W5GsigpOorz1_d-8ND2q9QHaHa?rs=1&pid=ImgDetMain"
                 },
                 {
                     "id": "7",
                     "name": "Set de velas aromáticas",
                     "description": "Set de velas aromáticas para crear un ambiente relajante en tu espacio de yoga.",
                     "price": 19.99,
-                    "imageUrl": "https://example.com/set-velas-aromaticas.png"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.doeJyL2hs0hrRJKzvUSmQgHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "8",
+                    "name": "Bloque de yoga",
+                    "description": "Bloque de yoga para mejorar la alineación y la postura en tus posturas.",
+                    "price": 14.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.fU3470GBYWzr3b5zdUS19AHaFj?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "9",
+                    "name": "Rueda de yoga",
+                    "description": "Rueda de yoga para mejorar la flexibilidad y la apertura del pecho.",
+                    "price": 34.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.Bw4ieL4TwQ_bDUE_AqXSCgHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "10",
+                    "name": "Set de incienso",
+                    "description": "Set de incienso para purificar el aire y crear un ambiente tranquilo.",
+                    "price": 9.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.a6sTzYKxYWNn-iJJ-RY-5QHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "11",
+                    "name": "Tapete de yoga",
+                    "description": "Tapete de yoga acolchado para una práctica cómoda y segura.",
+                    "price": 49.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.5f7nVrWxa69P-16zXfVa0gHaHa?rs=1&pid=ImgDetMain"
                 }
             ]
         },
@@ -409,21 +500,63 @@
                     "name": "Libro de cocina plant-based",
                     "description": "Libro lleno de recetas saludables y deliciosas para una dieta plant-based.",
                     "price": 24.99,
-                    "imageUrl": "https://example.com/libro-cocina-plant-based.png"
+                    "imageUrl": "https://th.bing.com/th/id/R.1ccf3c5a1229f1b0505d57c0aff20ba4?rik=X32NX8yMnktUqA&pid=ImgRaw&r=0"
                 },
                 {
                     "id": "8",
                     "name": "Set de especias",
                     "description": "Un set de especias para realzar tus comidas plant-based.",
                     "price": 18.99,
-                    "imageUrl": "https://example.com/set-especias.png"
+                    "imageUrl": "https://seyoverde.cl/wp-content/uploads/2020/10/N582-2.jpg"
                 },
                 {
                     "id": "9",
                     "name": "Botella de agua reutilizable",
                     "description": "Botella de agua ecológica para mantenerte hidratado en todo momento.",
                     "price": 19.99,
-                    "imageUrl": "https://example.com/botella-agua.png"
+                    "imageUrl": "https://th.bing.com/th/id/OIP.UVuOThnJZpwUpFg7Ue5sYgHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "10",
+                    "name": "Cuaderno de recetas",
+                    "description": "Cuaderno para anotar tus recetas favoritas y planes de alimentación.",
+                    "price": 15.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.lV5hp8yz7e_R3H_iHg5-LgHaJL?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "11",
+                    "name": "Set de cuchillos de cocina",
+                    "description": "Set de cuchillos de cocina de alta calidad para preparar tus comidas con facilidad.",
+                    "price": 49.99,
+                    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61GwIwNQaJL._AC_SL1001_.jpg"
+                },
+                {
+                    "id": "12",
+                    "name": "Termo para alimentos",
+                    "description": "Termo para mantener tus comidas calientes o frías durante el día.",
+                    "price": 24.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.HsXtH-a3cK8QeQluH9FSYAHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "13",
+                    "name": "Balanza de cocina",
+                    "description": "Balanza de cocina para medir tus porciones con precisión.",
+                    "price": 19.99,
+                    "imageUrl": "https://th.bing.com/th/id/R.d8137aa6696c397e44af9d4d28fda465?rik=Soq5ZNX7I7DVdA&pid=ImgRaw&r=0"
+                },
+                {
+                    "id": "14",
+                    "name": "Set de tupperware",
+                    "description": "Set de tupperware para almacenar tus comidas saludables y llevarlas contigo.",
+                    "price": 29.99,
+                    "imageUrl": "https://th.bing.com/th/id/OIP.IiVD_G7vm-budqe9K9xwswHaHa?rs=1&pid=ImgDetMain"
+                },
+                {
+                    "id": "15",
+                    "name": "Libro de cocina saludable",
+                    "description": "Libro lleno de recetas saludables y deliciosas para tu bienestar.",
+                    "price": 24.99,
+                    "imageUrl": "https://www.muysaludables.com/wp-content/uploads/2019/01/Libro-Cocina-tu-cambio.jpg"
                 }
             ]
         }
