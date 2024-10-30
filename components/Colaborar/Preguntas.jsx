@@ -17,19 +17,41 @@ const Preguntas = ({ preguntaActiva, manejarPresionPregunta }) => {
 
   const preguntas = [
     {
-      titulo: "¿Qué incluye la suscripción básica?",
+      titulo: "¿Qué es AcoMiles?",
       descripcion:
-        "La suscripción básica incluye acceso a ejercicios personalizados y seguimiento de progreso.",
+        "AcoMiles es una aplicación innovadora que ofrece un control integral sobre ejercicios personalizados, permitiendo a los usuarios seguir entrenamientos predeterminados o suscribirse a los servicios de entrenadores y nutricionistas certificados.",
     },
     {
-      titulo: "¿Puedo cancelar mi suscripción en cualquier momento?",
+      titulo:
+        "¿Cuál es el modelo de negocio para entrenadores y nutricionistas?",
       descripcion:
-        "Sí, puedes cancelar tu suscripción en cualquier momento sin cargos adicionales.",
+        "Los socios, que son profesionales capacitados en entrenamiento y nutrición, brindan asesoría personalizada a los usuarios. Por cada suscripción a sus servicios, ellos reciben el 70% de la tarifa, mientras que AcoMiles retiene el 30%, asegurando un crecimiento sostenible para ambas partes.",
     },
     {
-      titulo: "¿Hay descuentos por planes anuales?",
+      titulo: "¿Es posible generar ingresos adicionales como socio?",
       descripcion:
-        "Sí, ofrecemos descuentos si optas por la suscripción anual en lugar de la mensual.",
+        "Afirmativo. Además de las tarifas de suscripción, los socios tienen la oportunidad de promocionar productos relacionados con el fitness y la nutrición en la sección de 'shop' de la aplicación. De cada venta generada, los socios obtienen el 80% de las ganancias, mientras que AcoMiles se queda con el 20%.",
+    },
+    {
+      titulo:
+        "¿Es necesario estar suscrito a un entrenador para utilizar la aplicación?",
+      descripcion:
+        "No, la aplicación puede ser utilizada sin necesidad de una suscripción a un entrenador. No obstante, al no estar suscrito, los usuarios no podrán acceder a los beneficios de asesorías personalizadas y planes de entrenamiento específicos ofrecidos por los profesionales.",
+    },
+    {
+      titulo: "¿Qué tipo de productos puedo promocionar en la aplicación?",
+      descripcion:
+        "Los socios tienen la libertad de promocionar productos que se alineen con el entrenamiento y la nutrición, tales como suplementos, equipos de ejercicio y planes de alimentación, entre otros, brindando así un valor agregado a su oferta.",
+    },
+    {
+      titulo: "¿Qué tipo de soporte recibiré como socio?",
+      descripcion:
+        "AcoMiles se compromete a proporcionar un soporte integral a sus socios, que incluye acceso a recursos de marketing, capacitación continua y asistencia técnica, con el objetivo de maximizar su éxito dentro de la plataforma.",
+    },
+    {
+      titulo: "¿Cómo puedo convertirme en socio de AcoMiles?",
+      descripcion:
+        "Para convertirte en socio, deberás cumplir con ciertos requisitos de capacitación y certificación establecidos por AcoMiles. Una vez que se complete este proceso de evaluación, podrás ofrecer tus servicios a través de nuestra aplicación.",
     },
   ];
 
@@ -46,7 +68,8 @@ const Preguntas = ({ preguntaActiva, manejarPresionPregunta }) => {
       <Text
         style={[styles.informacion, { color: isDarkMode ? "#ccc" : "#666" }]}
       >
-        Respuestas a las preguntas más comunes sobre nuestras suscripciones.
+        A continuación, se presentan respuestas a las preguntas más comunes
+        sobre AcoMiles y su modelo de negocio.
       </Text>
       {preguntas.map((pregunta, index) => (
         <TouchableOpacity
@@ -128,7 +151,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
   },
-
   tituloPregunta: {
     fontSize: 18,
     fontWeight: "bold",
