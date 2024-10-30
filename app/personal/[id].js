@@ -85,7 +85,7 @@ const PersonalDetails = () => {
                     showsHorizontalScrollIndicator={false}
                 />
 
-<SocialMediaLinks isDarkMode={isDarkMode} title='Encuentrame en también en las siguientes plataformas' />
+                <SocialMediaLinks isDarkMode={isDarkMode} title='También disponible en las siguientes plataformas' />
 
                 {isPaymentVisible && (
                     <MetodoPago
