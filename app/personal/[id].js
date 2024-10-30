@@ -62,7 +62,6 @@ const PersonalDetails = () => {
                 <Header personal={selectedPersonal} isDarkMode={isDarkMode} />
                 <FollowButton isFollowing={isFollowing} onFollow={handleFollow} />
                 <AboutMe description={selectedPersonal.description} isDarkMode={isDarkMode} />
-                <SocialMediaLinks isDarkMode={isDarkMode} title='Encuentrame en también en las siguientes plataformas' />
 
 
                 <Text style={[styles.sectionTitle, { color: isDarkMode ? '#1DB954' : '#000' }]}>Planes de Suscripción</Text>
@@ -86,6 +85,7 @@ const PersonalDetails = () => {
                     showsHorizontalScrollIndicator={false}
                 />
 
+<SocialMediaLinks isDarkMode={isDarkMode} title='Encuentrame en también en las siguientes plataformas' />
 
                 {isPaymentVisible && (
                     <MetodoPago

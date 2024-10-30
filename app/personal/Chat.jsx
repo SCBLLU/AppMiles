@@ -1,5 +1,4 @@
-// Chat.js
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -28,6 +27,14 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
     },
   ]);
 
+  // Crear referencia para el ScrollView
+  const scrollViewRef = useRef();
+
+  // Desplazarse al final cada vez que se actualiza chatHistory
+  useEffect(() => {
+    scrollViewRef.current?.scrollToEnd({ animated: true });
+  }, [chatHistory]);
+
   const handleSend = () => {
     if (message.trim()) {
       setChatHistory([
@@ -50,6 +57,12 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
           "¿Necesitas más información sobre algún ejercicio específico?",
           "¿Te gustaría programar una sesión de entrenamiento?",
           "Puedo ayudarte a diseñar un plan personalizado.",
+          "¡Estoy aquí para responder tus preguntas!",
+          "¿Cuáles son tus objetivos de entrenamiento?",
+          "¿Prefieres entrenamientos en casa o en el gimnasio?",
+          "¿Tienes alguna lesión o condición médica que deba tener en cuenta?",
+          "¿Cuántos días a la semana planeas entrenar?",
+          "¿Qué tipo de ejercicios te gustan más?",
         ];
         const randomResponse =
           responses[Math.floor(Math.random() * responses.length)];
@@ -66,7 +79,7 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
             }),
           },
         ]);
-      }, 1000);
+      }, 2000);
     }
   };
 
@@ -124,7 +137,7 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={styles.messagesList}>
+          <ScrollView style={styles.messagesList} ref={scrollViewRef}>
             {chatHistory.map((chat) => (
               <View
                 key={chat.id}

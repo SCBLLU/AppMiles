@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Animated,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Chat from "./Chat";
@@ -13,6 +14,7 @@ import Chat from "./Chat";
 const Header = ({ personal, isDarkMode }) => {
   const [showChat, setShowChat] = useState(false);
   const [scaleAnim] = useState(new Animated.Value(1));
+  const screenWidth = Dimensions.get("window").width;
 
   const handlePressIn = () => {
     Animated.spring(scaleAnim, {
@@ -59,7 +61,12 @@ const Header = ({ personal, isDarkMode }) => {
             {personal.type}
           </Text>
 
-          <View style={styles.statsContainer}>
+          <View
+            style={[
+              styles.statsContainer,
+              screenWidth > 768 && { justifyContent: "space-around" },
+            ]}
+          >
             <View style={styles.statItem}>
               <Text
                 style={[
@@ -78,7 +85,12 @@ const Header = ({ personal, isDarkMode }) => {
                 Seguidores
               </Text>
             </View>
-            <View style={styles.separator} />
+            <View
+              style={[
+                styles.separator,
+                screenWidth > 768 && { marginHorizontal: 20 },
+              ]}
+            />
             <View style={styles.statItem}>
               <Text
                 style={[
@@ -97,7 +109,12 @@ const Header = ({ personal, isDarkMode }) => {
                 Suscriptores
               </Text>
             </View>
-            <View style={styles.separator} />
+            <View
+              style={[
+                styles.separator,
+                screenWidth > 768 && { marginHorizontal: 20 },
+              ]}
+            />
             <View style={styles.statItem}>
               <Text
                 style={[
@@ -161,53 +178,53 @@ const Header = ({ personal, isDarkMode }) => {
 
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    flexDirection: "row",
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
     borderBottomWidth: 1,
     borderBottomColor: "rgba(0,0,0,0.1)",
   },
   avatarContainer: {
     position: "relative",
+    marginBottom: 10,
   },
   avatar: {
-    width: 65,
-    height: 65,
-    borderRadius: 32.5,
-    borderWidth: 2,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderWidth: 3,
     borderColor: "#4CAF50",
   },
   onlineIndicator: {
     position: "absolute",
     bottom: 2,
     right: 2,
-    width: 12,
-    height: 12,
-    borderRadius: 6,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
     backgroundColor: "#4CAF50",
-    borderWidth: 2,
-    borderColor: "#fff",
+    borderColor: "#4CAF50",
   },
   headerInfo: {
-    flex: 1,
-    marginLeft: 15,
+    alignItems: "center",
+    marginBottom: 12,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 2,
   },
   subtitle: {
-    fontSize: 14,
-    marginBottom: 8,
+    fontSize: 13,
+    marginBottom: 6,
   },
   statsContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 8,
+    width: "100%",
+    marginBottom: 10,
   },
   statItem: {
     alignItems: "center",
@@ -215,14 +232,12 @@ const styles = StyleSheet.create({
   },
   separator: {
     width: 1,
-    height: 25,
-    backgroundColor: "rgba(0,0,0,0.1)",
-    marginHorizontal: 10,
+    height: 20,
+    backgroundColor: "282c34",
   },
   statNumber: {
     fontSize: 16,
     fontWeight: "700",
-    marginBottom: 2,
   },
   statLabel: {
     fontSize: 12,
@@ -230,10 +245,13 @@ const styles = StyleSheet.create({
   messageBtn: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    justifyContent: "center",
+    paddingVertical: 6,
+    paddingHorizontal: 14,
     borderRadius: 20,
     elevation: 2,
+    width: 200,
+    height: 40,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -242,9 +260,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   messageBtnText: {
-    marginLeft: 6,
-    fontSize: 14,
-    fontWeight: "600",
+    marginLeft: 5,
+    fontSize: 13,
+    fontWeight: "900",
   },
 });
 
