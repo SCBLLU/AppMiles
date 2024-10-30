@@ -51,7 +51,7 @@ const Login = () => {
           <Text style={[styles.label, { color: isDarkMode ? "#fff" : "#000" }]}>Usuario</Text>
           <TextInput
             style={[styles.input, { borderColor: isDarkMode ? "#fff" : "#333", color: isDarkMode ? "#fff" : "#000" }]}
-            placeholder="Email o nombre de usuario"
+            placeholder="Nombre de usuario"
             placeholderTextColor={isDarkMode ? "#888" : "#ccc"}
             value={username}
             onChangeText={setUsername}
