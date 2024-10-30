@@ -44,7 +44,7 @@ const Login = () => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={[styles.container, { backgroundColor: isDarkMode ? "#121212" : "#fff" }]}>
         <Text style={[styles.title, { color: isDarkMode ? "#fff" : "#000" }]}>
-          Inicio de sesión
+          Inicio de sesión - AcoMiles
         </Text>
 
         <View style={styles.inputContainer}>
