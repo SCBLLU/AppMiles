@@ -10,6 +10,7 @@ import SubscriptionPlan from './SubscriptionPlan';
 import MetodoPago from './MetodoPago';
 import MerchItem from './MerchItem';
 import Footer from './Footer';
+import SocialMediaLinks from './SocialMediaLinks';
 
 const PersonalDetails = () => {
     const { id } = useLocalSearchParams();
@@ -61,6 +62,8 @@ const PersonalDetails = () => {
                 <Header personal={selectedPersonal} isDarkMode={isDarkMode} />
                 <FollowButton isFollowing={isFollowing} onFollow={handleFollow} />
                 <AboutMe description={selectedPersonal.description} isDarkMode={isDarkMode} />
+                <SocialMediaLinks isDarkMode={isDarkMode} title='Encuentrame en también en las siguientes plataformas' />
+
 
                 <Text style={[styles.sectionTitle, { color: isDarkMode ? '#1DB954' : '#000' }]}>Planes de Suscripción</Text>
                 {plans.map((plan) => (
@@ -82,6 +85,7 @@ const PersonalDetails = () => {
                     horizontal
                     showsHorizontalScrollIndicator={false}
                 />
+
 
                 {isPaymentVisible && (
                     <MetodoPago
