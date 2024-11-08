@@ -10,6 +10,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
+  StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -88,138 +90,145 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
       transparent={true}
       onRequestClose={() => setShowChat(false)}
     >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.modalOverlay}
-      >
-        <View
-          style={[
-            styles.modalContent,
-            { backgroundColor: isDarkMode ? "#1B1B1B" : "#fff" },
-          ]}
+      <SafeAreaView style={[styles.modalOverlay, { backgroundColor: isDarkMode ? '#000' : '#fff' }]}>
+        <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.keyboardAvoidingView}
         >
-          <View style={styles.modalHeader}>
-            <View style={styles.headerInfo}>
-              <Image
-                source={{ uri: personal.imageUrl }}
-                style={styles.messageAvatar}
-              />
-              <View>
-                <Text
-                  style={[
-                    styles.modalTitle,
-                    { color: isDarkMode ? "#fff" : "#000" },
-                  ]}
-                >
-                  {personal.name}
-                </Text>
-                <Text
-                  style={[
-                    styles.modalSubtitle,
-                    { color: isDarkMode ? "#b3b3b3" : "#666" },
-                  ]}
-                >
-                  {personal.type}
-                </Text>
-              </View>
-            </View>
-            <TouchableOpacity
-              onPress={() => setShowChat(false)}
-              style={styles.closeButton}
-            >
-              <Ionicons
-                name="close"
-                size={24}
-                color={isDarkMode ? "#fff" : "#000"}
-              />
-            </TouchableOpacity>
-          </View>
-
-          <ScrollView style={styles.messagesList} ref={scrollViewRef}>
-            {chatHistory.map((chat) => (
-              <View
-                key={chat.id}
-                style={[
-                  styles.messageItem,
-                  chat.sender === "user"
-                    ? styles.userMessage
-                    : styles.trainerMessage,
-                  { backgroundColor: isDarkMode ? "#333" : "#f0f0f0" },
-                ]}
-              >
-                {chat.sender !== "user" && (
-                  <Image
-                    source={{ uri: personal.imageUrl }}
-                    style={styles.messageAvatar}
-                  />
-                )}
-                <View
-                  style={[
-                    styles.messageContent,
-                    chat.sender === "user" && styles.userMessageContent,
-                  ]}
-                >
+          <View
+            style={[
+              styles.modalContent,
+              { backgroundColor: isDarkMode ? "#1B1B1B" : "#fff" },
+            ]}
+          >
+            <View style={styles.modalHeader}>
+              <View style={styles.headerInfo}>
+                <Image
+                  source={{ uri: personal.imageUrl }}
+                  style={styles.messageAvatar}
+                />
+                <View>
                   <Text
                     style={[
-                      styles.messageText,
+                      styles.modalTitle,
                       { color: isDarkMode ? "#fff" : "#000" },
                     ]}
                   >
-                    {chat.text}
+                    {personal.name}
                   </Text>
                   <Text
                     style={[
-                      styles.timestamp,
+                      styles.modalSubtitle,
                       { color: isDarkMode ? "#b3b3b3" : "#666" },
                     ]}
                   >
-                    {chat.timestamp}
+                    {personal.type}
                   </Text>
                 </View>
               </View>
-            ))}
-          </ScrollView>
+              <TouchableOpacity
+                onPress={() => setShowChat(false)}
+                style={styles.closeButton}
+              >
+                <Ionicons
+                  name="close"
+                  size={24}
+                  color={isDarkMode ? "#fff" : "#000"}
+                />
+              </TouchableOpacity>
+            </View>
 
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={message}
-              onChangeText={setMessage}
-              placeholder="Escribe un mensaje..."
-              placeholderTextColor={isDarkMode ? "#b3b3b3" : "#666"}
-              style={[
-                styles.input,
-                {
-                  backgroundColor: isDarkMode ? "#333" : "#f0f0f0",
-                  color: isDarkMode ? "#fff" : "#000",
-                },
-              ]}
-              multiline
-            />
-            <TouchableOpacity
-              onPress={handleSend}
-              style={[
-                styles.sendButton,
-                {
-                  backgroundColor: message.trim()
-                    ? "#1DB954"
-                    : isDarkMode
-                      ? "#333"
-                      : "#f0f0f0",
-                },
-              ]}
-              disabled={!message.trim()}
+            <ScrollView
+              style={styles.messagesList}
+              ref={scrollViewRef}
+              contentContainerStyle={styles.messagesListContent}
             >
-              <Ionicons
-                name="send"
-                size={20}
-                color={
-                  message.trim() ? "#fff" : isDarkMode ? "#b3b3b3" : "#666"
-                }
+              {chatHistory.map((chat) => (
+                <View
+                  key={chat.id}
+                  style={[
+                    styles.messageItem,
+                    chat.sender === "user"
+                      ? styles.userMessage
+                      : styles.trainerMessage,
+                    { backgroundColor: isDarkMode ? "#333" : "#f0f0f0" },
+                  ]}
+                >
+                  {chat.sender !== "user" && (
+                    <Image
+                      source={{ uri: personal.imageUrl }}
+                      style={styles.messageAvatar}
+                    />
+                  )}
+                  <View
+                    style={[
+                      styles.messageContent,
+                      chat.sender === "user" && styles.userMessageContent,
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.messageText,
+                        { color: isDarkMode ? "#fff" : "#000" },
+                      ]}
+                    >
+                      {chat.text}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.timestamp,
+                        { color: isDarkMode ? "#b3b3b3" : "#666" },
+                      ]}
+                    >
+                      {chat.timestamp}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </ScrollView>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={message}
+                onChangeText={setMessage}
+                placeholder="Escribe un mensaje..."
+                placeholderTextColor={isDarkMode ? "#b3b3b3" : "#666"}
+                style={[
+                  styles.input,
+                  {
+                    backgroundColor: isDarkMode ? "#333" : "#f0f0f0",
+                    color: isDarkMode ? "#fff" : "#000",
+                  },
+                ]}
+                multiline
               />
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleSend}
+                style={[
+                  styles.sendButton,
+                  {
+                    backgroundColor: message.trim()
+                      ? "#1DB954"
+                      : isDarkMode
+                        ? "#333"
+                        : "#f0f0f0",
+                  },
+                ]}
+                disabled={!message.trim()}
+              >
+                <Ionicons
+                  name="send"
+                  size={20}
+                  color={
+                    message.trim() ? "#fff" : isDarkMode ? "#b3b3b3" : "#666"
+                  }
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     </Modal>
   );
 };
@@ -227,21 +236,16 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "flex-end",
+  },
+  keyboardAvoidingView: {
+    flex: 1,
   },
   modalContent: {
+    flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingTop: 20,
     paddingHorizontal: 10,
-    minHeight: "70%",
-    maxHeight: "90%",
-    elevation: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
   },
   modalHeader: {
     flexDirection: "row",
@@ -250,7 +254,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 15,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(0, 0, 0, 0.1)",
+    borderBottomColor: "rgba(128, 128, 128, 0.2)",
+  },
+  headerInfo: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   modalTitle: {
     fontSize: 18,
@@ -261,10 +269,12 @@ const styles = StyleSheet.create({
     color: "#8f8f8f",
   },
   closeButton: {
-    padding: 4,
+    padding: 8,
   },
   messagesList: {
     flex: 1,
+  },
+  messagesListContent: {
     paddingVertical: 20,
   },
   messageItem: {
@@ -273,10 +283,17 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 18,
     maxWidth: "75%",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
   userMessage: {
     alignSelf: "flex-end",
@@ -312,7 +329,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderTopWidth: 1,
-    borderTopColor: "rgba(0, 0, 0, 0.1)",
+    borderTopColor: "rgba(128, 128, 128, 0.2)",
   },
   input: {
     flex: 1,

@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
   messageBtnText: {
     marginLeft: 5,
     fontSize: 13,
-    fontWeight: "900",
+    fontWeight: "700",
   },
 });
 
