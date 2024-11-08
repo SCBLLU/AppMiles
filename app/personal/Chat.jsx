@@ -77,7 +77,7 @@ const Chat = ({ personal, isDarkMode, showChat, setShowChat }) => {
             }),
           },
         ]);
-      }, 6000);
+      }, 3000);
     }
   };
 

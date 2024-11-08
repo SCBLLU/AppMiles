@@ -1,11 +1,10 @@
 import React, { useState, useCallback } from "react";
-import { View, FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, FlatList, StyleSheet, Text, TouchableOpacity, SafeAreaView, Platform } from "react-native";
 import { useRouter } from "expo-router";
 import { useDarkMode } from "../../Utils/DarkModeProvider";
 import data from "../../../data/data.json";
 import ExploreButton from "./ExploreButton";
 import SearchInput from "./SearchInput";
-import CategorySelector from "./CategorySelector";
 import PersonalCard from "./PersonalCard";
 import { Ionicons } from '@expo/vector-icons';
 
@@ -55,7 +54,7 @@ export default function PersonalScreen() {
   const displayedPersonal = showAll ? filteredPersonal() : filteredPersonal().slice(0, 3);
 
   return (
-    <View style={[styles.container, isDarkMode && styles.containerDark]}>
+    <SafeAreaView style={[styles.container, isDarkMode && styles.containerDark]}>
       <Text style={[styles.encabezado, isDarkMode && styles.textDark]}>
         Explorar todo
       </Text>
@@ -70,18 +69,36 @@ export default function PersonalScreen() {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.searchAndCategoryContainer}>
-            <SearchInput
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              isDarkMode={isDarkMode}
-            />
-            <CategorySelector
-              categories={categories}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              isDarkMode={isDarkMode}
-            />
+          <SearchInput
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            isDarkMode={isDarkMode}
+          />
+
+          <View style={styles.categoryContainer}>
+            {categories.map((category) => (
+              <TouchableOpacity
+                key={category.id}
+                style={[
+                  styles.categoryButton,
+                  selectedCategory === category.id && styles.selectedCategoryButton,
+                  isDarkMode && styles.categoryButtonDark,
+                  selectedCategory === category.id && isDarkMode && styles.selectedCategoryButtonDark,
+                ]}
+                onPress={() => setSelectedCategory(category.id)}
+              >
+                <Text
+                  style={[
+                    styles.categoryButtonText,
+                    selectedCategory === category.id && styles.selectedCategoryButtonText,
+                    isDarkMode && styles.categoryButtonTextDark,
+                    selectedCategory === category.id && isDarkMode && styles.selectedCategoryButtonTextDark,
+                  ]}
+                >
+                  {category.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
 
           <FlatList
@@ -109,8 +126,7 @@ export default function PersonalScreen() {
           )}
         </>
       )}
-    </View>
-
+    </SafeAreaView>
   );
 }
 
@@ -139,6 +155,45 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 20,
     backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
+  categoryContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  categoryButton: {
+    flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    backgroundColor: "#e0e0e0",
+    marginHorizontal: 4,
+    alignItems: 'center',
+  },
+  categoryButtonDark: {
+    backgroundColor: "#333",
+  },
+  selectedCategoryButton: {
+    backgroundColor: "#1DB954",
+  },
+  selectedCategoryButtonDark: {
+    backgroundColor: "#1DB954",
+  },
+  categoryButtonText: {
+    color: "#333",
+    fontWeight: "300",
+  },
+  categoryButtonTextDark: {
+    color: "#fff",
+  },
+  selectedCategoryButtonText: {
+    color: "#fff",
+  },
+  selectedCategoryButtonTextDark: {
+    color: "#fff",
+  },
+  listContainer: {
+    paddingBottom: 20,
   },
   noResultsText: {
     fontSize: 16,
