@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Platform, StatusBar, Text } from "react-native";
+import { View, StyleSheet, Platform, StatusBar, Text, Image } from "react-native";
 import { useDarkMode } from "./Utils/DarkModeProvider";
 import Profile from "./User";
 
@@ -13,6 +13,10 @@ const Header = () => {
         { backgroundColor: isDarkMode ? "#121212" : "#fff" }, // Color de fondo del header
       ]}
     >
+      <Image
+        source={require("../assets/Miles.png")}
+        style={{ width: 50, height: 50, borderRadius: 5 }}
+      />
       <View style={styles.titleContainer}>
         <Text style={[styles.headerTitle, { color: isDarkMode ? "#fff" : "#121212" }]}>
           AcoMiles
