@@ -32,6 +32,14 @@
     "scheme": "app-miles",
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d20ed40a-284b-4e66-afc1-337047d95368"
+      }
+    }
   }
 }
