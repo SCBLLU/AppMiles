@@ -12,10 +12,14 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "bundleIdentifier": "com.tuempresa.appmiles",
       "supportsTablet": true,
       "newArchEnabled": true
     },
     "android": {
+      "package": "com.tuempresa.appmiles",
+      "versionCode": 2,
+      "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,7 +29,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "app-miles", 
+    "scheme": "app-miles",
     "plugins": [
       "expo-router"
     ]
